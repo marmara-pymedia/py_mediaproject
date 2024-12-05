@@ -1,5 +1,6 @@
 import json
-from entities.User import User
+from entities.user import *
+from entities.user import User
 
 class UserService:
     def __init__(self) -> None:

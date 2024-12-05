@@ -1,4 +1,4 @@
-from entities.User import User
+from entities.user import User
 
 class Register:
 
@@ -28,4 +28,4 @@ class Register:
 
 
     def register(user:User):
-        pass
+        print(user.firstName,"kayit basarili")
