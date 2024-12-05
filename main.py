@@ -4,6 +4,5 @@ from services.UserService import *
 from register import *
 
 
-login=Login()
 register=Register()
 

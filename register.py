@@ -1,4 +1,5 @@
 from entities.user import User
+from services.UserService import UserService
 
 class Register:
 
@@ -12,7 +13,7 @@ class Register:
                 break
         while True:
             lastName=input("Last Name: ")
-            if(lastName.isalpha()==False):
+            if(lastName.isalpha()==True):
                 break
         while True:
             userName=input("Username: ")
@@ -20,12 +21,14 @@ class Register:
                 break
         while True:
             password=input("Password: ")
-            if(password.find(" ")==-1 and not any(char.isupper() for char in password) and not any(char.islower() for char in password) and not any(char.isdigit() for char in password) and not any(char in self.symbols for char in password)):
+            if(password.find(" ")==-1 and any(char.isupper() for char in password) and any(char.islower() for char in password) and any(char.isdigit() for char in password) and any(char in self.symbols for char in password)):
                 break
         user=User(firstName,lastName,userName,password)
         self.register(user)
 
 
 
-    def register(user:User):
+    def register(self,user:User):
+        userService=UserService()
+        userService.addUser(user)
         print(user.firstName,"kayit basarili")
