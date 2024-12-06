@@ -1,8 +1,13 @@
 from login import Login
-from entities.user import *
-from services.UserService import *
-from register import *
+from tkinter import *
 
+def main():
+    root=Tk()
+    root.title("Pyflix")
+    root.geometry("800x600")
 
-register=Register()
+    Login(root)
 
+    root.mainloop()
+
+main()
