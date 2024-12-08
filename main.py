@@ -4,7 +4,7 @@ from tkinter import *
 def main():
     root=Tk()
     root.title("Pyflix")
-    root.geometry("800x600")
+    root.geometry("1920x1080")
 
     Login(root)
 

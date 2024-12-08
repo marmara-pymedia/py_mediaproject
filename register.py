@@ -1,8 +1,8 @@
-from entities.user import User
+from entities.User import User
 from services.UserService import UserService
 
 class Register:
-
+    print("Register")
     symbols = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/"
 
     def __init__(self) -> None:
