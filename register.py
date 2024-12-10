@@ -8,15 +8,15 @@ from tkinter import font
 from tkinter import PhotoImage
 
 class Register:
-    print("Register")
 
     def __init__(self, root) -> None:
         self.root=root
+        print("Register")
 
         self.registerFrame=Frame(self.root,bg="gray")
         self.registerFrame.pack(fill=BOTH,expand=True)
-        self.registerChildFrame=Frame(self.loginFrame,bg="white")
-        self.registerFrame.pack(expand=True,padx=709,pady=146,fill=BOTH)
+        self.registerChildFrame=Frame(self.registerFrame,bg="white")
+        self.registerChildFrame.pack(expand=True,padx=709,pady=146,fill=BOTH)
 
         self.registerChild2Frame=Frame(self.registerChildFrame,bg='gray')
         self.registerChild2Frame.pack(padx=56,pady=(108,109),expand=True)
@@ -73,7 +73,7 @@ class Register:
         self.registerButtonFrame=Frame(self.registerChild2Frame)
         self.registerButtonFrame.grid(row=5)
 
-        self.registerButton=Button(self.registerButtonFrame,text="Register",width=10,height=1,cursor="hand2", command=control_fields)
+        self.registerButton=Button(self.registerButtonFrame,text="Register",width=10,height=1,cursor="hand2", command=self.control_fields)
         self.registerButton.pack(expand=True)
 
     def control_fields(self):

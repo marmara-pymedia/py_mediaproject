@@ -1,4 +1,5 @@
 from login import Login
+from register import Register
 from tkinter import *
 
 def main():
@@ -6,7 +7,7 @@ def main():
     root.title("Pyflix")
     root.geometry("1920x1080")
 
-    Login(root)
+    Register(root)
 
     root.mainloop()
 
