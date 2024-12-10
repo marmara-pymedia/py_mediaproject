@@ -12,6 +12,4 @@ def main():
     root.mainloop()
 
 main()
-
-# adklgjadklhgklahgkla
-
+#test
