@@ -13,78 +13,78 @@ class Register:
         self.root=root
         print("Register")
 
-        self.registerFrame=Frame(self.root,bg="gray")
-        self.registerFrame.pack(fill=BOTH,expand=True)
-        self.registerChildFrame=Frame(self.registerFrame,bg="white")
-        self.registerChildFrame.pack(expand=True,padx=709,pady=146,fill=BOTH)
+        self.register_frame=Frame(self.root,bg="gray")
+        self.register_frame.pack(fill=BOTH,expand=True)
+        self.register_child_frame=Frame(self.register_frame,bg="white")
+        self.register_child_frame.pack(expand=True,padx=709,pady=146,fill=BOTH)
 
-        self.registerChild2Frame=Frame(self.registerChildFrame,bg='gray')
-        self.registerChild2Frame.pack(padx=56,pady=(108,109),expand=True)
-
-
-        self.logoRegisterFrame=Frame(self.registerChild2Frame)
-        self.logoRegisterFrame.grid(row=0,column=0,padx=150,pady=15)
-
-        self.logoRegister=PhotoImage(file="medias\logos\loginLogo.png")
-        self.logoRegisterLabel=Label(self.logoRegisterFrame,image=self.logoRegister)
-        self.logoRegisterLabel.pack(fill=BOTH)
+        self.register_child_2_frame=Frame(self.register_child_frame,bg='gray')
+        self.register_child_2_frame.pack(padx=56,pady=(108,109),expand=True)
 
 
-        self.firstNameFrame=Frame(self.registerChild2Frame,bg="white")
-        self.firstNameFrame.grid(row=1)
+        self.logo_register_frame=Frame(self.register_child_2_frame)
+        self.logo_register_frame.grid(row=0,column=0,padx=150,pady=15)
 
-        self.labelFirstName=Label(self.firstNameFrame,text="First Name :",font=("Roboto",14))
-        self.labelFirstName.grid(row=0,column=0)
-
-        self.entryFirstName=Entry(self.firstNameFrame,bg="gold")
-        self.entryFirstName.grid(row=0,column=1)
+        self.logo_register=PhotoImage(file="medias\logos\loginLogo.png")
+        self.logo_register_label=Label(self.logo_register_frame,image=self.logo_register)
+        self.logo_register_label.pack(fill=BOTH)
 
 
-        self.lastNameFrame=Frame(self.registerChild2Frame)
-        self.lastNameFrame.grid(row=2,pady=10)
+        self.first_name_frame=Frame(self.register_child_2_frame,bg="white")
+        self.first_name_frame.grid(row=1)
 
-        self.labelLastName=Label(self.lastNameFrame,text="Last Name :",font=("Roboto",14))
-        self.labelLastName.grid(row=0,column=0)
+        self.label_first_name=Label(self.first_name_frame,text="First Name :",font=("Roboto",14))
+        self.label_first_name.grid(row=0,column=0)
 
-        self.entryLastName=Entry(self.lastNameFrame,bg="gold")
-        self.entryLastName.grid(row=0,column=1)
-
-
-        self.usernameFrame=Frame(self.registerChild2Frame)
-        self.usernameFrame.grid(row=3,pady=10)
-
-        self.labelUsername=Label(self.usernameFrame,text="Username :",font=("Roboto",14))
-        self.labelUsername.grid(row=0,column=0)
-
-        self.entryUsername=Entry(self.usernameFrame,bg="gold")
-        self.entryUsername.grid(row=0,column=1)
+        self.entry_first_name=Entry(self.first_name_frame,bg="gold")
+        self.entry_first_name.grid(row=0,column=1)
 
 
-        self.passwordFrame=Frame(self.registerChild2Frame)
-        self.passwordFrame.grid(row=4,pady=10)
+        self.last_name_frame=Frame(self.register_child_2_frame)
+        self.last_name_frame.grid(row=2,pady=10)
 
-        self.labelPassword=Label(self.passwordFrame,text="Password :",font=("Roboto",14))
-        self.labelPassword.grid(row=0,column=0)
+        self.label_last_name=Label(self.last_name_frame,text="Last Name :",font=("Roboto",14))
+        self.label_last_name.grid(row=0,column=0)
 
-        self.entryPassword=Entry(self.passwordFrame,bg="gold")
-        self.entryPassword.grid(row=0,column=1)
+        self.entry_last_name=Entry(self.last_name_frame,bg="gold")
+        self.entry_last_name.grid(row=0,column=1)
 
 
-        self.registerButtonFrame=Frame(self.registerChild2Frame)
-        self.registerButtonFrame.grid(row=5)
+        self.username_frame=Frame(self.register_child_2_frame)
+        self.username_frame.grid(row=3,pady=10)
 
-        self.registerButton=Button(self.registerButtonFrame,text="Register",width=10,height=1,cursor="hand2", command=self.control_fields)
-        self.registerButton.pack(expand=True)
+        self.label_username=Label(self.username_frame,text="Username :",font=("Roboto",14))
+        self.label_username.grid(row=0,column=0)
+
+        self.entry_username=Entry(self.username_frame,bg="gold")
+        self.entry_username.grid(row=0,column=1)
+
+
+        self.password_frame=Frame(self.register_child_2_frame)
+        self.password_frame.grid(row=4,pady=10)
+
+        self.label_password=Label(self.password_frame,text="Password :",font=("Roboto",14))
+        self.label_password.grid(row=0,column=0)
+
+        self.entry_password=Entry(self.password_frame,bg="gold")
+        self.entry_password.grid(row=0,column=1)
+
+
+        self.register_futton_frame=Frame(self.register_child_2_frame)
+        self.register_futton_frame.grid(row=5)
+
+        self.register_button=Button(self.register_futton_frame,text="Register",width=10,height=1,cursor="hand2", command=self.control_fields)
+        self.register_button.pack(expand=True)
 
     def control_fields(self):
-        first_name = self.entryFirstName.get().strip()
-        last_name = self.entryLastName.get().strip()
-        username = self.entryUsername.get().strip()
-        Password = self.entryPassword.get().strip()
+        first_name = self.entry_first_name.get().strip()
+        last_name = self.entry_last_name.get().strip()
+        username = self.entry_username.get().strip()
+        password = self.entry_password.get().strip()
 
         symbols = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/"
 
-        if not first_name or not last_name or not username or not Password:
+        if not first_name or not last_name or not username or not password:
             messagebox.showerror("Error", "All fields are required!")
             return
         
@@ -104,7 +104,7 @@ class Register:
             existing_usernames.append(username)
             messagebox.showinfo("Successful", f"Username '{username}' is successfully saved!")
 
-        if len(Password)<8:
+        if len(password)<8:
             messagebox.showerror("Error", "Password must be longer than 8 characters!")
         elif not re.search(r'[A-Z]', password):
             messagebox.showerror("Error", "Password must consist at least an upper case letter!")
@@ -117,7 +117,7 @@ class Register:
         else:
             messagebox.showinfo("Successful", "Password valid!")
 
-        user=User(first_name,last_name,username,Password)
+        user=User(first_name,last_name,username,password)
         self.register(user)
 
 

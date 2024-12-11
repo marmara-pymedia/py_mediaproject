@@ -1,10 +1,10 @@
 import json
 
 class User:
-    def __init__(self,firstName,lastName,userName,password,imageLocation="default",id=-1):
+    def __init__(self,first_name,last_name,user_name,password,image_location="default",id=-1):
         self.id=id
-        self.firstName=firstName
-        self.lastName=lastName
-        self.userName=userName
+        self.first_name=first_name
+        self.last_name=last_name
+        self.user_name=user_name
         self.password=password
-        self.imageLocation=imageLocation
+        self.image_location=image_location

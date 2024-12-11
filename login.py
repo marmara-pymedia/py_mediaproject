@@ -7,55 +7,55 @@ class Login:
     def __init__(self,root) -> None:
         self.root=root
 
-        self.loginFrame=Frame(self.root,bg="gray")
-        self.loginFrame.pack(fill=BOTH,expand=True)
-        self.loginChildFrame=Frame(self.loginFrame,bg="white")
-        self.loginChildFrame.pack(expand=True,padx=709,pady=146,fill=BOTH)
+        self.login_frame=Frame(self.root,bg="gray")
+        self.login_frame.pack(fill=BOTH,expand=True)
+        self.login_child_frame=Frame(self.login_frame,bg="white")
+        self.login_child_frame.pack(expand=True,padx=709,pady=146,fill=BOTH)
 
-        self.loginChild2Frame=Frame(self.loginChildFrame,bg='gray')
-        self.loginChild2Frame.pack(padx=56,pady=(108,109),expand=True)
+        self.login_child_2_frame=Frame(self.login_child_frame,bg='gray')
+        self.login_child_2_frame.pack(padx=56,pady=(108,109),expand=True)
 
-        self.logoFrame=Frame(self.loginChild2Frame)
-        self.logoFrame.grid(row=0,column=0,padx=150,pady=34)
+        self.logo_frame=Frame(self.login_child_2_frame)
+        self.logo_frame.grid(row=0,column=0,padx=150,pady=34)
 
         self.logo=PhotoImage(file="medias\logos\loginLogo.png")
-        self.logoLabel=Label(self.logoFrame,image=self.logo)
-        self.logoLabel.pack(fill=BOTH)
+        self.logo_label=Label(self.logo_frame,image=self.logo)
+        self.logo_label.pack(fill=BOTH)
 
 
-        self.usernameFrame=Frame(self.loginChild2Frame,bg="white")
-        self.usernameFrame.grid(row=1)
+        self.username_frame=Frame(self.login_child_2_frame,bg="white")
+        self.username_frame.grid(row=1)
 
-        self.labelUsername=Label(self.usernameFrame,text="Username :",font=("Roboto",14))
-        self.labelUsername.grid(row=0,column=0)
+        self.label_username=Label(self.username_frame,text="Username :",font=("Roboto",14))
+        self.label_username.grid(row=0,column=0)
 
-        self.entryUsername=Entry(self.usernameFrame,bg="gold")
-        self.entryUsername.grid(row=0,column=1)
+        self.entry_username=Entry(self.username_frame,bg="gold")
+        self.entry_username.grid(row=0,column=1)
 
-        self.passwordFrame=Frame(self.loginChild2Frame)
-        self.passwordFrame.grid(row=2,pady=25)
+        self.password_frame=Frame(self.login_child_2_frame)
+        self.password_frame.grid(row=2,pady=25)
 
-        self.labelPassword=Label(self.passwordFrame,text="Password :",font=("Roboto",14))
-        self.labelPassword.grid(row=0,column=0)
+        self.label_password=Label(self.password_frame,text="Password :",font=("Roboto",14))
+        self.label_password.grid(row=0,column=0)
 
-        self.entryPassword=Entry(self.passwordFrame,bg="gold")
-        self.entryPassword.grid(row=0,column=1)
+        self.entry_password=Entry(self.password_frame,bg="gold")
+        self.entry_password.grid(row=0,column=1)
 
-        self.loginButtonFrame=Frame(self.loginChild2Frame)
-        self.loginButtonFrame.grid(row=3)
+        self.login_button_frame=Frame(self.login_child_2_frame)
+        self.login_button_frame.grid(row=3)
 
-        self.loginButton=Button(self.loginButtonFrame,text="Login",width=10,height=1,cursor="hand2")
-        self.loginButton.pack(expand=True)
+        self.login_button=Button(self.login_button_frame,text="Login",width=10,height=1,cursor="hand2")
+        self.login_button.pack(expand=True)
 
-        self.registerFrame=Frame(self.loginChild2Frame)
-        self.registerFrame.grid(row=4,pady=25)
+        self.register_frame=Frame(self.login_child_2_frame)
+        self.register_frame.grid(row=4,pady=25)
 
-        self.registerLabel1=Label(self.registerFrame,text="Hesabınız yok mu?")
-        self.registerLabel1.grid(row=0,column=0)
+        self.register_label_1=Label(self.register_frame,text="Hesabınız yok mu?")
+        self.register_label_1.grid(row=0,column=0)
 
-        self.registerLabel2=Label(self.registerFrame,text="Kayıt ol.",fg="blue",cursor="hand2")
-        self.registerLabel2.grid(row=0,column=1)
-        self.registerLabel2.bind("<Button-1>", lambda e: self.switchToRegisterPage)
+        self.register_label_2=Label(self.register_frame,text="Kayıt ol.",fg="blue",cursor="hand2")
+        self.register_label_2.grid(row=0,column=1)
+        self.register_label_2.bind("<Button-1>", lambda e: self.switch_to_register_page)
 
 
 
@@ -68,6 +68,6 @@ class Login:
             if (password.isspace() != True):
                 break
 
-    def switchToRegisterPage(self):
+    def switch_to_register_page(self):
         Register()
 
