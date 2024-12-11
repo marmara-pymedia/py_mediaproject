@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import font
+from tkinter import ttk
 from components.mediaCover import MediaCover
 
 class HomePage:
@@ -29,8 +30,21 @@ class HomePage:
         self.profile_img_label.pack()
     #/Navi
     #Body
-        self.body_frame=Frame(self.home_frame,bg="gray")
-        self.body_frame.pack(side=TOP,fill=BOTH,pady=(55,0),padx=(160,160))
+        self.main_body_frame=Frame(self.home_frame)
+        self.main_body_frame.pack(expand=True,fill=BOTH)
+
+        self.body_canvas=Canvas(self.main_body_frame)
+        self.body_canvas.pack(side=LEFT,fill=BOTH,expand=True,padx=(160,160))
+
+        self.body_scrollbar=ttk.Scrollbar(self.main_body_frame,orient=VERTICAL,command=self.body_canvas.yview)
+        self.body_scrollbar.pack(side=RIGHT,fill=Y)
+
+        self.body_canvas.configure(yscrollcommand=self.body_scrollbar)
+        self.body_canvas.bind("<Configure>",lambda e:self.body_canvas.configure(scrollregion=self.body_canvas.bbox("all")))
+
+        self.body_frame=Frame(self.body_canvas,bg="gray")
+
+        self.body_canvas.create_window((0,0),window=self.body_frame,anchor="nw")
         #Favourites
         self.favourites_frame=Frame(self.body_frame,bg="pink")
         self.favourites_frame.pack(side=TOP,pady=(40,0),padx=(80,80),fill=X)
@@ -44,7 +58,7 @@ class HomePage:
         self.medias_frame.pack(side=LEFT,padx=80,pady=(50,0))
         self.medias_container=Frame(self.medias_frame,bg="pink")
         self.medias_container.pack(padx=(30,0),pady=(20,20))
-        for i in range(2):
+        for i in range(5):
             for j in range(3):
                 MediaCover(self.medias_container).get_frame().grid(row=i,column=j,padx=(0,30),pady=(0,30))
         #/Medias
