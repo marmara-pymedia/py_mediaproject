@@ -29,7 +29,7 @@ class MediaCover:
         media_category_frame=Frame(media_extra_frame,height=20)
         media_category_frame.grid(row=0,column=0,padx=(6,8),sticky=W)
         media_category_title=Label(media_category_frame,text="Kategori:",font=("Roboto",8))
-        media_category_title.grid(row=0,column=0)
+        media_category_title.grid(row=0,column=0,)
         media_category=Label(media_category_frame,text="Belgesel",font=("Roboto",8))
         media_category.grid(row=0,column=1)
 
