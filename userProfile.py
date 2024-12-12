@@ -24,10 +24,11 @@ class UserProfile:
         
         self.logo_user_profile=PhotoImage(file="medias\logos\profilePng.png")
         self.logo_user_profile_label=Label(self.logo_user_profile_frame,image=self.logo_user_profile)
+        self.logo_user_profile_label.img_reference=self.logo_user_profile
         self.logo_user_profile_label.pack(fill=BOTH)
 
         self.username_frame=Frame(self.user_profile_child2_frame,bg="white")
-        self.username_frame.grid(row=1)
+        self.username_frame.grid(row=1,pady=30)
 
         self.label_username=Label(self.username_frame,text="Username",font=("Roboto",20))
         self.label_username.grid(row=0,column=0)
@@ -47,7 +48,7 @@ class UserProfile:
 
 
         self.last_name_frame=Frame(self.user_profile_child2_frame,bg="white")
-        self.username_frame.grid(row=3,pady=30)
+        self.last_name_frame.grid(row=3,pady=30)
 
         self.label_last_name=Label(self.last_name_frame,text="Last Name",font=("Roboto",20))
         self.label_last_name.grid(row=0,column=0)
