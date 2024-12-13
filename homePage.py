@@ -18,23 +18,24 @@ class HomePage:
         self.searchbar_entry=Entry(self.searchbar_frame,font=("Roboto",16))
         self.searchbar_entry.place(width=220,height=40,y=5,x=5)
         self.searchbar_img = PhotoImage(file="medias/icons/searchbar.png")
-        self.searchbar_button=Button(self.searchbar_frame,image=self.searchbar_img)
+        self.searchbar_button=Button(self.searchbar_frame,image=self.searchbar_img,bd=0)
         self.searchbar_button.img_reference=self.searchbar_img
         self.searchbar_button.place(height=50,width=50,x=230)
 
         self.profile_frame=Frame(self.navi_frame,bg="pink",width=50,height=50)
         self.profile_frame.grid(row=0,column=1)
         self.profile_img=PhotoImage(file="medias/icons/profileIcon.png")
-        self.profile_img_label=Label(self.profile_frame,image=self.profile_img,bg="pink")
-        self.profile_img_label.img_reference=self.profile_img
-        self.profile_img_label.pack()
+        self.profile_img_button=Button(self.profile_frame,image=self.profile_img,bg="pink",bd=0)
+        self.profile_img_button.img_reference=self.profile_img
+        self.profile_img_button.pack()
     #/Navi
+    
     #Body
         self.main_body_frame=Frame(self.home_frame)
         self.main_body_frame.pack(expand=True,fill=BOTH)
 
         self.body_canvas=Canvas(self.main_body_frame)
-        self.body_canvas.pack(side=LEFT,fill=BOTH,expand=True,padx=(160,160))
+        self.body_canvas.pack(side=LEFT,fill=BOTH,expand=True,padx=(160,70))
 
         self.body_scrollbar=ttk.Scrollbar(self.main_body_frame,orient=VERTICAL,command=self.body_canvas.yview)
         self.body_scrollbar.pack(side=RIGHT,fill=Y)
@@ -53,6 +54,70 @@ class HomePage:
         for i in range(5):
             MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,30))
         #/Favourites
+
+        #Filters
+        self.filters_frame=Frame(self.body_frame,width=300,height=500)
+        self.filters_frame.pack(side=RIGHT,padx=(0,80),pady=(50,0),anchor=NE)
+
+        self.filters_title=Label(self.filters_frame,text="Filtreler",font=("Roboto",20))
+        self.filters_title.grid(row=0,column=0,pady=(10,0))
+
+        self.type_filter_frame=Frame(self.filters_frame,bg="gray")
+        self.type_filter_frame.grid(row=1,column=0,padx=(20,20),pady=(20,0),sticky=W)
+        self.type_filter_title=Label(self.type_filter_frame,text="Tür",font=("Roboto",16))
+        self.type_filter_title.grid(row=0,column=0,sticky=W)
+        self.type_filter_checkbox_frame=Frame(self.type_filter_frame)
+        self.type_filter_checkbox_frame.grid(row=1,column=0)
+        self.type_filter_checkbox1=Checkbutton(self.type_filter_checkbox_frame,text="Film",font=("Roboto",12))
+        self.type_filter_checkbox1.grid(row=1,column=0,padx=(0,10))
+        self.type_filter_checkbox2=Checkbutton(self.type_filter_checkbox_frame,text="Dizi",font=("Roboto",12))
+        self.type_filter_checkbox2.grid(row=1,column=1)
+
+        self.category_filter_frame=Frame(self.filters_frame,bg="gray")
+        self.category_filter_frame.grid(row=2,column=0,padx=(20,20),pady=(20,0),sticky=W)
+        self.category_filter_title=Label(self.category_filter_frame,text="Kategori",font=("Roboto",16))
+        self.category_filter_title.grid(row=0,column=0,sticky=W)
+        self.category_filter_checkbox_frame=Frame(self.category_filter_frame)
+        self.category_filter_checkbox_frame.grid(row=1,column=0)
+        self.category_filter_checkbox1=Checkbutton(self.category_filter_checkbox_frame,text="Belgesel",font=("Roboto",12))
+        self.category_filter_checkbox1.grid(row=1,column=0,sticky=W,padx=(0,10))
+        self.category_filter_checkbox2=Checkbutton(self.category_filter_checkbox_frame,text="Bilim Kurgu",font=("Roboto",12))
+        self.category_filter_checkbox2.grid(row=1,column=1,sticky=W)
+        self.category_filter_checkbox2=Checkbutton(self.category_filter_checkbox_frame,text="Gerilim",font=("Roboto",12))
+        self.category_filter_checkbox2.grid(row=2,column=0,sticky=W,padx=(0,10))        
+        self.category_filter_checkbox2=Checkbutton(self.category_filter_checkbox_frame,text="Macera",font=("Roboto",12))
+        self.category_filter_checkbox2.grid(row=2,column=1,sticky=W)
+
+        self.statue_filter_frame=Frame(self.filters_frame,bg="gray")
+        self.statue_filter_frame.grid(row=3,column=0,padx=(20,20),pady=(20,0),sticky=W)
+        self.statue_filter_title=Label(self.statue_filter_frame,text="İzlenme Durumu",font=("Roboto",16))
+        self.statue_filter_title.grid(row=0,column=0,sticky=W)
+        self.statue_filter_checkbox_frame=Frame(self.statue_filter_frame)
+        self.statue_filter_checkbox_frame.grid(row=1,column=0)
+        self.statue_filter_checkbox1=Checkbutton(self.statue_filter_checkbox_frame,text="İzlendi",font=("Roboto",12))
+        self.statue_filter_checkbox1.grid(row=1,column=0,padx=(0,10))
+        self.statue_filter_checkbox2=Checkbutton(self.statue_filter_checkbox_frame,text="İzlenmedi",font=("Roboto",12))
+        self.statue_filter_checkbox2.grid(row=1,column=1)
+
+        self.score_filter_frame=Frame(self.filters_frame,bg="gray")
+        self.score_filter_frame.grid(row=4,column=0,padx=(20,20),pady=(20,20),sticky=W)
+        self.score_filter_title=Label(self.score_filter_frame,text="Puan Durumu",font=("Roboto",16))
+        self.score_filter_title.grid(row=0,column=0,sticky=W)
+        self.score_filter_checkbox_frame=Frame(self.score_filter_frame)
+        self.score_filter_checkbox_frame.grid(row=1,column=0)
+        self.score_filter_checkbox1=Checkbutton(self.score_filter_checkbox_frame,text="1",font=("Roboto",12))
+        self.score_filter_checkbox1.grid(row=1,column=0,sticky=W,padx=(0,10))
+        self.score_filter_checkbox2=Checkbutton(self.score_filter_checkbox_frame,text="2",font=("Roboto",12))
+        self.score_filter_checkbox2.grid(row=1,column=1,sticky=W,padx=(0,10))
+        self.score_filter_checkbox3=Checkbutton(self.score_filter_checkbox_frame,text="3",font=("Roboto",12))
+        self.score_filter_checkbox3.grid(row=1,column=2,sticky=W,padx=(0,10))
+        self.score_filter_checkbox4=Checkbutton(self.score_filter_checkbox_frame,text="4",font=("Roboto",12))
+        self.score_filter_checkbox4.grid(row=1,column=3,sticky=W,padx=(0,10))
+        self.score_filter_checkbox5=Checkbutton(self.score_filter_checkbox_frame,text="5",font=("Roboto",12))
+        self.score_filter_checkbox5.grid(row=1,column=4,sticky=W)
+
+        #/Filters
+
         #Medias
         self.medias_frame=Frame(self.body_frame,bg="pink")
         self.medias_frame.pack(side=LEFT,padx=80,pady=(50,0))
@@ -62,6 +127,16 @@ class HomePage:
             for j in range(3):
                 MediaCover(self.medias_container).get_frame().grid(row=i,column=j,padx=(0,30),pady=(0,30))
         #/Medias
+
+        #AddButton
+        self.add_button_frame=Frame(self.main_body_frame,width=90,height=90)
+        self.add_button_frame.pack_propagate(0)
+        self.add_button_frame.pack(side=RIGHT,anchor=SE)
+        self.add_button_image=PhotoImage(file="medias/icons/addMediaIcon.png")
+        self.add_button=Button(self.add_button_frame,image=self.add_button_image,bd=0)
+        self.add_button.img_reference=self.add_button_image
+        self.add_button.pack()
+    #/AddButton
     #/Body
             
 
