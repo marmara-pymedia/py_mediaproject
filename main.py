@@ -9,7 +9,7 @@ def main():
     root.title("Pyflix")
     root.geometry("1920x1080")
 
-    HomePage(root)
+    UserProfile(root)
 
     root.mainloop()
 

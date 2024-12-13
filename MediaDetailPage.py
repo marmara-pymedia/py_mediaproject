@@ -13,11 +13,21 @@ class mediaDetail:
         self.cats=PhotoImage(file="medias\images\\backgrounds\cats_bg.png")
         self.mediaLabel=Label(self.bgFrame,image=self.cats)
         self.mediaLabel.img_reference=self.cats
-        self.mediaLabel.pack(fill=BOTH)
+        self.mediaLabel.pack(fill=BOTH, pady=(95),)
 
          # Bottom-left Frame
-        self.bottomLeftFrame = Frame(self.bgFrame, bg="lightgrey")
-        self.bottomLeftFrame.pack(side=BOTTOM)
+        self.bottomLeftFrame = Frame(self.mediaLabel, bg= "lightblue")
+        self.bottomLeftFrame.pack(fill=BOTH ,padx=(43,743), pady=(409,7))
+
+
+        self.title_label = Label(self.bottomLeftFrame, text="Title", font=("Roboto",40,"bold"),bg="lightgreen").grid(row=0)
+
+        self.description_label = Label(self.bottomLeftFrame, text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed dictum tellus, ac accumsan tortor. Curabitur vitae libero in massa lobortis dictum. Maecenas imperdiet ac enim vitae tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum a est vel mi rutrum pulvinar.", font=("Roboto",30),bg="lightgreen").grid(row=1,)
+
+        self.type_frame = Frame(self.bottomLeftFrame, bg="lightyellow").grid(row=3)
+        
+        self.type_text = Label(self.type_frame, text="Type", font=("Roboto", 20 , "bold") , bg="lightgray").grid(column=0)
+        self.type_data = Label(self.type_frame, text="Type from User JSON", font=("Roboto", 20), bg="lime").grid(column=1)
 
         # # Adding Details to the Bottom-left Frame
         # Label(self.bottomLeftFrame, text="Title:", font=("Arial", 10, "bold"), bg="lightgrey").grid(row=0, column=0, sticky=W, padx=5, pady=2)
