@@ -14,10 +14,7 @@ class mediaDetail:
         self.mediaLabel=Label(self.bgFrame,image=self.cats)
         self.mediaLabel.img_reference=self.cats
         self.mediaLabel.pack(fill=BOTH, pady=(95))
-<<<<<<< Updated upstream
-=======
         
->>>>>>> Stashed changes
 
          # Bottom-left Frame
         self.bottomLeftFrame = Frame(self.mediaLabel, bg= "lightblue")
@@ -27,13 +24,6 @@ class mediaDetail:
         self.title_label = Label(self.bottomLeftFrame, text="Title", font=("Roboto",40,"bold"),bg="lightgreen")
         self.title_label.grid(row=0, sticky="W")
 
-<<<<<<< Updated upstream
-        self.title_label = Label(self.bottomLeftFrame, text="Title", font=("Roboto",40,"bold"),bg="lightgreen").grid(row=0,column=0)
-
-        self.description_label = Label(self.bottomLeftFrame, text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed dictum tellus, ac accumsan tortor. Curabitur vitae libero in massa lobortis dictum. Maecenas imperdiet ac enim vitae tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum a est vel mi rutrum pulvinar.", font=("Roboto",30),bg="lightgreen").grid(row=1,column=0)
-
-
-=======
         # DESCRIPTION
         self.description_label = Label(self.bottomLeftFrame, text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. ", font=("Roboto",12),bg="lightgreen")
         self.description_label.grid(row=1, sticky="W")
@@ -46,7 +36,6 @@ class mediaDetail:
         self.type_text.grid(row=0,column=0)
         self.type_data = Label(self.type_frame, text="Type from User JSON", font=("Roboto", 20), bg="lime", fg="white")
         self.type_data.grid(row=0,column=1)
->>>>>>> Stashed changes
 
         # CATEGORY
         self.category_frame = Frame(self.bottomLeftFrame, bg="lightyellow")
@@ -64,7 +53,6 @@ class mediaDetail:
 
         # DEFINING IMAGE PATHS
         self.edit=PhotoImage(file="medias\icons\pen.png")
-        self.edit.img_reference=self.edit
         self.delete=PhotoImage(file="medias\icons\\trashbin.png")
         self.rating=PhotoImage(file="medias\icons\star.png")
         self.watch=PhotoImage(file="medias\icons\eye.png")
@@ -74,8 +62,9 @@ class mediaDetail:
         # EDIT - BUTTON
         self.editButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.editButtonFrame.grid(row=0,column=0)
-        self.edit_button=Button(self.editButtonFrame, command=self.edit_media)
-        self.edit_button.image=self.edit
+        self.edit_button=Button(self.editButtonFrame, command=self.edit_media, image=self.edit)
+        self.edit_button.img_reference=self.edit
+        self.edit_button.grid(row=0,column=0)
         
         # DELETE - BUTTON
         self.editButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
