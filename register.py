@@ -13,13 +13,13 @@ class Register:
         self.root=root
         print("Register")
 
-        self.register_frame=Frame(self.root,bg="gray")
+        self.register_frame=Frame(self.root,bg="#070F2B")
         self.register_frame.pack(fill=BOTH,expand=True)
-        self.register_child_frame=Frame(self.register_frame,bg="white")
+        self.register_child_frame=Frame(self.register_frame,bg="#1B1A55")
         self.register_child_frame.pack(expand=True,padx=709,pady=146,fill=BOTH)
 
-        self.register_child_2_frame=Frame(self.register_child_frame,bg='gray')
-        self.register_child_2_frame.pack(padx=56,pady=(108,109),expand=True)
+        self.register_child_2_frame=Frame(self.register_child_frame,bg='#1B1A55')
+        self.register_child_2_frame.pack(padx=56,pady=(80,109),expand=True)
 
 
         self.logo_register_frame=Frame(self.register_child_2_frame)
@@ -30,50 +30,50 @@ class Register:
         self.logo_register_label.pack(fill=BOTH)
 
 
-        self.first_name_frame=Frame(self.register_child_2_frame,bg="white")
-        self.first_name_frame.grid(row=1)
+        self.first_name_frame=Frame(self.register_child_2_frame,bg="#535C91")
+        self.first_name_frame.grid(row=1,pady=(20,10))
 
-        self.label_first_name=Label(self.first_name_frame,text="First Name :",font=("Roboto",14))
-        self.label_first_name.grid(row=0,column=0)
+        self.label_first_name=Label(self.first_name_frame,text="First Name :",font=("Roboto",20),bg="#535C91",fg="white")
+        self.label_first_name.grid(row=0,column=0,padx=(5,5))
 
-        self.entry_first_name=Entry(self.first_name_frame,bg="gold")
-        self.entry_first_name.grid(row=0,column=1)
+        self.entry_first_name=Entry(self.first_name_frame,bg="white",font=("Roboto",16),width=15)
+        self.entry_first_name.grid(row=0,column=1,padx=(5,5))
 
 
-        self.last_name_frame=Frame(self.register_child_2_frame)
+        self.last_name_frame=Frame(self.register_child_2_frame,bg="#535C91")
         self.last_name_frame.grid(row=2,pady=10)
 
-        self.label_last_name=Label(self.last_name_frame,text="Last Name :",font=("Roboto",14))
-        self.label_last_name.grid(row=0,column=0)
+        self.label_last_name=Label(self.last_name_frame,text="Last Name :",font=("Roboto",20),bg="#535C91",fg="white")
+        self.label_last_name.grid(row=0,column=0,padx=(5,5))
 
-        self.entry_last_name=Entry(self.last_name_frame,bg="gold")
-        self.entry_last_name.grid(row=0,column=1)
+        self.entry_last_name=Entry(self.last_name_frame,bg="white",font=("Roboto",16),width=15)
+        self.entry_last_name.grid(row=0,column=1,padx=(5,5))
 
 
-        self.username_frame=Frame(self.register_child_2_frame)
+        self.username_frame=Frame(self.register_child_2_frame,bg="#535C91")
         self.username_frame.grid(row=3,pady=10)
 
-        self.label_username=Label(self.username_frame,text="Username :",font=("Roboto",14))
-        self.label_username.grid(row=0,column=0)
+        self.label_username=Label(self.username_frame,text="Username :",font=("Roboto",20),bg="#535C91",fg="white")
+        self.label_username.grid(row=0,column=0,padx=(5,5))
 
-        self.entry_username=Entry(self.username_frame,bg="gold")
-        self.entry_username.grid(row=0,column=1)
+        self.entry_username=Entry(self.username_frame,bg="white",font=("Roboto",16),width=15)
+        self.entry_username.grid(row=0,column=1,padx=(5,5))
 
 
-        self.password_frame=Frame(self.register_child_2_frame)
+        self.password_frame=Frame(self.register_child_2_frame,bg="#535C91")
         self.password_frame.grid(row=4,pady=10)
 
-        self.label_password=Label(self.password_frame,text="Password :",font=("Roboto",14))
-        self.label_password.grid(row=0,column=0)
+        self.label_password=Label(self.password_frame,text="Password :",font=("Roboto",20),bg="#535C91",fg="white")
+        self.label_password.grid(row=0,column=0,padx=(5,5))
 
-        self.entry_password=Entry(self.password_frame,bg="gold")
-        self.entry_password.grid(row=0,column=1)
+        self.entry_password=Entry(self.password_frame,bg="white",font=("Roboto",16),width=15)
+        self.entry_password.grid(row=0,column=1,padx=(5,5))
 
 
-        self.register_futton_frame=Frame(self.register_child_2_frame)
-        self.register_futton_frame.grid(row=5)
+        self.register_button_frame=Frame(self.register_child_2_frame,bg="#535C91")
+        self.register_button_frame.grid(row=5,pady=15)
 
-        self.register_button=Button(self.register_futton_frame,text="Register",width=10,height=1,cursor="hand2", command=self.control_fields)
+        self.register_button=Button(self.register_button_frame,text="Register",font=("Roboto",15),bg="#535C91",fg="white",width=10,height=1,cursor="hand2", command=self.control_fields)
         self.register_button.pack(expand=True)
 
     def control_fields(self):
