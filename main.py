@@ -8,8 +8,8 @@ def main():
     root=Tk()
     root.title("Pyflix")
     root.geometry("1920x1080")
-
-    HomePage(root)
+    root.configure(bg="#070F2B")
+    Login(root,)
 
     root.mainloop()
 
