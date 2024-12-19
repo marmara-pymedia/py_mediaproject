@@ -1,0 +1,77 @@
+from tkinter import *
+from tkinter import ttk, filedialog
+from tkinter import font
+from tkinter import PhotoImage
+
+#main için
+#from components.movieAdd import MovieAdd
+
+class MovieAdd:
+    def __init__(self, root) -> None:
+        self.root=root
+
+        self.popup = Toplevel(root) #homepage olmalı
+        self.popup.title("Add Movie")
+        self.popup.geometry("800x630")
+        self.popup.configure(bg="gray")
+
+        self.popup_frame=Frame(self.popup,bg="gray")
+        self.popup_frame.pack(fill=BOTH,expand=True)
+
+
+        self.movie_name_frame=Frame(self.popup_frame,bg="pink",height=50,width=700)
+        self.movie_name_frame.pack(pady=(60,0))
+
+        self.label_movie_name=Label(self.movie_name_frame,text="Movie Name :",font=("Roboto",18),bg="#FFADAD",fg="black")
+        self.label_movie_name.grid(row=0,column=0,padx=(5,5),pady=5)
+
+        self.entry_movie_name=Entry(self.movie_name_frame,font=("Roboto",16),width=45)
+        self.entry_movie_name.grid(row=0, column=1, padx=(5, 10), pady=5)
+
+
+        self.movie_type_frame=Frame(self.popup_frame,bg="pink",height=50,width=700)
+        self.movie_type_frame.pack(pady=(36,0))
+
+        self.label_movie_type=Label(self.movie_type_frame,text="Movie Genre :",font=("Roboto",18),bg="#FFADAD",fg="black")
+        self.label_movie_type.grid(row=0,column=0,padx=(5,5),pady=5)
+
+        #movie type entry hali, combobox yerine kullanmak istersek diye
+        #self.entry_movie_type=Entry(self.movie_type_frame,font=("Roboto",16),width=45)
+        #self.entry_movie_type.grid(row=0, column=1, padx=(5, 10), pady=5)
+
+        self.combo_movie_type=ttk.Combobox(self.movie_type_frame,font=("Roboto",15),width=45,values=["Action", "Adventure", "Comedy", "Drama", "Horror", "Science Fiction (Sci-Fi)", "Fantasy", "Romance", "Thriller", "Mystery", "Animation", "Documentary", "Musical", "Historical", "Crime", "Western", "War", "Family", "Biographical (Biopic)"])
+        self.combo_movie_type.grid(row=0, column=1, padx=10, pady=10)
+        self.combo_movie_type.set("Choose a Genre")
+
+
+        self.movie_files_frame=Frame(self.popup_frame,bg="pink",height=50,width=700)
+        self.movie_files_frame.pack(pady=(36,0))
+
+        self.label_choose_cover=Label(self.movie_files_frame, text="Cover:", font=("Roboto",18),bg="#FFADAD",fg="black")
+        self.label_choose_cover.grid(row=0,column=0,padx=(5,5),pady=5)
+
+        self.button_choose_cover=Button(self.movie_files_frame,text="Choose a File",font=("Roboto",13),width=12,height=1,cursor="hand2",command=lambda: filedialog.askopenfilename())
+        self.button_choose_cover.grid(row=0,column=1,padx=(5,5),pady=5)
+
+        self.label_choose_bg=Label(self.movie_files_frame, text="Background:", font=("Roboto",18),bg="#FFADAD",fg="black")
+        self.label_choose_bg.grid(row=0,column=2,padx=(60,5),pady=5)
+
+        self.button_choose_bg=Button(self.movie_files_frame,text="Choose a File",font=("Roboto",13),width=12,height=1,cursor="hand2",command=lambda: filedialog.askopenfilename())
+        self.button_choose_bg.grid(row=0,column=3,padx=(5,5),pady=5)
+
+
+        self.movie_description_frame=Frame(self.popup_frame,bg="pink",height=206,width=700)
+        self.movie_description_frame.pack(pady=(36,0))
+
+        self.label_movie_description=Label(self.movie_description_frame,text="Description :",font=("Roboto",18),bg="#FFADAD",fg="black")
+        self.label_movie_description.grid(row=0,column=0,padx=(5,5),pady=5)
+
+        self.text_movie_description=Text(self.movie_description_frame,width=68, height=15)
+        self.text_movie_description.grid(row=0, column=1, padx=(5, 10), pady=(5,5))
+
+
+        self.movie_save_frame=Frame(self.popup_frame,bg="pink",height=40,width=700)
+        self.movie_save_frame.pack(pady=(20,0))
+
+        self.button_save=Button(self.movie_save_frame,text="Save",font=("Roboto",16),bg="#FFADAD",fg="black",width=10,height=1,cursor="hand2",command=lambda: print("Film Eklendi!"))
+        self.button_save.pack(expand=True)

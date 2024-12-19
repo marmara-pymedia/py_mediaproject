@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import font
 from tkinter import ttk
 from components.mediaCover import MediaCover
+from components.searchSuggestion import SearchSuggestion
 
 class HomePage:
     def __init__(self,root):
@@ -15,7 +16,11 @@ class HomePage:
 
         self.searchbar_frame=Frame(self.navi_frame,bg="pink",width=285,height=50)
         self.searchbar_frame.grid(row=0,column=0,padx=(1478,40))
-        self.searchbar_entry=Entry(self.searchbar_frame,font=("Roboto",16))
+
+        sv=StringVar()
+        sv.trace("w",lambda name,inedex,mode,sv=sv:onEntry(sv))
+        self.searchbar_entry=Entry(self.searchbar_frame,font=("Roboto",16),textvariable=sv)
+
         self.searchbar_entry.place(width=220,height=40,y=5,x=5)
         self.searchbar_img = PhotoImage(file="medias/icons/searchbar.png")
         self.searchbar_button=Button(self.searchbar_frame,image=self.searchbar_img,bd=0)
@@ -28,6 +33,7 @@ class HomePage:
         self.profile_img_button=Button(self.profile_frame,image=self.profile_img,bg="pink",bd=0)
         self.profile_img_button.img_reference=self.profile_img
         self.profile_img_button.pack()
+
     #/Navi
     
     #Body
@@ -138,7 +144,22 @@ class HomePage:
         self.add_button.pack()
     #/AddButton
     #/Body
-            
+    #PopUp
+        self.search_suggestion_container=Frame(self.home_frame)
+        self.search_suggestion_container.place(y=75,x=1483)
+        def onEntry(sv:StringVar):
+            for i in self.search_suggestion_container.winfo_children():
+                    i.destroy()
+            contains=False
+            for i in ["abc","ade","fgh"]:
+                if(i.startswith(sv.get()) and sv.get()!=""):
+                    SearchSuggestion(self.search_suggestion_container,i).getFrame().pack()
+                    contains=True
+            if(contains):
+                self.search_suggestion_container.place(y=75,x=1483)
+            else:
+                self.search_suggestion_container.place_forget()
+    #/PopUp
 
         
 
