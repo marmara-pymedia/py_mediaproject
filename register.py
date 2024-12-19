@@ -7,10 +7,12 @@ from tkinter import *
 from tkinter import font
 from tkinter import PhotoImage
 
-class Register:
+class Register(Frame):
 
-    def __init__(self, root) -> None:
-        self.root=root
+    def __init__(self, root,controller) -> None:
+        Frame.__init__(self,root)
+        self.root=self
+        self.controller=controller
         print("Register")
 
         self.register_frame=Frame(self.root,bg="#070F2B")

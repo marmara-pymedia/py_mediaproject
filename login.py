@@ -3,12 +3,15 @@ from tkinter import font
 from tkinter import PhotoImage
 from register import Register
 
-class Login:
-    def __init__(self,root) -> None:
-        self.root=root
+class Login(Frame):
+    def __init__(self,root,controller) -> None:
+        Frame.__init__(self,root)
+        self.root=self
+        self.controller=controller
 
-        self.login_frame=Frame(self.root,bg="#070F2B")
+        self.login_frame=Frame(self.root,bg="#070F2B",width=1920,height=1080)
         self.login_frame.pack(fill=BOTH,expand=True)
+        self.login_frame.pack_propagate(False)
         self.login_child_frame=Frame(self.login_frame,bg="#535C91")
         self.login_child_frame.pack(expand=True,padx=709,pady=146,fill=BOTH)
 
@@ -55,7 +58,7 @@ class Login:
 
         self.register_label_2=Label(self.register_frame,text="Kayıt ol.",fg="blue",cursor="hand2")
         self.register_label_2.grid(row=0,column=1)
-        self.register_label_2.bind("<Button-1>", lambda e: self.switch_to_register_page)
+        self.register_label_2.bind("<Button-1>", lambda e: self.switch_to_register_page())
 
 
         self.fram1=Frame(self.root,bg="#070F2B")
@@ -64,17 +67,8 @@ class Login:
         self.frame2=Frame(self.root,bg="#070F2B")
         self.frame2.pack(expand=True,padx=600,pady=900,fill=BOTH)
 
-
-
-        while True:
-            userName = input("Username: ")
-            if (userName.isspace() != True):
-                break
-        while True:
-            password = input("Password: ")
-            if (password.isspace() != True):
-                break
+    # def destroy(self):
+    #     self.login_frame.destroy()
 
     def switch_to_register_page(self):
-        Register()
-
+        self.controller.show_frame(Register)
