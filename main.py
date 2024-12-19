@@ -12,7 +12,7 @@ class MainApp():
         root.geometry("1920x1080")
         root.configure(bg="#070F2B")
         self.current_frame=None
-        self.show_frame(Login)
+        self.show_frame(HomePage)
 
     def show_frame(self,frame_class):
         new_frame=frame_class(self.root,self)
