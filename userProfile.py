@@ -5,11 +5,12 @@ from tkinter import font
 from tkinter import PhotoImage
 from register import Register
 
-class UserProfile:
+class UserProfile(Frame):
 
-    def __init__(self, root) -> None:
-        self.root=root
-
+    def __init__(self, root,controller) -> None:
+        Frame.__init__(self,root)
+        self.root=self
+        self.controller=controller
         self.user_profile_frame=Frame(self.root,bg="#070F2B")
         self.user_profile_frame.pack(fill=BOTH,expand=True)
 

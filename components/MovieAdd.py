@@ -79,3 +79,6 @@ class MovieAdd:
 
         def show_message():
             messagebox.showinfo("Info", "Successfully saved!")
+    
+    def __del__(self):
+        self.popup.destroy()

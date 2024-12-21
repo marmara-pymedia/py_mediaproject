@@ -1,14 +1,17 @@
 from tkinter import *
 from tkinter import font
 from tkinter import ttk
+from userProfile import UserProfile
 from components.mediaCover import MediaCover
 from components.searchSuggestion import SearchSuggestion
+from components.MovieAdd import MovieAdd
 
 class HomePage(Frame):
     def __init__(self,root,controller):
         Frame.__init__(self,root)
         self.root=self
         self.controller=controller
+        self.add_form=None
 
         self.home_frame=Frame(self.root,bg="#1B1A55")
         self.home_frame.pack(expand=True,fill=BOTH)
@@ -20,7 +23,7 @@ class HomePage(Frame):
         self.searchbar_frame.grid(row=0,column=0,padx=(1478,40),pady=10)
 
         sv=StringVar()
-        sv.trace("w",lambda name,inedex,mode,sv=sv:onEntry(sv))
+        sv.trace("w",lambda name,index,mode,sv=sv:onEntry(sv))
         self.searchbar_entry=Entry(self.searchbar_frame,font=("Roboto",16),textvariable=sv)
 
         self.searchbar_entry.place(width=220,height=40,y=5,x=5)
@@ -32,9 +35,9 @@ class HomePage(Frame):
         self.profile_frame=Frame(self.navi_frame,bg="#070F2B",width=50,height=50)
         self.profile_frame.grid(row=0,column=1)
         self.profile_img=PhotoImage(file="medias/icons/user_vector.png")
-        self.profile_img_button=Button(self.profile_frame,image=self.profile_img,bg="#070F2B",bd=0,activebackground="#070F2B")
-        self.profile_img_button.img_reference=self.profile_img
-        self.profile_img_button.pack()
+        self.profile_button=Button(self.profile_frame,image=self.profile_img,bg="#070F2B",bd=0,activebackground="#070F2B",command=self.on_profile_button_click)
+        self.profile_button.img_reference=self.profile_img
+        self.profile_button.pack()
 
     #/Navi
     
@@ -154,7 +157,7 @@ class HomePage(Frame):
         self.add_button_frame.pack_propagate(0)
         self.add_button_frame.pack(side=RIGHT,anchor=SE,padx=(0,10))
         self.add_button_image=PhotoImage(file="medias/icons/addMediaIcon.png")
-        self.add_button=Button(self.add_button_frame,image=self.add_button_image,bd=0,bg="#1B1A55",activebackground="#1B1A55")
+        self.add_button=Button(self.add_button_frame,image=self.add_button_image,bd=0,bg="#1B1A55",activebackground="#1B1A55",command=self.on_add_button_click)
         self.add_button.img_reference=self.add_button_image
         self.add_button.pack()
         #/AddButton
@@ -177,6 +180,14 @@ class HomePage(Frame):
 
     def on_mousewheel(self,event):
         self.body_canvas.yview_scroll(int(-1*(event.delta/120)),"units")
+
+    def on_add_button_click(self):
+        if(self.add_form!=None):
+            del self.add_form
+        self.add_form=MovieAdd(self)
+
+    def on_profile_button_click(self):
+        self.controller.show_frame(UserProfile)
 
         
 
