@@ -32,7 +32,7 @@ class HomePage(Frame):
         self.profile_frame=Frame(self.navi_frame,bg="#070F2B",width=50,height=50)
         self.profile_frame.grid(row=0,column=1)
         self.profile_img=PhotoImage(file="medias/icons/user_vector.png")
-        self.profile_img_button=Button(self.profile_frame,image=self.profile_img,bg="#070F2B",bd=0)
+        self.profile_img_button=Button(self.profile_frame,image=self.profile_img,bg="#070F2B",bd=0,activebackground="#070F2B")
         self.profile_img_button.img_reference=self.profile_img
         self.profile_img_button.pack()
 
@@ -45,11 +45,12 @@ class HomePage(Frame):
         self.body_canvas=Canvas(self.main_body_frame,bg="red",bd=0, highlightthickness=0, relief='ridge')
         self.body_canvas.pack(side=LEFT,fill=BOTH,expand=True,padx=(160,70))
 
-        self.body_scrollbar=ttk.Scrollbar(self.main_body_frame,orient=VERTICAL,command=self.body_canvas.yview)
+        self.body_scrollbar=Scrollbar(self.main_body_frame,orient=VERTICAL,command=self.body_canvas.yview)
         self.body_scrollbar.pack(side=RIGHT,fill=Y)
 
-        self.body_canvas.configure(yscrollcommand=self.body_scrollbar)
+        self.body_canvas.configure(yscrollcommand=self.body_scrollbar.set)
         self.body_canvas.bind("<Configure>",lambda e:self.body_canvas.configure(scrollregion=self.body_canvas.bbox("all")))
+        self.body_canvas.bind_all("<MouseWheel>",self.on_mousewheel)
 
         self.body_frame=Frame(self.body_canvas,bg="#1B1A55")
 
@@ -153,7 +154,7 @@ class HomePage(Frame):
         self.add_button_frame.pack_propagate(0)
         self.add_button_frame.pack(side=RIGHT,anchor=SE,padx=(0,10))
         self.add_button_image=PhotoImage(file="medias/icons/addMediaIcon.png")
-        self.add_button=Button(self.add_button_frame,image=self.add_button_image,bd=0,bg="#1B1A55")
+        self.add_button=Button(self.add_button_frame,image=self.add_button_image,bd=0,bg="#1B1A55",activebackground="#1B1A55")
         self.add_button.img_reference=self.add_button_image
         self.add_button.pack()
         #/AddButton
@@ -173,6 +174,9 @@ class HomePage(Frame):
             else:
                 self.search_suggestion_container.place_forget()
     #/PopUp
+
+    def on_mousewheel(self,event):
+        self.body_canvas.yview_scroll(int(-1*(event.delta/120)),"units")
 
         
 
