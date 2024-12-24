@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import font
 from tkinter import ttk
+from services.MediaService import MediaService
 from userProfile import UserProfile
 from components.mediaCover import MediaCover
 from components.searchSuggestion import SearchSuggestion
@@ -12,6 +13,7 @@ class HomePage(Frame):
         self.root=self
         self.controller=controller
         self.add_form=None
+        self.media_service=MediaService()
 
         self.home_frame=Frame(self.root,bg="#1B1A55")
         self.home_frame.pack(expand=True,fill=BOTH)
@@ -45,7 +47,7 @@ class HomePage(Frame):
         self.main_body_frame=Frame(self.home_frame,bg="#1B1A55")
         self.main_body_frame.pack(expand=True,fill=BOTH)
 
-        self.body_canvas=Canvas(self.main_body_frame,bg="red",bd=0, highlightthickness=0, relief='ridge')
+        self.body_canvas=Canvas(self.main_body_frame,bg="white",bd=0, highlightthickness=0, relief='ridge')
         self.body_canvas.pack(side=LEFT,fill=BOTH,expand=True,padx=(160,70))
 
         self.body_scrollbar=Scrollbar(self.main_body_frame,orient=VERTICAL,command=self.body_canvas.yview)
@@ -67,13 +69,13 @@ class HomePage(Frame):
         #Favourites
         self.favourites_frame=Frame(self.body_child_frame,bg="#535C91")
         self.favourites_frame.pack(side=TOP)
-        self.favourites_container=Frame(self.favourites_frame,bg="#535C91")
+        self.favourites_container=Frame(self.favourites_frame,bg="#535C91",width=1300,height=200)
         self.favourites_container.pack(padx=20,pady=20)
-        for i in range(5):
-            if(i==4):
-                MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
-                continue
-            MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
+        # for i in range(5):
+        #     if(i==4):
+        #         MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
+        #         continue
+        #     MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
         #/Favourites
 
         #Filters
@@ -142,14 +144,25 @@ class HomePage(Frame):
         #Medias
         self.medias_frame=Frame(self.body_child_frame,bg="gray")
         self.medias_frame.pack(side=LEFT,padx=0,pady=(50,0))
-        self.medias_container=Frame(self.medias_frame,bg="#070F2B")
+        self.medias_container=Frame(self.medias_frame,bg="#070F2B",width=1000,height=1000)
         self.medias_container.pack(padx=(0,0),pady=(0,0))
-        for i in range(5):
-            for j in range(4):
-                if(j==3):
-                    MediaCover(self.medias_container).get_frame().grid(row=i,column=j,padx=(0,0),pady=(0,15))
-                    continue
-                MediaCover(self.medias_container).get_frame().grid(row=i,column=j,padx=(0,15),pady=(0,15))
+
+        col=0
+        row=0
+        for media in self.media_service.get_all():
+            if(col==3):
+                MediaCover(self.medias_container,media).get_frame().grid(row=row,column=col,padx=(0,0),pady=(0,15))
+                col=0
+                row+=1
+                continue
+            MediaCover(self.medias_container,media).get_frame().grid(row=row,column=col,padx=(0,15),pady=(0,15))
+
+        # for i in range(5):
+        #     for j in range(4):
+        #         if(j==3):
+        #             MediaCover(self.medias_container).get_frame().grid(row=i,column=j,padx=(0,0),pady=(0,15))
+        #             continue
+        #         MediaCover(self.medias_container).get_frame().grid(row=i,column=j,padx=(0,15),pady=(0,15))
         #/Medias
 
         #AddButton

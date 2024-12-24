@@ -3,12 +3,21 @@ from tkinter import ttk, filedialog
 from tkinter import font
 from tkinter import PhotoImage
 from tkinter import messagebox
+from entities.Media import Type
+import shutil
+
+from entities.Media import Media
+from services.MediaService import MediaService
+from services.CategoryService import CategoryService
 
 #main için
 #from components.movieAdd import MovieAdd
 
 class MovieAdd:
     def __init__(self, root) -> None:
+        self.media_service=MediaService()
+        self.category_service=CategoryService()
+        
         self.root=root
 
         self.popup = Toplevel(root) #homepage olmalı
@@ -40,7 +49,7 @@ class MovieAdd:
         #self.entry_movie_type=Entry(self.movie_type_frame,font=("Roboto",16),width=45)
         #self.entry_movie_type.grid(row=0, column=1, padx=(5, 10), pady=5)
 
-        self.combo_movie_type=ttk.Combobox(self.movie_type_frame,font=("Roboto",15),width=45,values=["Action", "Adventure", "Comedy", "Drama", "Horror", "Science Fiction (Sci-Fi)", "Fantasy", "Romance", "Thriller", "Mystery", "Animation", "Documentary", "Musical", "Historical", "Crime", "Western", "War", "Family", "Biographical (Biopic)"])
+        self.combo_movie_type=ttk.Combobox(self.movie_type_frame,font=("Roboto",15),width=45,values=[category.name for category in self.category_service.get_all()])
         self.combo_movie_type.grid(row=0, column=1, padx=10, pady=10)
         self.combo_movie_type.set("Choose a Genre")
 
@@ -51,13 +60,13 @@ class MovieAdd:
         self.label_choose_cover=Label(self.movie_files_frame, text="Cover:", font=("Roboto",18),bg="#535C91",fg="#D8C4B6")
         self.label_choose_cover.grid(row=0,column=0,padx=(5,5),pady=5)
 
-        self.button_choose_cover=Button(self.movie_files_frame,text="Choose a File",font=("Roboto",13),width=12,height=1,cursor="hand2",command=lambda: filedialog.askopenfilename())
+        self.button_choose_cover=Button(self.movie_files_frame,text="Choose a File",font=("Roboto",13),width=12,height=1,cursor="hand2",command=lambda:self.on_cover_img_button_click())
         self.button_choose_cover.grid(row=0,column=1,padx=(5,5),pady=5)
 
         self.label_choose_bg=Label(self.movie_files_frame, text="Background:", font=("Roboto",18),bg="#535C91",fg="#D8C4B6")
         self.label_choose_bg.grid(row=0,column=2,padx=(60,5),pady=5)
 
-        self.button_choose_bg=Button(self.movie_files_frame,text="Choose a File",font=("Roboto",13),width=12,height=1,cursor="hand2",command=lambda: filedialog.askopenfilename())
+        self.button_choose_bg=Button(self.movie_files_frame,text="Choose a File",font=("Roboto",13),width=12,height=1,cursor="hand2",command=lambda: self.on_bg_img_button_click())
         self.button_choose_bg.grid(row=0,column=3,padx=(5,5),pady=5)
 
 
@@ -74,11 +83,29 @@ class MovieAdd:
         self.movie_save_frame=Frame(self.popup_frame,bg="#1B1A55",height=40,width=700)
         self.movie_save_frame.pack(pady=(20,0))
 
-        self.button_save=Button(self.movie_save_frame,text="Save",font=("Roboto",16),bg="#1B1A55",fg="#D8C4B6",width=10,height=1,cursor="hand2",command=lambda: show_message())
+        self.button_save=Button(self.movie_save_frame,text="Save",font=("Roboto",16),bg="#1B1A55",fg="#D8C4B6",width=10,height=1,cursor="hand2",command=lambda: save_media())
         self.button_save.pack(expand=True)
 
-        def show_message():
+        def save_media():
+            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type.FILM,category=self.category_service.get_all()[self.combo_movie_type.current()],watch_state=1,score=5,note="No Note",bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path)
+            self.media_service.add_media(media)
             messagebox.showinfo("Info", "Successfully saved!")
+
     
+    def on_cover_img_button_click(self):
+        self.cover_img_path=self.save_file()
+
+    def on_bg_img_button_click(self):
+        self.bg_img_path=self.save_file()
+
+    def save_file(self):
+        file=filedialog.askopenfile()
+        if file is None:
+            return
+        file_path="medias/images/covers/"+file.name.split("/")[-1]
+        shutil.copy(file.name,file_path)
+        return file_path
+
+
     def __del__(self):
         self.popup.destroy()

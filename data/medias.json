@@ -1,0 +1,17 @@
+[
+    {
+        "title": "testt",
+        "description": "testtt",
+        "type": 1,
+        "category": {
+            "name": "Drama",
+            "id": 4
+        },
+        "watch_state": 1,
+        "score": 5,
+        "note": "No Note",
+        "cover_image_path": "medias/images/covers/d29ff078253287df01e3a8242eeba480 (1).png",
+        "bg_image_path": "medias/images/covers/ea329906a1ba7e8f5fe120296b6ea357.png",
+        "id": 1
+    }
+]

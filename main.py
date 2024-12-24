@@ -4,7 +4,6 @@ from homePage import HomePage
 from tkinter import *
 from userProfile import UserProfile
 
-
 class MainApp():
     def __init__(self,root):
         self.root=root

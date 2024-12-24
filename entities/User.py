@@ -1,5 +1,3 @@
-import json
-
 class User:
     def __init__(self,first_name,last_name,user_name,password,image_location="default",id=-1):
         self.id=id

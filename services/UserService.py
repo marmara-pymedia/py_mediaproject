@@ -26,9 +26,27 @@ class UserService:
         return [User(**user) for user in users]
     
     def update_user(self,user:User):
-        pass
+        users=self.get_all()
+        for i in users:
+            if(i.id==user.id):
+                i.first_name=user.first_name
+                i.last_name=user.last_name
+                i.image_location=user.image_location
+                i.password=user.password
+                i.user_name=user.user_name
+        
+        with open("data/users.json","w") as file:
+            file.write(json.dumps([user.__dict__ for user in users]))
+    
     def delete_user(self,user:User):
-        pass
+        users=self.get_all()
+        for i in users:
+            if(i.id==user.id):
+                users.remove(i)
+                break
+            
+        with open("data/users.json","w") as file:
+            file.write(json.dumps([user.__dict__ for user in users]))
 
 
 
