@@ -44,7 +44,7 @@ class MediaCover:
         media_type_frame.grid(row=0,column=1,padx=(0,3))
         media_type_title=Label(media_type_frame,text="Tür:",font=("Roboto",8,"bold"),bg="#070F2B",fg="white")
         media_type_title.grid(row=0,column=0)
-        media_type=Label(media_type_frame,text=media.type,font=("Roboto",8),bg="#070F2B",fg="white")
+        media_type=Label(media_type_frame,text=media.type.name,font=("Roboto",8),bg="#070F2B",fg="white")
         media_type.grid(row=0,column=1)
 
         media_score_frame=Frame(media_extra_frame,height=20,width=50)

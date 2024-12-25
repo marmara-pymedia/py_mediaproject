@@ -20,16 +20,19 @@ class MediaService:
                 return media
         return None
     
+    def get_media_by_category(self,category:Category):
+        medias=self.get_all()
+        for media in medias:
+            if media.category.id==category.id:
+                return media
+        return None
     def get_all(self)->list[Media]:
         with open("data/medias.json","r") as file:
             medias=json.load(file)
         new_medias=[]
         for media in medias:
             new_media=Media(**media)
-            new_media.category=Category(**media["category"])
-            new_media.type=Type(**media["type"])
-            new_media.watch_state=WatchState(**media["watch_state"])
-            new_medias.append(new_media)
+            new_medias.append(new_media.toObject())
         return new_medias
     
     def update_media(self,media:Media):

@@ -15,10 +15,10 @@ from services.CategoryService import CategoryService
 #from components.movieAdd import MovieAdd
 
 class MovieAdd:
-    def __init__(self, root) -> None:
+    def __init__(self, root,controller) -> None:
         self.media_service=MediaService()
         self.category_service=CategoryService()
-        
+        self.controller=controller
         self.root=root
 
         self.popup = Toplevel(root) #homepage olmalı
@@ -93,6 +93,7 @@ class MovieAdd:
             # print(media.__dict__)
             self.media_service.add_media(media)
             messagebox.showinfo("Info", "Successfully saved!")
+            self.controller.refresh_frame()
 
     
     def on_cover_img_button_click(self):

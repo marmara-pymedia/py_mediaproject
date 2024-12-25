@@ -23,6 +23,9 @@ class MainApp():
         self.current_frame=new_frame
         self.current_frame.pack(fill=BOTH,expand=True)
 
+    def refresh_frame(self):
+        self.show_frame(self.current_frame.__class__)
+
 
 def main():
     root=Tk()

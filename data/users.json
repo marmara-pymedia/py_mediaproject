@@ -57,7 +57,50 @@
         "last_name": "test",
         "user_name": "test",
         "password": "test",
-        "favourite_medias": [],
+        "favourite_medias": [
+            {
+                "title": "test",
+                "description": "testt",
+                "type": {
+                    "id": 1,
+                    "name": "Film"
+                },
+                "category": {
+                    "name": "Drama",
+                    "id": 4
+                },
+                "watch_state": {
+                    "id": 1,
+                    "state": "Izlenmedi"
+                },
+                "score": 5,
+                "note": "No Note",
+                "cover_image_path": "medias/images/covers/cats cover.png",
+                "bg_image_path": "medias/images/covers/cats cover.png",
+                "id": 1
+            },
+            {
+                "title": "test",
+                "description": "testt",
+                "type": {
+                    "id": 1,
+                    "name": "Film"
+                },
+                "category": {
+                    "name": "Drama",
+                    "id": 4
+                },
+                "watch_state": {
+                    "id": 1,
+                    "state": "Izlenmedi"
+                },
+                "score": 5,
+                "note": "No Note",
+                "cover_image_path": "medias/images/covers/cats cover.png",
+                "bg_image_path": "medias/images/covers/cats cover.png",
+                "id": 1
+            }
+        ],
         "image_location": "default"
     }
 ]

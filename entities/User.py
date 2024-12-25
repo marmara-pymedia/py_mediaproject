@@ -16,3 +16,8 @@ class User:
             self, default=lambda o: o.__dict__,
             sort_keys=False, indent=4
         )
+
+    def toObject(self):
+        user_dict = self.__dict__
+        self.favourite_medias = [Media(**media).toObject() for media in user_dict["favourite_medias"]]
+        return self

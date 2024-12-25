@@ -26,8 +26,7 @@ class UserService:
         new_users=[]
         for user in users:
             new_user=User(**user)
-            new_user.favourite_medias=[Media(**media) for media in user["favourite_medias"]]
-            new_users.append(new_user)
+            new_users.append(new_user.toObject())
         return new_users
     
     def update_user(self,user:User):

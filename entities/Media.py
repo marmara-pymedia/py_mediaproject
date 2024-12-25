@@ -22,3 +22,10 @@ class Media:
             self, default=lambda o: o.__dict__,
             sort_keys=False, indent=4
         )
+    
+    def toObject(self):
+        media_dict = self.__dict__
+        self.category = Category(**media_dict["category"])
+        self.type = Type(**media_dict["type"])
+        self.watch_state = WatchState(**media_dict["watch_state"])
+        return self
