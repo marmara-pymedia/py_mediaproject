@@ -16,8 +16,29 @@
         },
         "score": 5,
         "note": "No Note",
-        "cover_image_path": "medias/images/covers/depresyon.jpg",
-        "bg_image_path": "medias/images/covers/depresyon.jpg",
+        "cover_image_path": "medias/images/covers/cats cover.png",
+        "bg_image_path": "medias/images/covers/cats cover.png",
         "id": 1
+    },
+    {
+        "title": "test",
+        "description": "test",
+        "type": {
+            "id": 1,
+            "name": "Film"
+        },
+        "category": {
+            "name": "Science Fiction (Sci-Fi)",
+            "id": 6
+        },
+        "watch_state": {
+            "id": 1,
+            "state": "Izlenmedi"
+        },
+        "score": 5,
+        "note": "No Note",
+        "cover_image_path": "medias/images/covers/GameIcon.png",
+        "bg_image_path": "medias/images/covers/GameIcon.png",
+        "id": 2
     }
 ]

@@ -70,5 +70,8 @@ class Login(Frame):
     # def destroy(self):
     #     self.login_frame.destroy()
 
+    def login(self):
+        self.controller.user=None
+
     def switch_to_register_page(self):
         self.controller.show_frame(Register)

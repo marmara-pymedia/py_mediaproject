@@ -102,7 +102,7 @@ class MovieAdd:
         self.bg_img_path=self.save_file()
 
     def save_file(self):
-        file=filedialog.askopenfile()
+        file=filedialog.askopenfile(filetypes=[("Image Files", ".png")])
         if file is None:
             return
         file_path="medias/images/covers/"+file.name.split("/")[-1]

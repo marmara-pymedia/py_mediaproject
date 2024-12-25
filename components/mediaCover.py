@@ -1,22 +1,24 @@
 from tkinter import *
 from tkinter import ttk
-from PIL import Image,ImageTk
 
 import os
 
 from entities.Media import Media
 
 class MediaCover:
-    def __init__(self,root,media:Media):
+    def __init__(self,root,media:Media=None):
         self.media_cover_frame_base=Frame(root,width=250,height=310,bg="#1B1A55")
         self.media_cover_frame=Frame(self.media_cover_frame_base,width=240,height=300,bg="#1B1A55")
         self.media_cover_frame.pack(padx=(5,5),pady=(5,5))
         self.media_cover_frame.pack_propagate(0)
         self.media_cover_frame.grid_propagate(0)
-
+        if(media is None):
+            self.media_cover_frame_base.configure(bg="#070F2B")
+            self.media_cover_frame.configure(bg="#070F2B")
+            return
         image_frame=Frame(self.media_cover_frame,bg="#1B1A55",width=250,height=240)
         image_frame.grid(sticky=W)
-        media_image=PhotoImage(file=Image.open(media.cover_image_path))
+        media_image=PhotoImage(file=media.cover_image_path)
         media_image_label=Label(image_frame,image=media_image,borderwidth=0,highlightthickness = 0)
         media_image_label.img_reference=media_image
         media_image_label.pack(fill=BOTH,expand=True)

@@ -1,8 +1,9 @@
-from login import Login
-from register import Register
+
 from homePage import HomePage
 from tkinter import *
 from userProfile import UserProfile
+from services.UserService import UserService
+from entities.User import User
 
 class MainApp():
     def __init__(self,root):
@@ -11,6 +12,8 @@ class MainApp():
         root.geometry("1920x1080")
         root.configure(bg="#070F2B")
         self.current_frame=None
+        self.user:User=None
+        self.user=UserService().get_user_by_id(1)
         self.show_frame(HomePage)
 
     def show_frame(self,frame_class):

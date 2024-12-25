@@ -71,6 +71,15 @@ class HomePage(Frame):
         self.favourites_frame.pack(side=TOP)
         self.favourites_container=Frame(self.favourites_frame,bg="#535C91",width=1300,height=200)
         self.favourites_container.pack(padx=20,pady=20)
+
+        start_index=0
+        last_index=5
+        for i in range(start_index,last_index):
+            if(i==last_index-1):
+                MediaCover(self.favourites_container,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
+                continue
+            MediaCover(self.favourites_container,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
+
         # for i in range(5):
         #     if(i==4):
         #         MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
@@ -156,13 +165,19 @@ class HomePage(Frame):
                 row+=1
                 continue
             MediaCover(self.medias_container,media).get_frame().grid(row=row,column=col,padx=(0,15),pady=(0,15))
+            col+=1
 
-        # for i in range(5):
-        #     for j in range(4):
-        #         if(j==3):
-        #             MediaCover(self.medias_container).get_frame().grid(row=i,column=j,padx=(0,0),pady=(0,15))
-        #             continue
-        #         MediaCover(self.medias_container).get_frame().grid(row=i,column=j,padx=(0,15),pady=(0,15))
+            #Empty Medias
+            empty_medias_count=10-(len(self.media_service.get_all())) if len(self.media_service.get_all())<10 else 0
+        for i in range(empty_medias_count):
+            if(col==3):
+                MediaCover(self.medias_container).get_frame().grid(row=row,column=col,padx=(0,0),pady=(0,15))
+                col=0
+                row+=1
+                continue
+            MediaCover(self.medias_container).get_frame().grid(row=row,column=col,padx=(0,15),pady=(0,15))
+            col+=1
+            #/Empty Medias
         #/Medias
 
         #AddButton
