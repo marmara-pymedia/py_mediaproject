@@ -1,0 +1,14 @@
+[
+    {
+        "id":1,
+        "name":"Izlenmedi"
+    },
+    {
+        "id":2,
+        "name":"Devam Ediyor"
+    },
+    {
+        "id":3,
+        "name":"İzlendi"
+    }
+]

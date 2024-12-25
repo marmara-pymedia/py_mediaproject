@@ -27,6 +27,8 @@ class MediaService:
         for media in medias:
             new_media=Media(**media)
             new_media.category=Category(**media["category"])
+            new_media.type=Type(**media["type"])
+            new_media.watch_state=WatchState(**media["watch_state"])
             new_medias.append(new_media)
         return new_medias
     

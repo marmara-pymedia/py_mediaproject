@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from PIL import Image,ImageTk
 
 import os
 
@@ -15,7 +16,7 @@ class MediaCover:
 
         image_frame=Frame(self.media_cover_frame,bg="#1B1A55",width=250,height=240)
         image_frame.grid(sticky=W)
-        media_image=PhotoImage(file="medias\images\cats cover.png")
+        media_image=PhotoImage(file=Image.open(media.cover_image_path))
         media_image_label=Label(image_frame,image=media_image,borderwidth=0,highlightthickness = 0)
         media_image_label.img_reference=media_image
         media_image_label.pack(fill=BOTH,expand=True)

@@ -1,17 +1,23 @@
 [
     {
-        "title": "testt",
-        "description": "testtt",
-        "type": 1,
+        "title": "test",
+        "description": "testt",
+        "type": {
+            "id": 1,
+            "name": "Film"
+        },
         "category": {
             "name": "Drama",
             "id": 4
         },
-        "watch_state": 1,
+        "watch_state": {
+            "id": 1,
+            "state": "Izlenmedi"
+        },
         "score": 5,
         "note": "No Note",
-        "cover_image_path": "medias/images/covers/d29ff078253287df01e3a8242eeba480 (1).png",
-        "bg_image_path": "medias/images/covers/ea329906a1ba7e8f5fe120296b6ea357.png",
+        "cover_image_path": "medias/images/covers/depresyon.jpg",
+        "bg_image_path": "medias/images/covers/depresyon.jpg",
         "id": 1
     }
 ]

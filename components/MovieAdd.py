@@ -3,7 +3,8 @@ from tkinter import ttk, filedialog
 from tkinter import font
 from tkinter import PhotoImage
 from tkinter import messagebox
-from entities.Media import Type
+from entities.Type import Type
+from entities.WatchState import WatchState
 import shutil
 
 from entities.Media import Media
@@ -21,6 +22,7 @@ class MovieAdd:
         self.root=root
 
         self.popup = Toplevel(root) #homepage olmalı
+        self.popup.attributes('-topmost', 'true')
         self.popup.title("Add Movie")
         self.popup.geometry("800x630")
         self.popup.configure(bg="#070F2B")
@@ -87,7 +89,8 @@ class MovieAdd:
         self.button_save.pack(expand=True)
 
         def save_media():
-            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type.FILM,category=self.category_service.get_all()[self.combo_movie_type.current()],watch_state=1,score=5,note="No Note",bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path)
+            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type(1,"Film"),category=self.category_service.get_all()[self.combo_movie_type.current()],watch_state=WatchState(1,"Izlenmedi"),score=5,note="No Note",bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path)
+            # print(media.__dict__)
             self.media_service.add_media(media)
             messagebox.showinfo("Info", "Successfully saved!")
 

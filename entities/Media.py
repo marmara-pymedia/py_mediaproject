@@ -1,15 +1,7 @@
 from entities.Category import Category
-from enum import Enum
+from entities.Type import Type
+from entities.WatchState import WatchState
 import json
-
-class Type(Enum):
-    FILM=1
-    DIZI=2
-
-class WatchState(Enum):
-    IZLENMEDI=1
-    DEVAM=2
-    IZLENDI=3
 
 class Media:
     def __init__(self,title,description,type:Type,category:Category,watch_state:WatchState,score:int,note,cover_image_path="default",bg_image_path="default",id=-1):
