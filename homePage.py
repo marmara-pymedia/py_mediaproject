@@ -51,7 +51,7 @@ class HomePage(Frame):
         self.main_body_frame=Frame(self.home_frame,bg="#1B1A55")
         self.main_body_frame.pack(expand=True,fill=BOTH)
 
-        self.body_canvas=Canvas(self.main_body_frame,bg="white",bd=0, highlightthickness=0, relief='ridge')
+        self.body_canvas=Canvas(self.main_body_frame,bg="#070F2B",bd=0, highlightthickness=0, relief='ridge')
         self.body_canvas.pack(side=LEFT,fill=BOTH,expand=True,padx=(160,70))
 
         self.body_scrollbar=Scrollbar(self.main_body_frame,orient=VERTICAL,command=self.body_canvas.yview)
@@ -248,7 +248,8 @@ class HomePage(Frame):
             self.medias=self.media_service.get_all()
             self.load_medias()
             return
-        self.medias=[self.media_service.get_media_by_category(category) for category in selected_categories]
+        
+        self.medias=[self.media_service.get_media_by_category(category) for category in selected_categories if self.media_service.get_media_by_category(category)!=None]
         self.load_medias()
 
 
