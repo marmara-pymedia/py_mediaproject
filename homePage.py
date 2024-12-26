@@ -243,8 +243,8 @@ class HomePage(Frame):
             for i in self.search_suggestion_container.winfo_children():
                     i.destroy()
             contains=False
-            for i in ["abc","ade","fgh"]:
-                if(i.startswith(sv.get()) and sv.get()!=""):
+            for i in self.media_service.get_all():
+                if(i.title.startswith(sv.get()) and sv.get()!=""):
                     SearchSuggestion(self.search_suggestion_container,i).getFrame().pack()
                     contains=True
             if(contains):

@@ -13,15 +13,15 @@ class SearchSuggestion:
         self.suggestion_content_frame.grid_propagate(0)
         self.suggestion_content_frame.grid(row=0)
 
-        self.content_title_label=Label(self.suggestion_content_frame,text=media)
+        self.content_title_label=Label(self.suggestion_content_frame,text=media.title)
         self.content_title_label.bind("<Button-1>", self.on_suggestion_click)
         self.content_title_label.grid(row=0,column=0,padx=(5,0),pady=(5,0),sticky=W)
 
-        self.content_type_label=Label(self.suggestion_content_frame,text="Film")
+        self.content_type_label=Label(self.suggestion_content_frame,text=media.type.name)
         self.content_type_label.bind("<Button-1>", self.on_suggestion_click)
         self.content_type_label.grid(row=1,column=0,padx=(5,150),sticky=W)
 
-        self.content_score_label=Label(self.suggestion_content_frame,text="4.5/5")
+        self.content_score_label=Label(self.suggestion_content_frame,text=media.score)
         self.content_score_label.bind("<Button-1>", self.on_suggestion_click)
         self.content_score_label.grid(row=1,column=1,sticky=W,padx=(0,5))
 
