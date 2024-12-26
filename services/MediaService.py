@@ -26,6 +26,69 @@ class MediaService:
             if media.category.id==category.id:
                 return media
         return None
+    
+    def get_all_media_by_categories(self,categories:list[Category]):
+        medias=self.get_all()
+        filtered_medias=[]
+        for media in medias:
+            if any(media.category.id == c.id for c in categories):
+                filtered_medias.append(media)
+        return filtered_medias
+    
+    def get_media_by_type(self,type:Type):
+        medias=self.get_all()
+        for media in medias:
+            if media.type.id==type.id:
+                return media
+        return None
+    
+    def get_all_media_by_types(self,types:list[Type]):
+        medias=self.get_all()
+        filtered_medias=[]
+        for media in medias:
+            if any(media.type.id == t.id for t in types):
+                filtered_medias.append(media)
+        return filtered_medias
+    
+    
+    def get_media_by_score(self,score:int):
+        medias=self.get_all()
+        for media in medias:
+            if media.score==score:
+                return media
+        return None
+    
+    def get_all_media_by_scores(self,scores:list[int]):
+        medias=self.get_all()
+        filtered_medias=[]
+        for media in medias:
+            if any(media.score == s for s in scores):
+                filtered_medias.append(media)
+        return filtered_medias
+    
+    
+    def get_media_by_watch_state(self,watch_state:WatchState):
+        medias=self.get_all()
+        for media in medias:
+            if media.watch_state.id==watch_state.id:
+                return media
+        return None
+    
+    def get_all_media_by_watch_states(self,watch_states:list[WatchState]):
+        medias=self.get_all()
+        filtered_medias=[]
+        for media in medias:
+            if any(media.watch_state.id == w.id for w in watch_states):
+                filtered_medias.append(media)
+        return filtered_medias
+    
+    def get_filtered_medias(self,*media_lists:list[Media])->list[Media]:
+        filtered_media_list=media_lists[0]
+        for media_list in media_lists:
+            filtered_media_list=[media for media in filtered_media_list if any(media.id == m.id for m in media_list)]
+        return filtered_media_list
+
+
     def get_all(self)->list[Media]:
         with open("data/medias.json","r") as file:
             medias=json.load(file)

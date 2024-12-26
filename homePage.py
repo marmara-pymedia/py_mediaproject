@@ -3,6 +3,8 @@ from tkinter import font
 from tkinter import ttk
 from services.MediaService import MediaService
 from services.CategoryService import CategoryService
+from services.TypeService import TypeService
+from services.WatchStateService import WatchStateService
 from userProfile import UserProfile
 from components.mediaCover import MediaCover
 from components.searchSuggestion import SearchSuggestion
@@ -16,6 +18,8 @@ class HomePage(Frame):
         self.add_form=None
         self.media_service=MediaService()
         self.category_service=CategoryService()
+        self.type_service=TypeService()
+        self.watch_state_service=WatchStateService()
 
         self.medias=self.media_service.get_all()
 
@@ -111,13 +115,26 @@ class HomePage(Frame):
         self.type_filter_checkbox_frame=Frame(self.type_filter_frame,bg="#535C91")
         self.type_filter_checkbox_frame.grid(row=1,column=0)
 
-        self.film_choice_num=IntVar()
-        self.type_filter_checkbox1=Checkbutton(self.type_filter_checkbox_frame,text="Film",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white",variable=self.film_choice_num)
-        self.type_filter_checkbox1.grid(row=1,column=0,padx=(0,10))
+        self.type_vars={type:BooleanVar() for type in self.type_service.get_all()}
 
-        self.dizi_choice_num=IntVar()
-        self.type_filter_checkbox2=Checkbutton(self.type_filter_checkbox_frame,text="Dizi",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white",variable=self.dizi_choice_num)
-        self.type_filter_checkbox2.grid(row=1,column=1)
+        type_row=0
+        type_col=0
+        for type,var in self.type_vars.items():
+            if(type_col==2):
+                type_row+=1
+                type_col=0
+            self.type_filter_checkbox1=Checkbutton(self.type_filter_checkbox_frame,
+                                                       text=type.name,
+                                                       variable=var,
+                                                       command=self.filter_medias,
+                                                       font=("Roboto",12),
+                                                       bg="#535C91",
+                                                       fg="white",
+                                                       selectcolor="black",
+                                                       activebackground="#535C91",
+                                                       activeforeground="white")
+            self.type_filter_checkbox1.grid(row=type_row,column=type_col,sticky=W,padx=(0,10))
+            type_col+=1
 
         self.category_filter_frame=Frame(self.filters_frame,bg="#535C91")
         self.category_filter_frame.grid(row=2,column=0,padx=(20,20),pady=(20,0),sticky=W)
@@ -154,10 +171,27 @@ class HomePage(Frame):
         self.statue_filter_title.grid(row=0,column=0,sticky=W)
         self.statue_filter_checkbox_frame=Frame(self.statue_filter_frame,bg="#535C91")
         self.statue_filter_checkbox_frame.grid(row=1,column=0)
-        self.statue_filter_checkbox1=Checkbutton(self.statue_filter_checkbox_frame,text="İzlendi",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white")
-        self.statue_filter_checkbox1.grid(row=1,column=0,padx=(0,10))
-        self.statue_filter_checkbox2=Checkbutton(self.statue_filter_checkbox_frame,text="İzlenmedi",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white")
-        self.statue_filter_checkbox2.grid(row=1,column=1)
+
+        self.watch_state_vars={watch_state:BooleanVar() for watch_state in self.watch_state_service.get_all()}
+
+        watch_state_row=0
+        watch_state_col=0
+        for watch_state,var in self.watch_state_vars.items():
+            if(watch_state_col==2):
+                watch_state_row+=1
+                watch_state_col=0
+            self.watch_state_filter_checkbox1=Checkbutton(self.statue_filter_checkbox_frame,
+                                                       text=watch_state.state,
+                                                       variable=var,
+                                                       command=self.filter_medias,
+                                                       font=("Roboto",12),
+                                                       bg="#535C91",
+                                                       fg="white",
+                                                       selectcolor="black",
+                                                       activebackground="#535C91",
+                                                       activeforeground="white")
+            self.watch_state_filter_checkbox1.grid(row=watch_state_row,column=watch_state_col,sticky=W,padx=(0,10))
+            watch_state_col+=1
 
         self.score_filter_frame=Frame(self.filters_frame,bg="#535C91")
         self.score_filter_frame.grid(row=4,column=0,padx=(20,20),pady=(20,20),sticky=W)
@@ -165,17 +199,27 @@ class HomePage(Frame):
         self.score_filter_title.grid(row=0,column=0,sticky=W)
         self.score_filter_checkbox_frame=Frame(self.score_filter_frame,bg="#535C91")
         self.score_filter_checkbox_frame.grid(row=1,column=0)
-        self.score_filter_checkbox1=Checkbutton(self.score_filter_checkbox_frame,text="1",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white")
-        self.score_filter_checkbox1.grid(row=1,column=0,sticky=W,padx=(0,10))
-        self.score_filter_checkbox2=Checkbutton(self.score_filter_checkbox_frame,text="2",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white")
-        self.score_filter_checkbox2.grid(row=1,column=1,sticky=W,padx=(0,10))
-        self.score_filter_checkbox3=Checkbutton(self.score_filter_checkbox_frame,text="3",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white")
-        self.score_filter_checkbox3.grid(row=1,column=2,sticky=W,padx=(0,10))
-        self.score_filter_checkbox4=Checkbutton(self.score_filter_checkbox_frame,text="4",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white")
-        self.score_filter_checkbox4.grid(row=1,column=3,sticky=W,padx=(0,10))
-        self.score_filter_checkbox5=Checkbutton(self.score_filter_checkbox_frame,text="5",font=("Roboto",12),bg="#535C91",fg="white",selectcolor="black",activebackground="#535C91",activeforeground="white")
-        self.score_filter_checkbox5.grid(row=1,column=4,sticky=W)
 
+        self.score_vars={score:BooleanVar() for score in [1,2,3,4,5]}
+
+        score_row=0
+        score_col=0
+        for score,var in self.score_vars.items():
+            if(score_col==5):
+                score_row+=1
+                score_col=0
+            self.score_filter_checkbox1=Checkbutton(self.score_filter_checkbox_frame,
+                                                       text=score,
+                                                       variable=var,
+                                                       command=self.filter_medias,
+                                                       font=("Roboto",12),
+                                                       bg="#535C91",
+                                                       fg="white",
+                                                       selectcolor="black",
+                                                       activebackground="#535C91",
+                                                       activeforeground="white")
+            self.score_filter_checkbox1.grid(row=score_row,column=score_col,sticky=W,padx=(0,10))
+            score_col+=1
         #/Filters
 
         #Medias
@@ -230,7 +274,7 @@ class HomePage(Frame):
             col+=1
 
             #Empty Medias
-            empty_medias_count=10-(len(self.media_service.get_all())) if len(self.media_service.get_all())<10 else 0
+        empty_medias_count=10-(len(self.media_service.get_all())) if len(self.media_service.get_all())<10 else 0
         for i in range(empty_medias_count):
             if(col==3):
                 MediaCover(self.medias_container).get_frame().grid(row=row,column=col,padx=(0,0),pady=(0,15))
@@ -242,14 +286,41 @@ class HomePage(Frame):
             #/Empty Medias
     
     def filter_medias(self):
+        medias_by_category=[]
         selected_categories=[category for category,var in self.category_vars.items() if var.get()]
-
         if(len(selected_categories)==0):
-            self.medias=self.media_service.get_all()
-            self.load_medias()
-            return
+            medias_by_category+=self.media_service.get_all()
+        else:
+            medias_by_category+=self.media_service.get_all_media_by_categories(selected_categories)
         
-        self.medias=[self.media_service.get_media_by_category(category) for category in selected_categories if self.media_service.get_media_by_category(category)!=None]
+
+        medias_by_type=[]
+        selected_types=[type for type,var in self.type_vars.items() if var.get()]
+        if(len(selected_types)==0):
+            medias_by_type+=self.media_service.get_all()
+        else:
+            medias_by_type+=self.media_service.get_all_media_by_types(selected_types)
+
+
+
+        medias_by_watch_state=[]
+        selected_watch_states=[watch_state for watch_state,var in self.watch_state_vars.items() if var.get()]
+        if(len(selected_watch_states)==0):
+            medias_by_watch_state+=self.media_service.get_all()
+        else:
+            medias_by_watch_state+=self.media_service.get_all_media_by_watch_states(selected_watch_states)
+        
+
+        medias_by_score=[]
+        selected_scores=[score for score,var in self.score_vars.items() if var.get()]
+        if(len(selected_scores)==0):
+            medias_by_score+=self.media_service.get_all()
+        else:
+            medias_by_score+=self.media_service.get_all_media_by_scores(selected_scores)
+        
+
+        self.medias=self.media_service.get_filtered_medias(medias_by_category,medias_by_type,medias_by_watch_state,medias_by_score)
+        print(medias_by_type)
         self.load_medias()
 
 

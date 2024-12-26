@@ -1,14 +1,14 @@
 [
     {
         "id":1,
-        "name":"Izlenmedi"
+        "state":"Izlenmedi"
     },
     {
         "id":2,
-        "name":"Devam Ediyor"
+        "state":"Devam Ediyor"
     },
     {
         "id":3,
-        "name":"İzlendi"
+        "state":"Izlendi"
     }
 ]
