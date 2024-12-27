@@ -69,20 +69,19 @@ class mediaDetail:
         self.rating=PhotoImage(file="medias\icons\star.png")
         self.view=PhotoImage(file="medias\icons\eye.png")
         self.leavenote=PhotoImage(file="medias\icons\leavenote.png")
+
+        self.star_1=PhotoImage(file="medias\icons\star-1.png")
+        self.star_2=PhotoImage(file="medias\icons\star-2.png")
+        self.star_3=PhotoImage(file="medias\icons\star-3.png")
+        self.star_4=PhotoImage(file="medias\icons\star-4.png")
+        self.star_5=PhotoImage(file="medias\icons\star-5.png")
         
 
         # EDIT - BUTTON
         self.editButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
-<<<<<<< Updated upstream
         self.editButtonFrame.grid(row=0,column=0)
         self.edit_button=Button(self.editButtonFrame, command=self.edit_media)
         self.edit_button.image=self.edit
-=======
-        self.editButtonFrame.grid(row=0,column=0,padx=(10),pady=(10))
-        self.edit_button=Button(self.editButtonFrame, image=self.edit, command=self.edit_media,)
-        self.edit_button.img_reference=self.edit
-        self.edit_button.grid(row=0,column=0)
->>>>>>> Stashed changes
         
         # DELETE - BUTTON
         self.deleteButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
@@ -93,14 +92,14 @@ class mediaDetail:
         # RATE - BUTTON
         self.ratingButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.ratingButtonFrame.grid(row=0,column=2,padx=(10),pady=(10))
-        self.rating_button=Button(self.ratingButtonFrame, image=self.rating, command=self.rate_media)
+        self.rating_button=Button(self.ratingButtonFrame, image=self.rating, command=self.toggle_rating_options)
         self.rating_button.img_reference=self.rating
         self.rating_button.grid(row=0,column=2)
         
         # VIEW - BUTTON
         self.viewButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.viewButtonFrame.grid(row=0,column=3,padx=(10),pady=(10))
-        self.view_button=Button(self.viewButtonFrame, image=self.view, command=self.view_media)
+        self.view_button=Button(self.viewButtonFrame, image=self.view, command=self.toggle_view_options)
         self.view_button.img_reference=self.view
         self.view_button.grid(row=0,column=3)
         
@@ -112,7 +111,63 @@ class mediaDetail:
         self.leavenote_button.grid(row=0,column=4)
 
 
+        # -------------------------- FOR RATING -----------------------------------------------
 
+          # RATING OPTIONS FRAME (Separate from bottomRightFrame)
+        self.ratingOptionsFrame = Frame(self.mediaLabel, bg="#535C91")
+        self.ratingOptionsFrame.place_forget()  # Hide initially
+
+        # RATING OPTIONS BUTTONS
+
+        self.one_star_button = Button(
+            self.ratingOptionsFrame,
+            image=self.star_1,
+            command=lambda: self.select_rating_option(1),
+            width=60,
+            height=60
+        )
+        self.one_star_button.img_reference = self.star_1
+        self.one_star_button.grid(row=0, column=0, pady=5, padx=5)
+
+        self.two_star_button = Button(
+            self.ratingOptionsFrame,
+            image=self.star_2,
+            command=lambda: self.select_rating_option(2),
+            width=60,
+            height=60
+        )
+        self.two_star_button.img_reference = self.star_2
+        self.two_star_button.grid(row=1, column=0, pady=5, padx=5)
+
+        self.three_star_button = Button(    
+            self.ratingOptionsFrame,
+            image=self.star_3,
+            command=lambda: self.select_rating_option(3),
+            width=60,
+            height=60
+        ) 
+        self.three_star_button.img_reference = self.star_3
+        self.three_star_button.grid(row=2, column=0, pady=5, padx=5)
+
+        self.four_star_button = Button(
+            self.ratingOptionsFrame,
+            image=self.star_4,
+            command=lambda: self.select_rating_option(4),
+            width=60,
+            height=60
+        )
+        self.four_star_button.img_reference = self.star_4
+        self.four_star_button.grid(row=3, column=0, pady=5, padx=5)
+
+        self.five_star_button = Button(
+            self.ratingOptionsFrame,
+            image=self.star_5,
+            command=lambda: self.select_rating_option(5),
+            width=60,
+            height=60
+        )
+        self.five_star_button.img_reference = self.star_5
+        self.five_star_button.grid(row=4, column=0, pady=5, padx=5)
 
 
 
@@ -122,43 +177,103 @@ class mediaDetail:
 
         # VIEW FRAME
 
-        self.viewFrame = Frame(self.mediaLabel, bg="#535C91")
-        self.viewFrame.pack(padx=(10), pady=(5), fill=BOTH,)
-        self.viewFrame.place(x = 1700, y = 300)  # Hide initially
+        self.viewOptionsFrame = Frame(self.mediaLabel, bg="#535C91")
+        self.viewOptionsFrame.place_forget()  # Hide initially
 
         # VIEW OPTIONS FRAME
-        self.viewOptionsFrame = Frame(self.viewFrame, bg="#535C91")
-        self.viewOptionsFrame.grid(row=1, column=3, padx=(10), pady=(10))
-        self.viewOptionsFrame.grid_remove()  # Hide initially
+        self.not_watched_button = Button(
+            self.viewOptionsFrame,
+            image=self.view,
+            command=lambda: self.select_view_option("not_watched"),
+            bg="#FB4141",
+            width=60,
+            height=60
+        )
+        self.not_watched_button.img_reference = self.view
+        self.not_watched_button.grid(row=0, column=0, pady=5, padx=5)
 
-        # VIEW OPTIONS BUTTONS
-        self.not_watched_button = Button(self.viewOptionsFrame, text="Not Watched", command=lambda: self.select_view_option("not_watched"))
-        self.not_watched_button.grid(row=0, column=0, pady=(5))
-        self.watching_button = Button(self.viewOptionsFrame, text="Watching", command=lambda: self.select_view_option("watching"))
-        self.watching_button.grid(row=1, column=0, pady=(5))
-        self.watched_button = Button(self.viewOptionsFrame, text="Watched", command=lambda: self.select_view_option("watched"))
-        self.watched_button.grid(row=2, column=0, pady=(5))
+        self.watching_button = Button(
+            self.viewOptionsFrame,
+            image=self.view,
+            command=lambda: self.select_view_option("watching"),
+            bg="#FFC145",
+            width=60,
+            height=60
+        )
+        self.watching_button.img_reference = self.view
+        self.watching_button.grid(row=1, column=0, pady=5, padx=5)
+
+        self.watched_button = Button(
+            self.viewOptionsFrame,
+            image=self.view,
+            command=lambda: self.select_view_option("watched"),
+            bg="#5CB338",
+            width=60,
+            height=60
+        )
+        self.watched_button.img_reference = self.view
+        self.watched_button.grid(row=2, column=0, pady=5, padx=5)
 
         # Placeholder for the selected view option
         self.selected_view_option = "not_watched"
 
+        # -------------------------- TOGGLES -----------------------------------------------
+        
+        # VIEW OPTİON TOGGLES
+
     def toggle_view_options(self):
-        if self.viewOptionsFrame.winfo_ismapped():
-            self.viewOptionsFrame.grid_remove()
+        # Show or hide the view options
+        if self.viewOptionsFrame.winfo_y() != 250:
+            self.viewOptionsFrame.place(x = 1665, y = 250)  # Show if hidden
         else:
-            self.viewOptionsFrame.grid()
+          self.viewOptionsFrame.place_forget()  # Hide initially
 
     def select_view_option(self, option):
+        # Update the selected view option and icon
         self.selected_view_option = option
-        self.viewOptionsFrame.grid_remove()
+        self.viewOptionsFrame.place_forget()  # Hide after selection
         print(f"Selected view option: {option}")
-        # Update the view button icon based on the selected option
+
+        # Update the "View" button icon based on the selected option
         if option == "not_watched":
-            self.view_button.config(image=self.view)
+            self.view_button.config(image=self.view, bg="#FB4141")
         elif option == "watching":
-            self.view_button.config(image=self.view)
+            self.view_button.config(image=self.view, bg="#FFC145")
         elif option == "watched":
-            self.view_button.config(image=self.view)
+            self.view_button.config(image=self.view, bg="#5CB338")
+    
+
+
+    # RATING OPTİON TOGGLES
+
+    def select_rating_option(self, rating):
+        self.selected_rating = rating
+        self.ratingOptionsFrame.place_forget()  # Hide after selection 
+        print(f"Selected rating: {rating} Stars")
+        # Update the rating button background color based on the selected rating
+        self.rating_button.config(bg="#FFC145")
+
+        if rating == 1:
+            self.rating_button.config(bg="white", image=self.star_1)
+            self.rating_button.img_reference = self.star_1
+        elif rating == 2:
+            self.rating_button.config(bg="white", image=self.star_2)
+            self.rating_button.img_reference = self.star_2
+        elif rating == 3:
+            self.rating_button.config(bg="white", image=self.star_3)
+            self.rating_button.img_reference = self.star_3
+        elif rating == 4:
+            self.rating_button.config(bg="white", image=self.star_4)
+            self.rating_button.img_reference = self.star_4
+        elif rating == 5:
+            self.rating_button.config(bg="white", image=self.star_5)
+            self.rating_button.img_reference = self.star_5
+
+    def toggle_rating_options(self):
+        if self.ratingOptionsFrame.winfo_y() != 100:
+            self.ratingOptionsFrame.place(x=1585, y=100)
+        else:
+            self.ratingOptionsFrame.place_forget()
 
     def edit_media(self):
         print("Edit Media")
