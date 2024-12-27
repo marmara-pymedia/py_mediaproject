@@ -9,6 +9,7 @@ from userProfile import UserProfile
 from components.mediaCover import MediaCover
 from components.searchSuggestion import SearchSuggestion
 from components.MovieAdd import MovieAdd
+import math
 
 class HomePage(Frame):
     def __init__(self,root,controller):
@@ -77,28 +78,19 @@ class HomePage(Frame):
         #Favourites
         self.favourites_frame=Frame(self.body_child_frame,bg="#535C91")
         self.favourites_frame.pack(side=TOP)
-        self.favourites_container=Frame(self.favourites_frame,bg="#535C91",width=1300,height=200)
-        self.favourites_container.pack(padx=20,pady=20)
 
-        start_index=0
-        last_index=5 if len(self.controller.user.favourite_medias)>=5 else len(self.controller.user.favourite_medias)
-        for i in range(start_index,last_index):
-            if(i==5):
-                MediaCover(self.favourites_container,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
-                continue
-            MediaCover(self.favourites_container,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
+        self.favourites_right_arrow=Label(self.favourites_frame,text=">",font=("Roboto",40),bg="#535C91",fg="white")
+        self.favourites_right_arrow.pack(side=RIGHT)
+        self.favourites_right_arrow.bind("<Button-1>",lambda e:self.on_rigth_arrow_click())
+        self.favourites_left_arrow=Label(self.favourites_frame,text="<",font=("Roboto",40),bg="#535C91",fg="white")
+        self.favourites_left_arrow.pack(side=LEFT)
+        self.favourites_left_arrow.bind("<Button-1>",lambda e:self.on_left_arrow_click())
 
-        for i in range(5-last_index):
-            if(i==5):
-                MediaCover(self.favourites_container).get_frame().grid(row=0,column=i+last_index,padx=(0,0),pady=(0,0))
-                continue
-            MediaCover(self.favourites_container).get_frame().grid(row=0,column=i+last_index,padx=(0,15),pady=(0,0))
+        self.favourites_container=None
+        self.start_index=0
+        self.last_index=5 if len(self.controller.user.favourite_medias)>=5 else len(self.controller.user.favourite_medias)
+        self.load_favourites()
 
-        # for i in range(5):
-        #     if(i==4):
-        #         MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
-        #         continue
-        #     MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
         #/Favourites
 
         #Filters
@@ -253,6 +245,32 @@ class HomePage(Frame):
                 self.search_suggestion_container.place_forget()
     #/PopUp
 
+    def load_favourites(self):
+        if(self.favourites_container!=None):
+            self.favourites_container.destroy()
+
+        self.favourites_container=Frame(self.favourites_frame,bg="#535C91",width=1300,height=200)
+        self.favourites_container.pack(pady=20)
+
+
+        for i in range(self.start_index,self.last_index):
+            if(i==4):
+                MediaCover(self.favourites_container,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
+                continue
+            MediaCover(self.favourites_container,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
+
+        for i in range(math.ceil(self.last_index/5)*5-self.last_index):
+            if(i==5-self.last_index-1):
+                MediaCover(self.favourites_container).get_frame().grid(row=0,column=i+self.last_index,padx=(0,0),pady=(0,0))
+                continue
+            MediaCover(self.favourites_container).get_frame().grid(row=0,column=i+self.last_index,padx=(0,15),pady=(0,0))
+
+        # for i in range(5):
+        #     if(i==4):
+        #         MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
+        #         continue
+        #     MediaCover(self.favourites_container).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
+
     def load_medias(self):
         if(self.medias_frame!=None):
             self.medias_frame.destroy()
@@ -335,6 +353,18 @@ class HomePage(Frame):
 
     def on_profile_button_click(self):
         self.controller.show_frame(UserProfile)
+    
+    def on_rigth_arrow_click(self):
+        self.start_index+=5 if self.start_index+5<len(self.controller.user.favourite_medias) else 0
+        self.last_index+=5 if self.last_index+5<len(self.controller.user.favourite_medias) else len(self.controller.user.favourite_medias)-self.last_index
+        print(self.start_index,self.last_index)
+        self.load_favourites()
+    
+    def on_left_arrow_click(self):
+        self.start_index-=5 if self.start_index-5>=0 else 0
+        self.last_index-=5 if self.last_index-5>=0 else 0
+        print(self.start_index,self.last_index)
+        self.load_favourites()
 
         
 

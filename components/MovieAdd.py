@@ -107,7 +107,10 @@ class MovieAdd:
         if file is None:
             return
         file_path="medias/images/covers/"+file.name.split("/")[-1]
-        shutil.copy(file.name,file_path)
+        try:
+            shutil.copy(file.name,file_path)
+        except:
+            pass
         return file_path
 
 
