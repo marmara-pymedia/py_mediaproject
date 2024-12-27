@@ -362,7 +362,14 @@ class HomePage(Frame):
     
     def on_left_arrow_click(self):
         self.start_index-=5 if self.start_index-5>=0 else 0
-        self.last_index-=5 if self.last_index-5>=0 else 0
+
+        if(not self.last_index<=5):
+            self.last_index-=5 if self.last_index-5>0 else 0
+        if(self.last_index<len(self.controller.user.favourite_medias)):
+            self.last_index=math.ceil(self.last_index/5)*5
+        if(self.last_index>len(self.controller.user.favourite_medias)):
+            self.last_index=len(self.controller.user.favourite)
+
         print(self.start_index,self.last_index)
         self.load_favourites()
 
