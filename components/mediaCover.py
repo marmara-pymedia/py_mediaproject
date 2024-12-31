@@ -9,7 +9,6 @@ from services.UsermediaService import UsermediaService
 class MediaCover:
     def __init__(self,root,controller=None,media:Media=None):
 
-        self.usermedia_service=UsermediaService()
 
         self.media_cover_frame_base=Frame(root,width=250,height=310,bg="#1B1A55")
         self.media_cover_frame=Frame(self.media_cover_frame_base,width=240,height=300,bg="#1B1A55")
@@ -20,6 +19,7 @@ class MediaCover:
             self.media_cover_frame_base.configure(bg="#070F2B")
             self.media_cover_frame.configure(bg="#070F2B")
             return
+        self.usermedia_service=controller.main_service.usermedia_service
         
         self.usermedia=self.usermedia_service.get_usermedia_by_user_id_and_media_id(controller.user.id,media.id)
 

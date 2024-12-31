@@ -6,11 +6,11 @@ from services.TypeService import TypeService
 from services.UsermediaService import UsermediaService
 
 class MediaService:
-    def __init__(self):
-        self.category_service=CategoryService()
-        self.type_service=TypeService()
-        self.usermedia_service=UsermediaService()
-
+    def __init__(self,category_service,type_service,usermedia_service):
+        self.category_service=category_service
+        self.type_service=type_service
+        self.usermedia_service=usermedia_service
+        
     def add_media(self,media:Media):
         medias=self.get_all()
         media.id=medias[-1].id+1 if len(medias)!=0 else 1

@@ -1,14 +1,11 @@
 from entities.Usermedia import Usermedia
-from services.UserService import UserService
-from services.MediaService import MediaService
-from services.WatchStateService import WatchStateService
 import json
 
 class UsermediaService:
-    def __init__(self):
-        self.user_service=UserService()
-        self.media_service=MediaService()
-        self.watch_state_service=WatchStateService()
+    def __init__(self,user_service,media_service,watch_state_service):
+        self.user_service=user_service
+        self.media_service=media_service
+        self.watch_state_service=watch_state_service
 
     def add_usermedia(self,usermedia:Usermedia):
         medias=self.get_all()
