@@ -1,11 +1,11 @@
 import json
 from entities.User import *
 from entities.User import User
-from services.MediaService import MediaService
+# from services.MediaService import MediaService
 
 class UserService:
-    def __init__(self) -> None:
-        self.media_service=MediaService()
+    def __init__(self,media_service) -> None:
+        self.media_service=media_service
         pass
 
     def add_user(self,user:User):

@@ -18,10 +18,10 @@ class HomePage(Frame):
         self.root=self
         self.controller=controller
         self.add_form=None
-        self.media_service=MediaService()
-        self.category_service=CategoryService()
-        self.type_service=TypeService()
-        self.watch_state_service=WatchStateService()
+        self.media_service=controller.main_service.media_service
+        self.category_service=controller.main_service.category_service
+        self.type_service=controller.main_service.type_service
+        self.watch_state_service=controller.main_service.watch_state_service
 
         self.medias=self.media_service.get_all()
 
