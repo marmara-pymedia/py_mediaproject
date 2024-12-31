@@ -335,7 +335,8 @@ class HomePage(Frame):
         if(len(selected_scores)==0):
             medias_by_score+=self.media_service.get_all()
         else:
-            medias_by_score+=self.media_service.get_all_media_by_scores(selected_scores)
+            print(self.media_service,"trestsef")
+            medias_by_score+=self.media_service.get_all_media_by_scores(self.controller.user.id,selected_scores)
         
 
         self.medias=self.media_service.get_filtered_medias(medias_by_category,medias_by_type,medias_by_watch_state,medias_by_score)

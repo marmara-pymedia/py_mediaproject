@@ -67,7 +67,7 @@ class MediaService:
         medias=self.get_all()
         filtered_medias=[]
         for media in medias:
-            if any(self.usermedia_service.get_usermedia_by_user_id_and_media_id(user_id,media.id) == s for s in scores):
+            if any(self.usermedia_service.get_usermedia_by_user_id_and_media_id(user_id,media.id).score == s for s in scores):
                 filtered_medias.append(media)
         return filtered_medias
     

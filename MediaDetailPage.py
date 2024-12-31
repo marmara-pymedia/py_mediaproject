@@ -322,4 +322,13 @@ class mediaDetail(Frame):
     def delete_media(self):
         print("Delete Media")
     
+<<<<<<< HEAD
     # will add somehtin 
+=======
+
+root=Tk()
+root.title("Media Detail Page")
+root.geometry("1920x1080")
+mediaDetail(root)
+root.mainloop()
+>>>>>>> 24e40f29584dd40f768750bfae27acc43312358f
