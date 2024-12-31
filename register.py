@@ -6,6 +6,11 @@ from services.UserService import UserService
 from tkinter import *
 from tkinter import font
 from tkinter import PhotoImage
+from tkinter import messagebox
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from login import Login
 
 class Register(Frame):
 
@@ -27,7 +32,7 @@ class Register(Frame):
         self.logo_register_frame=Frame(self.register_child_2_frame)
         self.logo_register_frame.grid(row=0,column=0,padx=150,pady=15)
 
-        self.logo_register=PhotoImage(file="medias\logos\loginLogo.png")
+        self.logo_register=PhotoImage(file="medias\logos\\loginLogo.png")
         self.logo_register_label=Label(self.logo_register_frame,image=self.logo_register)
         self.logo_register_label.pack(fill=BOTH)
 
@@ -77,6 +82,15 @@ class Register(Frame):
 
         self.register_button=Button(self.register_button_frame,text="Register",font=("Roboto",15),bg="#535C91",fg="white",width=10,height=1,cursor="hand2", command=self.control_fields)
         self.register_button.pack(expand=True)
+
+        self.back_button_frame=Frame(self.register_child_2_frame,bg="white")
+        self.back_button_frame.grid(row=6,column=0,pady=(0,10))
+
+        self.back_button=Button(self.back_button_frame,text="Back",font=("Roboto",15),bg="white",fg="black",width=10,height=1,cursor="hand2", command=self.switch_to_login_page)
+        self.back_button.pack(expand=True)
+
+    def switch_to_login_page(self):
+        self.controller.show_frame(Login)
 
     def control_fields(self):
         first_name = self.entry_first_name.get().strip()
