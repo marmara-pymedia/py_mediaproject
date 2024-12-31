@@ -115,31 +115,33 @@ class Register(Frame):
             messagebox.showerror("Error", "Last Name must consist of only letters!")
             return
 
-        if not username:
-            messagebox.showerror("Error", "Username cannot be empty!")
-        elif not username.isalnum():
-            messagebox.showerror("Error", "Username must consist only letters and numbers!")
-        elif self.user_service.get_user_by_id(username):  # Check if username already exists
+        if not username.isalnum():
+            messagebox.showerror("Error", "Username must consist of only letters and numbers!")
+            return
+        elif self.user_service.get_user_by_id(username):
             messagebox.showerror("Error", "This username already exists!")
-        else:
-            self.all_users.append(username)
-            messagebox.showinfo("Successful", f"Username '{username}' is successfully saved!")
+            return
+        # else:
+        #     self.all_users.append(username)
 
         if len(password)<8:
-            messagebox.showerror("Error", "Password must be longer than 8 characters!")
-        elif not re.search(r'[A-Z]', password):
-            messagebox.showerror("Error", "Password must consist at least an upper case letter!")
-        elif not re.search(r'[a-z]', password):
-            messagebox.showerror("Error", "Password must consist at least a lower case letter!")
-        elif not re.search(r'\d', password):
-            messagebox.showerror("Error", "Password must consist at least a number!")
-        elif not any(char in symbols for char in password):
-            messagebox.showerror("Error", f"Password must consist at least one of these special characters: {symbols}")
-        else:
-            messagebox.showinfo("Successful", "Password valid!")
+            messagebox.showerror("Error", "Password must be at least 8 characters long!")
+            return
+        if not re.search(r'[A-Z]', password):
+            messagebox.showerror("Error", "Password must contain at least one uppercase letter!")
+            return
+        if not re.search(r'[a-z]', password):
+            messagebox.showerror("Error", "Password must contain at least one lowercase letter!")
+            return
+        if not re.search(r'\d', password):
+            messagebox.showerror("Error", "Password must contain at least one number!")
+            return
+        if not any(char in symbols for char in password):
+            messagebox.showerror("Error", f"Password must contain at least one special characters: {symbols}")
 
         user=User(first_name,last_name,username,password)
         self.register(user)
+        messagebox.showinfo("Successful", f"Username '{username}' is successfully saved!")
 
 
     def register(self,user:User):
