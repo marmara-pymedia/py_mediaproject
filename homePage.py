@@ -5,6 +5,7 @@ from services.MediaService import MediaService
 from services.CategoryService import CategoryService
 from services.TypeService import TypeService
 from services.WatchStateService import WatchStateService
+from services.UsermediaService import UsermediaService
 from userProfile import UserProfile
 from components.mediaCover import MediaCover
 from components.searchSuggestion import SearchSuggestion
@@ -255,9 +256,9 @@ class HomePage(Frame):
 
         for i in range(self.start_index,self.last_index):
             if(i==4):
-                MediaCover(self.favourites_container,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
+                MediaCover(self.favourites_container,self.controller,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,0),pady=(0,0))
                 continue
-            MediaCover(self.favourites_container,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
+            MediaCover(self.favourites_container,self.controller,self.controller.user.favourite_medias[i]).get_frame().grid(row=0,column=i,padx=(0,15),pady=(0,0))
 
         for i in range(math.ceil(self.last_index/5)*5-self.last_index):
             if(i==5-self.last_index-1):
@@ -284,11 +285,11 @@ class HomePage(Frame):
         row=0
         for media in self.medias:
             if(col==3):
-                MediaCover(self.medias_container,media).get_frame().grid(row=row,column=col,padx=(0,0),pady=(0,15))
+                MediaCover(self.medias_container,self.controller,media).get_frame().grid(row=row,column=col,padx=(0,0),pady=(0,15))
                 col=0
                 row+=1
                 continue
-            MediaCover(self.medias_container,media).get_frame().grid(row=row,column=col,padx=(0,15),pady=(0,15))
+            MediaCover(self.medias_container,self.controller,media).get_frame().grid(row=row,column=col,padx=(0,15),pady=(0,15))
             col+=1
 
             #Empty Medias

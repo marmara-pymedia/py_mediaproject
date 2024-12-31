@@ -1,0 +1,100 @@
+[
+    {
+        "id": 1,
+        "user": {
+            "id": 1,
+            "first_name": "test",
+            "last_name": "test",
+            "user_name": "test",
+            "password": "test",
+            "favourite_medias": [
+                {
+                    "title": "test1",
+                    "description": "test",
+                    "type": {
+                        "id": 1,
+                        "name": "Film"
+                    },
+                    "category": {
+                        "name": "Comedy",
+                        "id": 3
+                    },
+                    "cover_image_path": "medias/images/covers/Alaaddin-cover.png",
+                    "bg_image_path": "medias/images/covers/Bad-Boys-cover.png",
+                    "id": 1
+                },
+                {
+                    "title": "test2",
+                    "description": "test",
+                    "type": {
+                        "id": 1,
+                        "name": "Film"
+                    },
+                    "category": {
+                        "name": "Comedy",
+                        "id": 3
+                    },
+                    "cover_image_path": "medias/images/covers/Alaaddin-cover.png",
+                    "bg_image_path": "medias/images/covers/Bad-Boys-cover.png",
+                    "id": 2
+                }
+            ],
+            "image_location": "default"
+        },
+        "media": {
+            "title": "test",
+            "description": "test",
+            "type": {
+                "id": 1,
+                "name": "Film"
+            },
+            "category": {
+                "name": "Comedy",
+                "id": 3
+            },
+            "cover_image_path": "medias/images/covers/Alaaddin-cover.png",
+            "bg_image_path": "medias/images/covers/Bad-Boys-cover.png",
+            "id": 1
+        },
+        "watch_state": {
+            "id": 1,
+            "state": "Izlenmedi"
+        },
+        "score": 5,
+        "note": ""
+    },
+    {
+        "id": 2,
+        "user": {
+            "id": 2,
+            "first_name": "test",
+            "last_name": "test",
+            "user_name": "test",
+            "password": "test",
+            "favourite_medias": [
+            ],
+            "image_location": "default"
+        },
+        "media": {
+            "title": "test",
+            "description": "test",
+            "type": {
+                "id": 1,
+                "name": "Film"
+            },
+            "category": {
+                "name": "Comedy",
+                "id": 3
+            },
+            "cover_image_path": "medias/images/covers/Alaaddin-cover.png",
+            "bg_image_path": "medias/images/covers/Bad-Boys-cover.png",
+            "id": 1
+        },
+        "watch_state": {
+            "id": 1,
+            "state": "Izlenmedi"
+        },
+        "score": 5,
+        "note": ""
+    }
+]

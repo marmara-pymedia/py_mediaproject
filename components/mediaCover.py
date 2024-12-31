@@ -4,9 +4,13 @@ from tkinter import ttk
 import os
 
 from entities.Media import Media
+from services.UsermediaService import UsermediaService
 
 class MediaCover:
-    def __init__(self,root,media:Media=None):
+    def __init__(self,root,controller=None,media:Media=None):
+
+        self.usermedia_service=UsermediaService()
+
         self.media_cover_frame_base=Frame(root,width=250,height=310,bg="#1B1A55")
         self.media_cover_frame=Frame(self.media_cover_frame_base,width=240,height=300,bg="#1B1A55")
         self.media_cover_frame.pack(padx=(5,5),pady=(5,5))
@@ -16,6 +20,9 @@ class MediaCover:
             self.media_cover_frame_base.configure(bg="#070F2B")
             self.media_cover_frame.configure(bg="#070F2B")
             return
+        
+        self.usermedia=self.usermedia_service.get_usermedia_by_user_id_and_media_id(controller.user.id,media.id)
+
         image_frame=Frame(self.media_cover_frame,bg="#1B1A55",width=250,height=240)
         image_frame.grid(sticky=W)
         image_frame.pack_propagate(0)
@@ -53,7 +60,7 @@ class MediaCover:
         media_score_frame.grid(row=0,column=2)
         media_score_title=Label(media_score_frame,text="Score:",font=("Roboto",8,"bold"),bg="#070F2B",fg="white")
         media_score_title.grid(row=0,column=0)
-        media_score=Label(media_score_frame,text=media.score,font=("Roboto",8),bg="#070F2B",fg="white")
+        media_score=Label(media_score_frame,text=self.usermedia.score if self.usermedia!=None else "-",font=("Roboto",8),bg="#070F2B",fg="white")
         media_score.grid(row=0,column=1)
 
 

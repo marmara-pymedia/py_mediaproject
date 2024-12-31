@@ -10,14 +10,23 @@
             "name": "Comedy",
             "id": 3
         },
-        "watch_state": {
-            "id": 1,
-            "state": "Izlenmedi"
-        },
-        "score": 5,
-        "note": "No Note",
         "cover_image_path": "medias/images/covers/Alaaddin-cover.png",
         "bg_image_path": "medias/images/covers/Bad-Boys-cover.png",
         "id": 1
+    },
+    {
+        "title": "tsetsets",
+        "description": "dgsdfgsd",
+        "type": {
+            "id": 1,
+            "name": "Film"
+        },
+        "category": {
+            "name": "Thriller",
+            "id": 9
+        },
+        "cover_image_path": "medias/images/covers/Screenshot 2024-07-22 153354.png",
+        "bg_image_path": "medias/images/covers/Screenshot 2024-07-22 153354.png",
+        "id": 2
     }
 ]

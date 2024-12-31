@@ -89,7 +89,7 @@ class MovieAdd:
         self.button_save.pack(expand=True)
 
         def save_media():
-            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type(1,"Film"),category=self.category_service.get_all()[self.combo_movie_type.current()],watch_state=WatchState(1,"Izlenmedi"),score=5,note="No Note",bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path)
+            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type(1,"Film"),category=self.category_service.get_all()[self.combo_movie_type.current()],score=0,bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path)
             # print(media.__dict__)
             self.media_service.add_media(media)
             messagebox.showinfo("Info", "Successfully saved!")
