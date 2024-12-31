@@ -1,9 +1,14 @@
 from entities.Usermedia import Usermedia
+from services.UserService import UserService
+from services.MediaService import MediaService
+from services.WatchStateService import WatchStateService
 import json
 
 class UsermediaService:
     def __init__(self):
-        pass
+        self.user_service=UserService()
+        self.media_service=MediaService()
+        self.watch_state_service=WatchStateService()
 
     def add_usermedia(self,usermedia:Usermedia):
         medias=self.get_all()
@@ -39,6 +44,6 @@ class UsermediaService:
             medias=json.load(file)
         new_medias=[]
         for media in medias:
-            new_media=Usermedia(**media)
+            new_media=Usermedia(self.user_service.get_user_by_id(media["user_id"]),self.media_service.get_media_by_id(media["media_id"]),self.watch_state_service.get_by_id(media["watch_state_id"]),media["score"],media["note"],media["id"])
             new_medias.append(new_media.toObject())
         return new_medias

@@ -6,36 +6,6 @@
         "user_name": "test",
         "password": "test",
         "favourite_medias": [
-            {
-                "title": "test1",
-                "description": "test",
-                "type": {
-                    "id": 1,
-                    "name": "Film"
-                },
-                "category": {
-                    "name": "Comedy",
-                    "id": 3
-                },
-                "cover_image_path": "medias/images/covers/Alaaddin-cover.png",
-                "bg_image_path": "medias/images/covers/Bad-Boys-cover.png",
-                "id": 1
-            },
-            {
-                "title": "test2",
-                "description": "test",
-                "type": {
-                    "id": 1,
-                    "name": "Film"
-                },
-                "category": {
-                    "name": "Comedy",
-                    "id": 3
-                },
-                "cover_image_path": "medias/images/covers/Alaaddin-cover.png",
-                "bg_image_path": "medias/images/covers/Bad-Boys-cover.png",
-                "id": 2
-            }
         ],
         "image_location": "default"
     },

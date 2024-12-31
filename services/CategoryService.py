@@ -12,7 +12,7 @@ class CategoryService:
         with open("data/categories.json","w") as file:
             file.write(json.dumps([category.__dict__ for category in categories]))
 
-    def get_user_by_id(self,id:int):
+    def get_by_id(self,id:int):
         categories=self.get_all()
         for category in categories:
             if category.id==id:

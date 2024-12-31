@@ -1,9 +1,11 @@
 import json
 from entities.User import *
 from entities.User import User
+from services.MediaService import MediaService
 
 class UserService:
     def __init__(self) -> None:
+        self.media_service=MediaService()
         pass
 
     def add_user(self,user:User):
@@ -25,7 +27,7 @@ class UserService:
             users=json.load(file)
         new_users=[]
         for user in users:
-            new_user=User(**user)
+            new_user=User(user["first_name"],user["last_name"],user["image_location"],user["password"],[self.media_service.get_media_by_id(id) for id in user["favourite_medias_id_list"]],user["user_name"],user["id"])
             new_users.append(new_user.toObject())
         return new_users
     

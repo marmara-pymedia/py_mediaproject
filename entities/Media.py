@@ -15,13 +15,21 @@ class Media:
         pass
 
     def toJSON(self):
-        return json.dumps(
-            self, default=lambda o: o.__dict__,
-            sort_keys=False, indent=4
-        )
+        return json.dumps(MediaJSON(self.title,self.description,self.type.id,self.category.id,self.cover_image_path,self.bg_image_path,self.id).__dict__)
     
     def toObject(self):
-        media_dict = self.__dict__
-        self.category = Category(**media_dict["category"])
-        self.type = Type(**media_dict["type"])
+        # media_dict = self.__dict__
+        # self.category = Category(**media_dict["category"])
+        # self.type = Type(**media_dict["type"])
         return self
+    
+class MediaJSON:
+    def __init__(self,title,description,type_id,category_id,cover_image_path="default",bg_image_path="default",id=-1):
+        self.title=title
+        self.description=description
+        self.type_id=type_id
+        self.category_id=category_id
+        self.cover_image_path=cover_image_path
+        self.bg_image_path=bg_image_path
+        self.id=id
+        pass

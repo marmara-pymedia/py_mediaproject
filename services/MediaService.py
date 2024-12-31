@@ -1,10 +1,13 @@
 import json
 from entities.Media import Media
 from entities.Media import *
+from services.CategoryService import CategoryService
+from services.TypeService import TypeService
 
 class MediaService:
     def __init__(self):
-        pass
+        self.category_service=CategoryService()
+        self.type_service=TypeService()
 
     def add_media(self,media:Media):
         medias=self.get_all()
@@ -94,7 +97,7 @@ class MediaService:
             medias=json.load(file)
         new_medias=[]
         for media in medias:
-            new_media=Media(**media)
+            new_media=Media(media["title"],media["description"],self.type_service.get_by_id(media["type_id"]),self.category_service.get_by_id(media["category_id"]),media["cover_image_path"],media["bg_image_path"],media["id"])
             new_medias.append(new_media.toObject())
         return new_medias
     
@@ -106,11 +109,8 @@ class MediaService:
                 i.description=media.description
                 i.bg_image_path=media.bg_image_path
                 i.cover_image_path=media.cover_image_path
-                i.note=media.note
-                i.score=media.score
                 i.title=media.title
-                i.type=media.type
-                i.watch_state=media.watch_state        
+                i.type=media.type     
         with open("data/medias.json","w") as file:
             file.write(json.dumps([media.__dict__ for media in medias]))
     
