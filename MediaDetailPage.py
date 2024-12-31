@@ -281,7 +281,7 @@ class mediaDetail:
     def leave_note(self):
         print("Leave Note")
     
-    
+    # will add somehtin 
     
     def get_user_choice(self):
         with open('user.json', 'r') as user_file:
