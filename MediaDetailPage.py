@@ -1,21 +1,28 @@
 from tkinter import *
 from tkinter import PhotoImage
+import textwrap
 
-class mediaDetail:
-    def __init__(self,root):
+
+class mediaDetail(Frame):
+    def __init__(self,root,controller,media):
+        Frame.__init__(self,root)
+        self.media=media
+        self.controller=controller
         self.root=root
         print("Media Detail")
         self.root.title("Media Detail Page")
         
+        self.mediaService = self.controller.main_service.media_service
+        
 
-
+        # BG FRAME
         self.bgFrame=Frame(self.root, bg="#070F2B")
         self.bgFrame.pack(fill=BOTH, expand=True)
 
         # MEDIA BACKGROUND
-        self.cats=PhotoImage(file="medias\images\\backgrounds\cats_bg.png")
-        self.mediaLabel=Label(self.bgFrame,image=self.cats)
-        self.mediaLabel.img_reference=self.cats
+        self.movie=PhotoImage(file=self.media.bg_image_path)
+        self.mediaLabel=Label(self.bgFrame,image=self.movie)
+        self.mediaLabel.img_reference=self.movie
         self.mediaLabel.pack(fill=BOTH, pady=(95))  
         # will delete upper part, ones json is connected DELETE        
 
@@ -24,20 +31,21 @@ class mediaDetail:
         self.bottomLeftFrame.pack(padx=(43), pady=(409,7),side=LEFT)
 
         # TITLE
-        self.title_label = Label(self.bottomLeftFrame, text="Title", font=("Roboto",40,"bold"),fg="White",background="#535C91")
+        self.title_label = Label(self.bottomLeftFrame, text=self.media.title, font=("Roboto",40,"bold"),fg="White",background="#535C91")
         self.title_label.grid(row=0, sticky="W")
 
         # DESCRIPTION
-        self.description_label = Label(self.bottomLeftFrame, text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. ", font=("Roboto",12),fg="White",background="#535C91")
+        wrapped_description = textwrap.fill(self.media.description, width=40)  # Adjust width as needed
+        self.description_label = Label(self.bottomLeftFrame, text=wrapped_description, font=("Roboto",12),fg="White",background="#535C91")
         self.description_label.grid(row=1, sticky="W")
 
         # TYPE
-        self.type_frame = Frame(self.bottomLeftFrame, )
+        self.type_frame = Frame(self.bottomLeftFrame)
         self.type_frame.grid(row=2, sticky="W")
         
         self.type_text = Label(self.type_frame, text="Type : ", font=("Roboto", 20 , "bold"), fg="white",background="#535C91")
         self.type_text.grid(row=0,column=0)
-        self.type_data = Label(self.type_frame, text="Type from User JSON", font=("Roboto", 20), fg="white",background="#535C91")
+        self.type_data = Label(self.type_frame, text=self.media.type.name, font=("Roboto", 20), fg="white",background="#535C91")
         self.type_data.grid(row=0,column=1)
 
         # CATEGORY
@@ -46,7 +54,7 @@ class mediaDetail:
         
         self.category_text = Label(self.category_frame, text="Category : ", font=("Roboto", 20 , "bold") , fg="white",background="#535C91")
         self.category_text.grid(row=0,column=0)
-        self.category_data = Label(self.category_frame, text="Category from User JSON", font=("Roboto", 20), fg="white",background="#535C91")
+        self.category_data = Label(self.category_frame, text=self.media.category.name, font=("Roboto", 20), fg="white",background="#535C91")
         self.category_data.grid(row=0,column=1)
 
 
@@ -315,11 +323,3 @@ class mediaDetail:
         print("Delete Media")
     
     # will add somehtin 
-
-
-
-root=Tk()
-root.title("Media Detail Page")
-root.geometry("1920x1080")
-mediaDetail(root)
-root.mainloop()
