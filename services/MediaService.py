@@ -3,11 +3,13 @@ from entities.Media import Media
 from entities.Media import *
 from services.CategoryService import CategoryService
 from services.TypeService import TypeService
+from services.UsermediaService import UsermediaService
 
 class MediaService:
     def __init__(self):
         self.category_service=CategoryService()
         self.type_service=TypeService()
+        self.usermedia_service=UsermediaService()
 
     def add_media(self,media:Media):
         medias=self.get_all()
@@ -61,11 +63,11 @@ class MediaService:
                 return media
         return None
     
-    def get_all_media_by_scores(self,scores:list[int]):
+    def get_all_media_by_scores(self,user_id:int,scores:list[int]):
         medias=self.get_all()
         filtered_medias=[]
         for media in medias:
-            if any(media.score == s for s in scores):
+            if any(self.usermedia_service.get_usermedia_by_user_id_and_media_id(user_id,media.id) == s for s in scores):
                 filtered_medias.append(media)
         return filtered_medias
     
