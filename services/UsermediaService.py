@@ -32,6 +32,7 @@ class UsermediaService:
     def get_usermedia_by_user_id_and_media_id(self,user_id:int,media_id:int):
         medias=self.get_all()
         for media in medias:
+            print(media.user.id,media.media.id,user_id,media_id)
             if media.user.id==user_id and media.media.id==media_id:
                 return media
         return None

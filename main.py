@@ -4,6 +4,7 @@ from tkinter import *
 from userProfile import UserProfile
 from entities.User import User
 from services.MainService import MainService
+from MediaDetailPage import mediaDetail
 
 class MainApp():
     def __init__(self,root):
@@ -29,8 +30,7 @@ class MainApp():
     def show_home_page(self):
         self.show_frame(HomePage)
     def show_media_detail_page(self,media):
-        # self.show_frame(mediaDetail,media)
-        pass
+        self.show_frame(mediaDetail,media)
 
 
     def refresh_frame(self):

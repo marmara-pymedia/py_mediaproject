@@ -30,6 +30,7 @@ class MediaCover:
         media_image=PhotoImage(file=media.cover_image_path)
         media_image_label=Label(image_frame,image=media_image,borderwidth=0,highlightthickness = 0)
         media_image_label.img_reference=media_image
+        media_image_label.bind("<Button-1>",lambda e: controller.show_media_detail_page(media))
         media_image_label.pack(fill=BOTH,expand=True)
 
         media_title_frame=Frame(self.media_cover_frame,bg="#070F2B",width=250,height=20)
