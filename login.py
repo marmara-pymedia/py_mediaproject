@@ -15,7 +15,7 @@ class Login(Frame):
         Frame.__init__(self,root)
         self.root=self
         self.controller=controller
-        self.user_service=UserService()
+        self.user_service=self.controller.main_service.user_service
         self.all_users=self.user_service.get_all()
 
         self.login_frame=Frame(self.root,bg="#070F2B",width=1920,height=1080)
@@ -30,7 +30,7 @@ class Login(Frame):
         self.logo_frame=Frame(self.login_child_2_frame)
         self.logo_frame.grid(row=0,column=0,padx=150,pady=15)
 
-        self.logo=PhotoImage(file="medias\logos\\loginLogo.png")
+        self.logo=PhotoImage(file="medias/logos/loginLogo.png")
         self.logo_label=Label(self.logo_frame,image=self.logo)
         self.logo_label.pack(fill=BOTH)
 
@@ -100,13 +100,18 @@ class Login(Frame):
             messagebox.showerror("Error", "Username must consist only letters and numbers!")
         elif not password.isalnum():
             messagebox.showerror("Error", "Password must consist only letters and numbers!")
-        elif not self.user_service.get_user_by_id(username):
-            messagebox.showerror("Error", "User not found!")
-        elif self.user_service.get_user_by_id(username).password != password:
-            messagebox.showerror("Error", "Password is incorrect!")
         else:
-            self.controller.user = self.user_service.get_user_by_id(username)
-            self.controller.show_frame(HomePage)
+            for user in self.all_users:
+                if user.user_name==username and user.password==password:
+                    self.controller.user=user
+                print(user.user_name,user.password)
+            print(username,password)
+            print(self.controller.user)
+            print("User found!")
+            if self.controller.user!=None:
+                self.controller.show_frame(HomePage)
+            else:
+                messagebox.showerror("Error", "User not found!")
         
 
         

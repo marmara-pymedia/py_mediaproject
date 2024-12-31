@@ -284,7 +284,7 @@ class mediaDetail:
     # will add somehtin 
     
     def get_user_choice(self):
-        with open('user.json', 'r') as user_file:
+        with open('users.json', 'r') as user_file:
             user_data = json.load(user_file)
             return user_data['selected_media_id']
 

@@ -27,7 +27,7 @@ class UserService:
             users=json.load(file)
         new_users=[]
         for user in users:
-            new_user=User(user["first_name"],user["last_name"],user["image_location"],user["password"],[self.media_service.get_media_by_id(id) for id in user["favourite_medias_id_list"]],user["user_name"],user["id"])
+            new_user=User(user["first_name"],user["last_name"],user["user_name"],user["password"],[self.media_service.get_media_by_id(id) for id in user["favourite_medias_id_list"]],user["user_name"],user["id"])
             new_users.append(new_user.toObject())
         return new_users
     
