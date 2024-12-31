@@ -1,9 +1,12 @@
 from tkinter import *
 from tkinter import PhotoImage
+
 class mediaDetail:
     def __init__(self,root):
         self.root=root
         print("Media Detail")
+        self.root.title("Media Detail Page")
+        
 
 
         self.bgFrame=Frame(self.root, bg="#070F2B")
@@ -14,9 +17,7 @@ class mediaDetail:
         self.mediaLabel=Label(self.bgFrame,image=self.cats)
         self.mediaLabel.img_reference=self.cats
         self.mediaLabel.pack(fill=BOTH, pady=(95))  
-        # will delete upper part, ones json is connected DELETE
-        self.update_media_label()
-        
+        # will delete upper part, ones json is connected DELETE        
 
          # Bottom-left Frame
         self.bottomLeftFrame = Frame(self.mediaLabel,bg="#535C91")
@@ -69,9 +70,10 @@ class mediaDetail:
 
         # EDIT - BUTTON
         self.editButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
-        self.editButtonFrame.grid(row=0,column=0)
-        self.edit_button=Button(self.editButtonFrame, command=self.edit_media)
-        self.edit_button.image=self.edit
+        self.editButtonFrame.grid(row=0,column=0,padx=(10),pady=(10))
+        self.edit_button=Button(self.editButtonFrame,image=self.edit, command=self.edit_media)
+        self.edit_button.img_reference=self.edit
+        self.edit_button.grid(row=0,column=0)
         
         # DELETE - BUTTON
         self.deleteButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
@@ -96,7 +98,7 @@ class mediaDetail:
         # LEAVE note - BUTTON
         self.leavenoteButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.leavenoteButtonFrame.grid(row=0,column=4,padx=(10),pady=(10))
-        self.leavenote_button=Button(self.leavenoteButtonFrame, image=self.leavenote, command=self.leave_note)
+        self.leavenote_button=Button(self.leavenoteButtonFrame, image=self.leavenote, command=self.toggle_note_frame)
         self.leavenote_button.img_reference=self.delete
         self.leavenote_button.grid(row=0,column=4)
 
@@ -160,6 +162,22 @@ class mediaDetail:
         self.five_star_button.grid(row=4, column=0, pady=5, padx=5)
 
 
+        #  -------------------------- FOR note -----------------------------------------------
+        # NOTE FRAME (Initially hidden)
+        self.noteFrame = Frame(self.mediaLabel, bg="#535C91")
+        self.noteFrame.place_forget() # Hide initially
+
+        # NOTE ENTRY
+        self.note_text = Text(self.noteFrame, font=("Comic Sans MS",18,"bold"),fg="black",background="#d8c4b6", width=20, height=3)
+        self.note_text.grid(row=0, column=0, padx=(10), pady=(10))
+
+        # SUBMIT BUTTON
+        self.submitIcon=PhotoImage(file="medias\icons\send.png")
+        self.submit_button = Button(self.noteFrame, image=self.submitIcon, command=self.submit_note, bg="#3E7B27")
+        self.submit_button.img_reference = self.submitIcon
+        self.submit_button.grid(row=0, column=1, padx=(10), pady=(10))
+
+
 
 
 
@@ -209,6 +227,14 @@ class mediaDetail:
 
         # -------------------------- TOGGLES -----------------------------------------------
         
+        # DELETE TOGGLES
+
+    def delete_media(self):
+        self.mediaService.delete_media(self.media)
+        print(f"Media with ID {self.media.id} deleted.")
+        self.root.destroy()
+        
+
         # VIEW OPTİON TOGGLES
 
     def toggle_view_options(self):
@@ -259,32 +285,39 @@ class mediaDetail:
             self.rating_button.config(bg="white", image=self.star_5)
             self.rating_button.img_reference = self.star_5
 
+
     def toggle_rating_options(self):
         if self.ratingOptionsFrame.winfo_y() != 100:
             self.ratingOptionsFrame.place(x=1585, y=100)
         else:
             self.ratingOptionsFrame.place_forget()
 
+
+        # LEAVE note TOGGLES
+
+    def toggle_note_frame(self):
+        if self.noteFrame.winfo_y() != 300:
+            self.noteFrame.place(x=1200, y=300)  # Adjust the position as needed
+        else:
+            self.noteFrame.place_forget()  # Hide initially
+
+    def submit_note(self):
+        self.note = self.note_text.get("1.0", END).strip()
+        print(f"Note submitted: {self.note}")
+        self.noteFrame.place_forget()  # Hide the frame after submission
+
+
+
     def edit_media(self):
         print("Edit Media")
 
     def delete_media(self):
         print("Delete Media")
-
-    def rate_media(self):
-        print("Rate Media")
-
-    def view_media(self):
-        print("View Info")
-
-
-    def leave_note(self):
-        print("Leave Note")
     
     # will add somehtin 
     
     def get_user_choice(self):
-        with open('users.json', 'r') as user_file:
+        with open('user.json', 'r') as user_file:
             user_data = json.load(user_file)
             return user_data['selected_media_id']
 
