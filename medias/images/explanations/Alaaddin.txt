@@ -4,7 +4,7 @@ Description: This “Aladdin” is still the funny-sentimental-inspirational sto
 
 Type: Movie
 
-Category: Fantasy/Comedy
+Category: Fantasy/Comedy/Adventure
 
 background-path: medias\images\\backgrounds\Alaaddin-bg.png                 backgrounds kısmında \b yi escape seq zannediyor onun için \\backgrounds yaptık.
 

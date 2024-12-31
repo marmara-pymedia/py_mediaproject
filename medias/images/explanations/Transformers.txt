@@ -1,0 +1,11 @@
+Title: Transformers
+
+Description: An ancient struggle between two Cybertronian races, the heroic Autobots and the evil Decepticons, comes to Earth, with a clue to the ultimate power held by a teenager. High-school student Sam Witwicky buys his first car, who is actually the Autobot Bumblebee.
+
+Type: Movie
+
+Category: Sci-fi/Action
+
+background-path: medias\images\\backgrounds\Transformers-bg.png                 backgrounds kısmında \b yi escape seq zannediyor onun için \\backgrounds yaptık.
+
+cover-path: medias\images\covers\Transformers-cover.png

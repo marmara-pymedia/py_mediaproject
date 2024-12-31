@@ -13,7 +13,9 @@ class mediaDetail:
         self.cats=PhotoImage(file="medias\images\\backgrounds\cats_bg.png")
         self.mediaLabel=Label(self.bgFrame,image=self.cats)
         self.mediaLabel.img_reference=self.cats
-        self.mediaLabel.pack(fill=BOTH, pady=(95))
+        self.mediaLabel.pack(fill=BOTH, pady=(95))  
+        # will delete upper part, ones json is connected DELETE
+        self.update_media_label()
         
 
          # Bottom-left Frame
@@ -275,8 +277,33 @@ class mediaDetail:
     def view_media(self):
         print("View Info")
 
+
     def leave_note(self):
         print("Leave Note")
+    
+    
+    
+    def get_user_choice(self):
+        with open('user.json', 'r') as user_file:
+            user_data = json.load(user_file)
+            return user_data['selected_media_id']
+
+    def get_media_image(self, media_id):
+        with open('media.json', 'r') as media_file:
+            media_data = json.load(media_file)
+            for media in media_data['medias']:
+                if media['id'] == media_id:
+                    return media['image_path']
+        return None
+
+    def update_media_label(self):
+        media_id = self.get_user_choice()
+        image_path = self.get_media_image(media_id)
+        if image_path:
+            new_image = PhotoImage(file=image_path)
+            self.mediaLabel = Label(self.bgFrame, image=new_image)
+            self.mediaLabel.img_reference = new_image
+            self.mediaLabel.pack(fill=BOTH, pady=(95))
 
 
 
