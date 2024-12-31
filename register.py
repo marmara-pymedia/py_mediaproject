@@ -2,6 +2,7 @@ import re
 import json
 from tkinter import messagebox
 from entities.User import User
+from homePage import HomePage
 from services.UserService import UserService
 from tkinter import *
 from tkinter import font
@@ -18,7 +19,9 @@ class Register(Frame):
         Frame.__init__(self,root)
         self.root=self
         self.controller=controller
-        self.user_service=UserService()
+        # self.user_service=UserService()
+        # self.all_users=self.user_service.get_all()
+        self.user_service=self.controller.main_service.user_service
         self.all_users=self.user_service.get_all()
 
         print("Register")
@@ -101,7 +104,7 @@ class Register(Frame):
         username = self.entry_username.get().strip()
         password = self.entry_password.get().strip()
 
-        symbols = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/"
+        symbols = "!@#$%^&*()_+-=[];:,.?"
 
         if not first_name or not last_name or not username or not password:
             messagebox.showerror("Error", "All fields are required!")
@@ -115,34 +118,37 @@ class Register(Frame):
             messagebox.showerror("Error", "Last Name must consist of only letters!")
             return
 
-        if not username:
-            messagebox.showerror("Error", "Username cannot be empty!")
-        elif not username.isalnum():
-            messagebox.showerror("Error", "Username must consist only letters and numbers!")
-        elif self.user_service.get_user_by_id(username):  # Check if username already exists
+        if not username.isalnum():
+            messagebox.showerror("Error", "Username must consist of only letters and numbers!")
+            return
+        elif self.user_service.get_user_by_id(username):
             messagebox.showerror("Error", "This username already exists!")
-        else:
-            self.all_users.append(username)
-            messagebox.showinfo("Successful", f"Username '{username}' is successfully saved!")
+            return
+        # else:
+        #     self.all_users.append(username)
 
         if len(password)<8:
-            messagebox.showerror("Error", "Password must be longer than 8 characters!")
-        elif not re.search(r'[A-Z]', password):
-            messagebox.showerror("Error", "Password must consist at least an upper case letter!")
-        elif not re.search(r'[a-z]', password):
-            messagebox.showerror("Error", "Password must consist at least a lower case letter!")
-        elif not re.search(r'\d', password):
-            messagebox.showerror("Error", "Password must consist at least a number!")
-        elif not any(char in symbols for char in password):
-            messagebox.showerror("Error", f"Password must consist at least one of these special characters: {symbols}")
-        else:
-            messagebox.showinfo("Successful", "Password valid!")
+            messagebox.showerror("Error", "Password must be at least 8 characters long!")
+            return
+        if not re.search(r'[A-Z]', password):
+            messagebox.showerror("Error", "Password must contain at least one uppercase letter!")
+            return
+        if not re.search(r'[a-z]', password):
+            messagebox.showerror("Error", "Password must contain at least one lowercase letter!")
+            return
+        if not re.search(r'\d', password):
+            messagebox.showerror("Error", "Password must contain at least one number!")
+            return
+        if not any(char in symbols for char in password):
+            messagebox.showerror("Error", f"Password must contain at least one special characters: {symbols}")
 
-        user=User(first_name,last_name,username,password)
-        self.register(user)
+        user=User(first_name, last_name, username, password, "", "")
+        self.register_user(user)
+        messagebox.showinfo("Successful", f"Username '{username}' is successfully saved!")
+        #self.controller.show_frame(HomePage) #düzeltilecek
 
 
-    def register(self,user:User):
-        userService=UserService()
-        userService.addUser(user)
-        print(user.firstName,"kayit basarili")
+    def register_user(self, user:User):
+        userService=self.user_service
+        userService.add_user(user)
+        print(user.first_name,"kayit basarili")
