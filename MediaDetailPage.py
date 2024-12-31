@@ -23,7 +23,7 @@ class mediaDetail(Frame):
         self.movie=PhotoImage(file=self.media.bg_image_path)
         self.mediaLabel=Label(self.bgFrame,image=self.movie)
         self.mediaLabel.img_reference=self.movie
-        self.mediaLabel.pack(fill=BOTH, pady=(95))  
+        self.mediaLabel.pack(fill=BOTH,expand=True , pady=(95))  
         # will delete upper part, ones json is connected DELETE        
 
          # Bottom-left Frame
@@ -31,12 +31,13 @@ class mediaDetail(Frame):
         self.bottomLeftFrame.pack(padx=(43), pady=(409,7),side=LEFT)
 
         # TITLE
-        self.title_label = Label(self.bottomLeftFrame, text=self.media.title, font=("Roboto",40,"bold"),fg="White",background="#535C91")
+        self.wrapped_title = textwrap.fill(self.media.title,width=20)
+        self.title_label = Label(self.bottomLeftFrame, text=self.wrapped_title, font=("Roboto",40,"bold"),fg="White",background="#535C91")
         self.title_label.grid(row=0, sticky="W")
 
         # DESCRIPTION
-        wrapped_description = textwrap.fill(self.media.description, width=40)  # Adjust width as needed
-        self.description_label = Label(self.bottomLeftFrame, text=wrapped_description, font=("Roboto",12),fg="White",background="#535C91")
+        self.wrapped_description = textwrap.fill(self.media.description, width=50)  # Adjust width as needed
+        self.description_label = Label(self.bottomLeftFrame, text=self.wrapped_description, font=("Roboto",12),fg="White",background="#535C91")
         self.description_label.grid(row=1, sticky="W")
 
         # TYPE
@@ -86,7 +87,7 @@ class mediaDetail(Frame):
         # DELETE - BUTTON
         self.deleteButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.deleteButtonFrame.grid(row=0,column=1, padx=(10),pady=(10))
-        self.delete_button=Button(self.deleteButtonFrame, image=self.delete, command=self.delete_media)
+        self.delete_button=Button(self.deleteButtonFrame, image=self.delete, command=self.media.delete)
         self.delete_button.img_reference=self.delete
         self.delete_button.grid(row=0,column=1)
         # RATE - BUTTON
@@ -107,7 +108,7 @@ class mediaDetail(Frame):
         self.leavenoteButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.leavenoteButtonFrame.grid(row=0,column=4,padx=(10),pady=(10))
         self.leavenote_button=Button(self.leavenoteButtonFrame, image=self.leavenote, command=self.toggle_note_frame)
-        self.leavenote_button.img_reference=self.delete
+        self.leavenote_button.img_reference=self.le
         self.leavenote_button.grid(row=0,column=4)
 
 
@@ -322,13 +323,4 @@ class mediaDetail(Frame):
     def delete_media(self):
         print("Delete Media")
     
-<<<<<<< HEAD
     # will add somehtin 
-=======
-
-root=Tk()
-root.title("Media Detail Page")
-root.geometry("1920x1080")
-mediaDetail(root)
-root.mainloop()
->>>>>>> 24e40f29584dd40f768750bfae27acc43312358f

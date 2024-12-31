@@ -118,9 +118,9 @@
     },
     {
         "title": "Your Lie in April",
-        "description": "I met this girl under full-bloomed cherry blossoms, and my fate has begun to change",
+        "description": "I met this girl under full-bloomed cherry blossoms, and my fate has begun to change 🌸",
         "type_id": 2,
-        "category_id": 11,
+        "category_id": 4,
         "bg_image_path": "medias/images/backgrounds/Your-lie-in-April-bg.png",
         "cover_image_path": "medias/images/covers/Your-lie-in-April-cover.png",
         "id": 14
@@ -133,5 +133,32 @@
         "bg_image_path": "medias/images/backgrounds/Transformers-bg.png",
         "cover_image_path": "medias/images/covers/Transformers-cover.png",
         "id": 15
+    },
+    {
+        "title": "Transformers",
+        "description": "An ancient struggle between two Cybertronian races, the heroic Autobots and the evil Decepticons, comes to Earth, with a clue to the ultimate power held by a teenager. High-school student Sam Witwicky buys his first car, who is actually the Autobot Bumblebee.",
+        "type_id": 1,
+        "category_id": 6,
+        "bg_image_path": "medias/images/backgrounds/Transformers-bg.png",
+        "cover_image_path": "medias/images/covers/Transformers-cover.png",
+        "id": 16
+    },
+    {
+        "title": "Transformers",
+        "description": "An ancient struggle between two Cybertronian races, the heroic Autobots and the evil Decepticons, comes to Earth, with a clue to the ultimate power held by a teenager. High-school student Sam Witwicky buys his first car, who is actually the Autobot Bumblebee.",
+        "type_id": 1,
+        "category_id": 6,
+        "bg_image_path": "medias/images/backgrounds/Transformers-bg.png",
+        "cover_image_path": "medias/images/covers/Transformers-cover.png",
+        "id": 17
+    },
+    {
+        "title": "Transformers",
+        "description": "An ancient struggle between two Cybertronian races, the heroic Autobots and the evil Decepticons, comes to Earth, with a clue to the ultimate power held by a teenager. High-school student Sam Witwicky buys his first car, who is actually the Autobot Bumblebee.",
+        "type_id": 1,
+        "category_id": 6,
+        "bg_image_path": "medias/images/backgrounds/Transformers-bg.png",
+        "cover_image_path": "medias/images/covers/Transformers-cover.png",
+        "id": 18
     }
 ]
