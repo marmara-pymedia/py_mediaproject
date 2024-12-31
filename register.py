@@ -18,6 +18,9 @@ class Register(Frame):
         Frame.__init__(self,root)
         self.root=self
         self.controller=controller
+        self.user_service=UserService()
+        self.all_users=self.user_service.get_all()
+
         print("Register")
 
         self.register_frame=Frame(self.root,bg="#070F2B")
@@ -104,20 +107,22 @@ class Register(Frame):
             messagebox.showerror("Error", "All fields are required!")
             return
         
-        if not all(char.isalpha() for char in first_name):
-            messagebox.showerror("Error", "First Name must consist only letters!")
-
-        if not all(char.isalpha() for char in last_name):
-            messagebox.showerror("Hata", "Last Name must consist only letters!")
+        if not first_name.isalpha():
+            messagebox.showerror("Error", "First Name must consist of only letters!")
+            return
+        
+        if not last_name.isalpha():
+            messagebox.showerror("Error", "Last Name must consist of only letters!")
+            return
 
         if not username:
             messagebox.showerror("Error", "Username cannot be empty!")
         elif not username.isalnum():
             messagebox.showerror("Error", "Username must consist only letters and numbers!")
-        elif username in existing_usernames:  #burada existing_usernames değişmeli!!!!
+        elif self.user_service.get_user_by_id(username):  # Check if username already exists
             messagebox.showerror("Error", "This username already exists!")
         else:
-            existing_usernames.append(username)
+            self.all_users.append(username)
             messagebox.showinfo("Successful", f"Username '{username}' is successfully saved!")
 
         if len(password)<8:
