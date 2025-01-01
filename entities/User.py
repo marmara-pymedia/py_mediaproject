@@ -2,7 +2,7 @@ from entities.Media import Media
 import json
 
 class User:
-    def __init__(self,first_name,last_name,user_name,password,favourite_medias=None,big_image_path="Default",small_image_path="Default",id=-1):
+    def __init__(self,first_name,last_name,user_name,password,favourite_medias=None,big_image_path="medias/logos/profilePng.png",small_image_path="medias/icons/user_vector.png",id=-1):
         self.id=id
         self.first_name=first_name
         self.last_name=last_name

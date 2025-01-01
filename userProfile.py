@@ -34,7 +34,7 @@ class UserProfile(Frame):
         self.logo_user_profile_frame=Frame(self.user_profile_child2_frame, bg="#535C91")
         self.logo_user_profile_frame.grid(row=0,column=0,padx=150,pady=15) 
         
-        self.logo_user_profile=PhotoImage(file="medias\logos\profilePng.png")
+        self.logo_user_profile=PhotoImage(file=self.controller.user.small_image_path)
         self.logo_user_profile_label=Label(self.logo_user_profile_frame,image=self.logo_user_profile)
         self.logo_user_profile_label.img_reference=self.logo_user_profile
         self.logo_user_profile_label.pack(fill=BOTH)
@@ -148,14 +148,11 @@ class UserProfile(Frame):
         self.save_changes_frame=Frame(self.popup_frame,bg="#1B1A55",height=40,width=700)
         self.save_changes_frame.pack(pady=(45,0)) #
 
-        self.button_save_changes=Button(self.save_changes_frame,text="Save Changes",font=("Roboto",16),bg="#1B1A55",fg="#D8C4B6",width=15,height=1,cursor="hand2",command=lambda: save_user_changes())
-        self.button_save_changes.pack(expand=True)
-
         self.button_save_changes=Button(self.save_changes_frame,text="Save Changes",font=("Roboto",16),bg="#1B1A55",fg="#D8C4B6",width=15,height=1,cursor="hand2",command=lambda: self.save_user_changes())
         self.button_save_changes.pack(expand=True)
     
     def save_user_changes(self):
-        user_change=User(first_name=self.entry_first_name_updated.get(),last_name=self.entry_last_name_updated.get(),user_name=self.entry_username_updated.get(),password=self.entry_password_updated.get(),big_image_path=self.big_img_path,small_image_path=self.small_img_path)
+        user_change=User(first_name=self.entry_first_name_updated.get(),last_name=self.entry_last_name_updated.get(),user_name=self.entry_username_updated.get(),password=self.entry_password_updated.get(),big_image_path=self.big_img_path,small_image_path=self.small_img_path,id=self.controller.user.id)
         self.user_service=self.controller.main_service.user_service
         self.updated_user=self.user_service.update_user(user_change)
         messagebox.showinfo("Info", "Successfully saved!")

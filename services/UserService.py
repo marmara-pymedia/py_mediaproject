@@ -42,9 +42,8 @@ class UserService:
                 i.password=user.password
                 i.favourite_medias=user.favourite_medias
                 i.user_name=user.user_name
-        
-        with open("data/users.json","w") as file:
-            file.write(json.dumps([user.__dict__ for user in users]))
+        self.delete_user(user)
+        self.add_user(user)
     
     def delete_user(self,user:User):
         users=self.get_all()
@@ -54,7 +53,7 @@ class UserService:
                 break
             
         with open("data/users.json","w") as file:
-            file.write(json.dumps([user.__dict__ for user in users]))
+            file.write(json.dumps([json.loads(user.toJSON()) for user in users]))
     
     def add_favourite_media(self,user:User,media:Media):
         users=self.get_all()
