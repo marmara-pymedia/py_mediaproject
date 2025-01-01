@@ -17,8 +17,7 @@ class MainApp():
         root.configure(bg="#070F2B")
         self.current_frame=None
         self.user:User=None
-        self.user=self.main_service.user_service.get_user_by_id(1)
-        self.show_frame(HomePage)
+        self.show_frame(Login)
 
     def show_frame(self,frame_class,*args):
         new_frame=frame_class(self.root,self,*args)

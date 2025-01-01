@@ -50,7 +50,7 @@ class Login(Frame):
         self.label_password=Label(self.password_frame,text="Password :",font=("Roboto",20),bg="#535C91",fg="white")
         self.label_password.grid(row=0,column=0,padx=(5,5))
 
-        self.entry_password=Entry(self.password_frame,bg="white",font=("Roboto",16),width=15)
+        self.entry_password=Entry(self.password_frame,bg="white",font=("Roboto",16),width=15,show="*")
         self.entry_password.grid(row=0,column=1,padx=(5,5))
 
         self.login_button_frame=Frame(self.login_child_2_frame, bg="#535C91")
@@ -83,7 +83,7 @@ class Login(Frame):
         self.controller.user=None
 
     def switch_to_register_page(self):
-        self.controller.show_frame(Register)
+        self.controller.show_register_page()
 
     def control_fields_login(self):
         username = self.entry_username.get().strip()
@@ -92,14 +92,6 @@ class Login(Frame):
         if not username or not password:
             messagebox.showerror("Error", "All fields are required!")
             return
-        elif not username:
-            messagebox.showerror("Error", "Username cannot be empty!")
-        elif not password:
-            messagebox.showerror("Error", "Password cannot be empty!")
-        elif not username.isalnum():
-            messagebox.showerror("Error", "Username must consist only letters and numbers!")
-        elif not password.isalnum():
-            messagebox.showerror("Error", "Password must consist only letters and numbers!")
         else:
             for user in self.all_users:
                 if user.user_name==username and user.password==password:
@@ -109,7 +101,7 @@ class Login(Frame):
             print(self.controller.user)
             print("User found!")
             if self.controller.user!=None:
-                self.controller.show_frame(HomePage)
+                self.controller.show_home_page()
             else:
                 messagebox.showerror("Error", "User not found!")
         

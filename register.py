@@ -78,7 +78,7 @@ class Register(Frame):
         self.label_password=Label(self.password_frame,text="Password :",font=("Roboto",20),bg="#535C91",fg="white")
         self.label_password.grid(row=0,column=0,padx=(5,5))
 
-        self.entry_password=Entry(self.password_frame,bg="white",font=("Roboto",16),width=15)
+        self.entry_password=Entry(self.password_frame,bg="white",font=("Roboto",16),width=15,show="*")
         self.entry_password.grid(row=0,column=1,padx=(5,5))
 
 
@@ -95,7 +95,7 @@ class Register(Frame):
         self.back_button.pack(expand=True)
 
     def switch_to_login_page(self):
-        self.controller.show_frame(Login)
+        self.controller.show_login_page()
 
     def control_fields(self):
         first_name = self.entry_first_name.get().strip()
@@ -140,6 +140,7 @@ class Register(Frame):
             return
         if not any(char in symbols for char in password):
             messagebox.showerror("Error", f"Password must contain at least one special characters: {symbols}")
+            return
 
         user=User(first_name, last_name, username, password, "", "")
         self.register_user(user)

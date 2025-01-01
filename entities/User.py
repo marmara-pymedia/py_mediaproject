@@ -30,5 +30,5 @@ class UserJSON:
         self.last_name=last_name
         self.user_name=user_name
         self.password=password
-        self.favourite_medias=favourite_medias_id_list if favourite_medias_id_list is not None else []
+        self.favourite_medias_id_list=favourite_medias_id_list if favourite_medias_id_list is not None else []
         self.image_location=image_location
