@@ -1,10 +1,1 @@
-[
-    {
-        "id": 1,
-        "user_id": 1,
-        "media_id": 1,
-        "watch_state_id": 1,
-        "score": 5,
-        "note": ""
-    }
-]
+[{"id": 1, "user_id": 1, "media_id": 8, "watch_state_id": 2, "score": 4, "note": "alxfladhfafa\nasfjkghahjkga"}, {"id": 2, "user_id": 1, "media_id": 4, "watch_state_id": 1, "score": 0, "note": ""}]

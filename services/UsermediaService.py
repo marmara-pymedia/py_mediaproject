@@ -69,4 +69,4 @@ class UsermediaService:
                 break
             
         with open("data/usermedias.json","w") as file:
-            file.write(json.dumps([json.loads(media.toJSON()) for media in medias]))
+            file.write(json.dumps([json.loads(media.toJSON()) for media in usermedias]))
