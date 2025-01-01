@@ -13,7 +13,8 @@ class mediaDetail(Frame):
         self.root.title("Media Detail Page")
         
         self.mediaService = self.controller.main_service.media_service
-        self.userService = self.controller.main_service.user_service
+        self.usermediaService = self.controller.main_service.usermedia_service
+        self.watch_state_service = self.controller.main_service.watch_state_service
         
 
         # BG FRAME
@@ -82,7 +83,7 @@ class mediaDetail(Frame):
         # EDIT - BUTTON
         self.editButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.editButtonFrame.grid(row=0,column=0,padx=(10),pady=(10))
-        self.edit_button=Button(self.editButtonFrame,image=self.edit, command=self.toggle_edit_options)
+        self.edit_button=Button(self.editButtonFrame,image=self.edit, command=self.edit_media)
         self.edit_button.img_reference=self.edit
         self.edit_button.grid(row=0,column=0)
         
@@ -260,16 +261,21 @@ class mediaDetail(Frame):
         print(f"Selected view option: {option}")
 
         # Update the "View" button icon based on the selected option
+        self.watch_state = self.media.watch_state
         if option == "not_watched":
             self.view_button.config(image=self.view, bg="#FB4141")
             self.media.watch_state = "not_watched"
+            self.watch_state = self.watch_state_service.get_by_id(1)
+    
         elif option == "watching":
             self.view_button.config(image=self.view, bg="#FFC145")
             self.media.watch_state = "watching"
+            self.watch_state = self.watch_state_service.get_by_id(2)
         elif option == "watched":
             self.view_button.config(image=self.view, bg="#5CB338")
             self.media.watch_state = "watched"
-    
+            self.watch_state = self.watch_state_service.get_by_id(3)
+
 
 
     # RATING OPTİON TOGGLES
@@ -284,12 +290,10 @@ class mediaDetail(Frame):
         if rating == 1:
             self.rating_button.config(bg="white", image=self.star_1)
             self.rating_button.img_reference = self.star_1
-            self.media.scor = 1
-
         elif rating == 2:
             self.rating_button.config(bg="white", image=self.star_2)
             self.rating_button.img_reference = self.star_2
-            self.media. = 2
+            
 
         elif rating == 3:
             self.rating_button.config(bg="white", image=self.star_3)
