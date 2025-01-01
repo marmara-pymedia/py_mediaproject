@@ -1,11 +1,6 @@
 from tkinter import *
 from tkinter import font
 from tkinter import ttk
-from services.MediaService import MediaService
-from services.CategoryService import CategoryService
-from services.TypeService import TypeService
-from services.WatchStateService import WatchStateService
-from services.UsermediaService import UsermediaService
 from userProfile import UserProfile
 from components.mediaCover import MediaCover
 from components.searchSuggestion import SearchSuggestion
@@ -327,7 +322,7 @@ class HomePage(Frame):
         if(len(selected_watch_states)==0):
             medias_by_watch_state+=self.media_service.get_all()
         else:
-            medias_by_watch_state+=self.media_service.get_all_media_by_watch_states(selected_watch_states)
+            medias_by_watch_state+=self.media_service.get_all_media_by_watch_states(self.controller.user.id,selected_watch_states)
         
 
         medias_by_score=[]

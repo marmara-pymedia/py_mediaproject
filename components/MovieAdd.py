@@ -8,8 +8,6 @@ from entities.WatchState import WatchState
 import shutil
 
 from entities.Media import Media
-from services.MediaService import MediaService
-from services.CategoryService import CategoryService
 
 #main için
 #from components.movieAdd import MovieAdd

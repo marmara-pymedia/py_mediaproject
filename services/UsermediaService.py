@@ -34,6 +34,7 @@ class UsermediaService:
         for media in medias:
             print(media.user.id,media.media.id,user_id,media_id)
             if media.user.id==user_id and media.media.id==media_id:
+                print(media.id)
                 return media
         return None
     
