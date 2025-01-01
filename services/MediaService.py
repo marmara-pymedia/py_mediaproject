@@ -1,9 +1,8 @@
 import json
 from entities.Media import Media
-from entities.Media import *
-from services.CategoryService import CategoryService
-from services.TypeService import TypeService
-from services.UsermediaService import UsermediaService
+from entities.Category import Category
+from entities.Type import Type
+from entities.WatchState import WatchState
 
 class MediaService:
     def __init__(self,category_service,type_service,usermedia_service):
@@ -66,8 +65,11 @@ class MediaService:
     def get_all_media_by_scores(self,user_id:int,scores:list[int]):
         medias=self.get_all()
         filtered_medias=[]
+        print(self.usermedia_service)
         for media in medias:
-            if any(self.usermedia_service.get_usermedia_by_user_id_and_media_id(user_id,media.id).score == s for s in scores):
+            usermedia=self.usermedia_service.get_usermedia_by_user_id_and_media_id(user_id,media.id)
+            if(usermedia is not None and any(usermedia.score == s for s in scores)):
+                print(media.title)
                 filtered_medias.append(media)
         return filtered_medias
     
@@ -79,11 +81,12 @@ class MediaService:
                 return media
         return None
     
-    def get_all_media_by_watch_states(self,watch_states:list[WatchState]):
+    def get_all_media_by_watch_states(self,user_id,watch_states:list[WatchState]):
         medias=self.get_all()
         filtered_medias=[]
         for media in medias:
-            if any(media.watch_state.id == w.id for w in watch_states):
+            usermedia=self.usermedia_service.get_usermedia_by_user_id_and_media_id(user_id,media.id)
+            if(usermedia is not None and any(usermedia.watch_state.id == w.id for w in watch_states)):
                 filtered_medias.append(media)
         return filtered_medias
     
