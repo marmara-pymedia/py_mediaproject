@@ -36,7 +36,7 @@ class UserProfile(Frame):
         self.logo_user_profile_frame.pack_propagate(False)
         self.logo_user_profile_frame.grid_propagate(False)
         
-        self.logo_user_profile=PhotoImage(file=self.controller.user.small_image_path)
+        self.logo_user_profile=PhotoImage(file=self.controller.user.big_image_path)
         self.logo_user_profile_label=Label(self.logo_user_profile_frame,image=self.logo_user_profile)
         self.logo_user_profile_label.img_reference=self.logo_user_profile
         self.logo_user_profile_label.pack(fill=BOTH)
@@ -75,6 +75,15 @@ class UserProfile(Frame):
 
         self.edit_button=Button(self.edit_button_frame,text="Edit Profile",font=("Roboto",15),bg="#535C91",fg="white",width=10,height=1,cursor="hand2",command=lambda: self.edit_profile(self.root, self.controller))
         self.edit_button.pack(expand=True)
+
+        self.back_button_frame=Frame(self.user_profile_child2_frame,bg="white")
+        self.back_button_frame.grid(row=5,column=0,pady=(0,10))
+
+        self.back_button=Button(self.back_button_frame,text="Back",font=("Roboto",15),bg="white",fg="black",width=10,height=1,cursor="hand2", command=self.switch_to_home_page) #####
+        self.back_button.pack(expand=True)
+
+    def switch_to_home_page(self):
+        self.controller.show_home_page()
 
     def edit_profile(self,root,controller):
         #self.controller.show_frame(Register)
