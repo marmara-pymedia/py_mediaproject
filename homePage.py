@@ -41,7 +41,7 @@ class HomePage(Frame):
 
         self.profile_frame=Frame(self.navi_frame,bg="#070F2B",width=50,height=50)
         self.profile_frame.grid(row=0,column=1)
-        self.profile_img=PhotoImage(file="medias/icons/user_vector.png")
+        self.profile_img=PhotoImage(file=self.controller.user.small_image_path)
         self.profile_button=Button(self.profile_frame,image=self.profile_img,bg="#070F2B",bd=0,activebackground="#070F2B",command=self.on_profile_button_click)
         self.profile_button.img_reference=self.profile_img
         self.profile_button.pack()
