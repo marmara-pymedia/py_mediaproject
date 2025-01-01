@@ -87,7 +87,7 @@ class mediaDetail(Frame):
         # DELETE - BUTTON
         self.deleteButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.deleteButtonFrame.grid(row=0,column=1, padx=(10),pady=(10))
-        self.delete_button=Button(self.deleteButtonFrame, image=self.delete, command=self.media.delete)
+        self.delete_button=Button(self.deleteButtonFrame, image=self.delete, command=self.delete_media)
         self.delete_button.img_reference=self.delete
         self.delete_button.grid(row=0,column=1)
         # RATE - BUTTON
@@ -108,7 +108,7 @@ class mediaDetail(Frame):
         self.leavenoteButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.leavenoteButtonFrame.grid(row=0,column=4,padx=(10),pady=(10))
         self.leavenote_button=Button(self.leavenoteButtonFrame, image=self.leavenote, command=self.toggle_note_frame)
-        self.leavenote_button.img_reference=self.le
+        self.leavenote_button.img_reference=self.leavenote_button
         self.leavenote_button.grid(row=0,column=4)
 
 

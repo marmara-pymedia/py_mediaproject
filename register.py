@@ -2,7 +2,6 @@ import re
 import json
 from tkinter import messagebox
 from entities.User import User
-from homePage import HomePage
 from services.UserService import UserService
 from tkinter import *
 from tkinter import font
