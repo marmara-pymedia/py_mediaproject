@@ -5,6 +5,8 @@ from userProfile import UserProfile
 from entities.User import User
 from services.MainService import MainService
 from MediaDetailPage import mediaDetail
+from login import Login
+from register import Register
 
 class MainApp():
     def __init__(self,root):
@@ -15,8 +17,7 @@ class MainApp():
         root.configure(bg="#070F2B")
         self.current_frame=None
         self.user:User=None
-        self.user=self.main_service.user_service.get_user_by_id(1)
-        self.show_frame(HomePage)
+        self.show_frame(Login)
 
     def show_frame(self,frame_class,*args):
         new_frame=frame_class(self.root,self,*args)
@@ -31,6 +32,10 @@ class MainApp():
         self.show_frame(HomePage)
     def show_media_detail_page(self,media):
         self.show_frame(mediaDetail,media)
+    def show_login_page(self):
+        self.show_frame(Login)
+    def show_register_page(self):
+        self.show_frame(Register)
 
 
     def refresh_frame(self):
