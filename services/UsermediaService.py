@@ -34,9 +34,9 @@ class UsermediaService:
         for media in medias:
             print(media.user.id)
             # print(media.user.id,media.media.id,user_id,media_id)
-            # if media.user.id==user_id and media.media.id==media_id:
-            #     print(media.id)
-            #     return media
+            if media.user.id==user_id and media.media.id==media_id:
+                print(media.id)
+                return media
         return None
     
     def get_all(self)->list[Usermedia]:
@@ -47,3 +47,26 @@ class UsermediaService:
             new_media=Usermedia(self.user_service.get_user_by_id(media["user_id"]),self.media_service.get_media_by_id(media["media_id"]),self.watch_state_service.get_by_id(media["watch_state_id"]),media["score"],media["note"],media["id"])
             new_medias.append(new_media.toObject())
         return new_medias
+    
+    def update(self,usermedia):
+        usermedias=self.get_all()
+        for i in usermedias:
+            if(i.id==usermedia.id):
+                i.media=usermedia.media
+                i.user=usermedia.user
+                i.watch_state=usermedia.watch_state
+                i.score=usermedia.score
+                i.note=usermedia.note    
+        
+        self.delete_media(usermedia)
+        self.add_usermedia(usermedia)
+
+    def delete_media(self,usermedia:Usermedia):
+        usermedias=self.get_all()
+        for i in usermedias:
+            if(i.id==usermedia.id):
+                usermedias.remove(i)
+                break
+            
+        with open("data/usermedias.json","w") as file:
+            file.write(json.dumps([json.loads(media.toJSON()) for media in medias]))
