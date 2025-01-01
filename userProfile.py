@@ -107,6 +107,8 @@ class UserProfile(Frame):
         self.label_first_name.grid(row=0,column=0,padx=(5,5),pady=5)
 
         self.entry_first_name_updated=Entry(self.first_name_frame,font=("Roboto",16),width=30)
+        #self.entry_first_name_updated.insert(0, self.controller.user.first_name)
+        self.entry_first_name_updated.insert(0, self.first_name)
         self.entry_first_name_updated.grid(row=0, column=1, padx=(5, 10), pady=5)
 
 
@@ -117,6 +119,7 @@ class UserProfile(Frame):
         self.label_last_name.grid(row=0,column=0,padx=(5,5),pady=5)
 
         self.entry_last_name_updated=Entry(self.last_name_frame,font=("Roboto",16),width=30)
+        self.entry_last_name_updated.insert(0, self.last_name)
         self.entry_last_name_updated.grid(row=0, column=1, padx=(5, 10), pady=5)
 
 
@@ -127,6 +130,7 @@ class UserProfile(Frame):
         self.label_username.grid(row=0,column=0,padx=(5,5),pady=5)
 
         self.entry_username_updated=Entry(self.username_frame,font=("Roboto",16),width=30)
+        self.entry_username_updated.insert(0, self.user_name)
         self.entry_username_updated.grid(row=0, column=1, padx=(5, 10), pady=5)
 
 
@@ -137,6 +141,7 @@ class UserProfile(Frame):
         self.label_password.grid(row=0,column=0,padx=(5,5),pady=5)
 
         self.entry_password_updated=Entry(self.password_frame,font=("Roboto",16),width=30)
+        self.entry_password_updated.insert(0, self.controller.user.password)
         self.entry_password_updated.grid(row=0, column=1, padx=(5, 10), pady=5)
 
 
