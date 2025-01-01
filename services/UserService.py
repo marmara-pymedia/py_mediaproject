@@ -44,6 +44,7 @@ class UserService:
                 i.user_name=user.user_name
         self.delete_user(user)
         self.add_user(user)
+        return user
     
     def delete_user(self,user:User):
         users=self.get_all()
