@@ -2,14 +2,15 @@ from entities.Media import Media
 import json
 
 class User:
-    def __init__(self,first_name,last_name,user_name,password,favourite_medias=None,image_location="default",id=-1):
+    def __init__(self,first_name,last_name,user_name,password,favourite_medias=None,big_image_path="Default",small_image_path="Default",id=-1):
         self.id=id
         self.first_name=first_name
         self.last_name=last_name
         self.user_name=user_name
         self.password=password
         self.favourite_medias=favourite_medias if favourite_medias is not None else []
-        self.image_location=image_location
+        self.big_image_path=big_image_path
+        self.small_image_path=small_image_path
 
     def toJSON(self):
         return json.dumps(UserJSON(self.first_name,self.last_name,self.user_name,self.password,[media.id for media in self.favourite_medias],self.image_location,self.id).__dict__)

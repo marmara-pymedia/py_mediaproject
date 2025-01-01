@@ -1,4 +1,4 @@
-from tkinter import messagebox
+from tkinter import filedialog, messagebox
 from entities.User import User
 from services.UserService import UserService
 from tkinter import *
@@ -149,33 +149,32 @@ class UserProfile(Frame):
         self.button_save_changes=Button(self.save_changes_frame,text="Save Changes",font=("Roboto",16),bg="#1B1A55",fg="#D8C4B6",width=15,height=1,cursor="hand2",command=lambda: save_user_changes())
         self.button_save_changes.pack(expand=True)
 
-    #     #########
-    #     def save_user_changes():
-    #         user_change=User(first_name=self.entry_first_name_updated.get(),last_name=self.entry_last_name_updated.get(),user_name=self.entry_username_updated.get(),password=self.entry_password_updated.get(),
-    #                          ,bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path)
-    #         # print(media.__dict__)
-    #         self.media_service.add_media(media)
-    #         messagebox.showinfo("Info", "Successfully saved!")
-    #         self.controller.refresh_frame()
+        #########
+        def save_user_changes():
+            user_change=User(first_name=self.entry_first_name_updated.get(),last_name=self.entry_last_name_updated.get(),user_name=self.entry_username_updated.get(),password=self.entry_password_updated.get(),big_image_path=self.big_img_path,small_image_path=self.small_img_path)
+            self.user_service=self.controller.main_service.user_service
+            self.updated_user=self.user_service.update_user(user_change)
+            messagebox.showinfo("Info", "Successfully saved!")
+            self.controller.refresh_frame()
 
-    # ################
-    # def on_small_img_button_click(self):
-    #     self.cover_img_path=self.save_file()
+    ################
+    def on_small_img_button_click(self):
+        self.small_img_path=self.save_file()
 
-    # def on_big_img_button_click(self):
-    #     self.bg_img_path=self.save_file()
+    def on_big_img_button_click(self):
+        self.big_img_path=self.save_file()
 
-    # def save_file(self):
-    #     file=filedialog.askopenfile(filetypes=[("Image Files", ".png")])
-    #     if file is None:
-    #         return
-    #     file_path="medias/images/covers/"+file.name.split("/")[-1]
-    #     try:
-    #         shutil.copy(file.name,file_path)
-    #     except:
-    #         pass
-    #     return file_path
+    def save_file(self):
+        file=filedialog.askopenfile(filetypes=[("Profile Photo Files", ".png")])
+        if file is None:
+            return
+        file_path="medias/images/pp/"+file.name.split("/")[-1]
+        try:
+            shutil.copy(file.name,file_path)
+        except:
+            pass
+        return file_path
 
 
-    # def __del__(self):
-    #     self.popup.destroy()
+    def __del__(self):
+        self.popup.destroy()
