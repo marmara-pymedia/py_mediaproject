@@ -116,8 +116,9 @@ class MediaService:
                 i.cover_image_path=media.cover_image_path
                 i.title=media.title
                 i.type=media.type     
-        with open("data/medias.json","w") as file:
-            file.write(json.dumps([media.__dict__ for media in medias]))
+        
+        self.delete_media(media)
+        self.add_media(media)
     
     def delete_media(self,media:Media):
         medias=self.get_all()
@@ -127,6 +128,6 @@ class MediaService:
                 break
             
         with open("data/medias.json","w") as file:
-            file.write(json.dumps([media.__dict__ for media in medias]))
+            file.write(json.dumps([json.loads(media.toJSON()) for media in medias]))
 
     
