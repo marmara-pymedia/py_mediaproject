@@ -25,7 +25,7 @@ class mediaDetail(Frame):
         
 
         # BG FRAME
-        self.bgFrame=Frame(self.root, bg="#070F2B", height=1080, width=1920)
+        self.bgFrame=Frame(self, bg="#070F2B", height=1080, width=1920)
         self.bgFrame.pack_propagate(0)
         self.bgFrame.pack(fill=BOTH, expand=True)
 
@@ -388,5 +388,6 @@ class mediaDetail(Frame):
     def toggle_delete_options(self):
         self.mediaService.delete_media(self.media)
         self.usermediaService.delete_media(self.usermedia)
-        print("Media Deleted")
         self.controller.show_home_page()
+        print("Media Deleted")
+        self.destroy()
