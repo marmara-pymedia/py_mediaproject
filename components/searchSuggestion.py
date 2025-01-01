@@ -2,9 +2,10 @@ from tkinter import *
 from tkinter import ttk
 
 class SearchSuggestion:
-    def __init__(self,root:Frame,media):
+    def __init__(self,root:Frame,controller,media):
         self.root=root
         self.media=media
+        self.controller=controller
         self.suggestion_frame=Frame(self.root,width=220,height=100,cursor="hand2")
         self.suggestion_frame.bind("<Button-1>", self.on_suggestion_click)
         
@@ -21,13 +22,13 @@ class SearchSuggestion:
         self.content_type_label.bind("<Button-1>", self.on_suggestion_click)
         self.content_type_label.grid(row=1,column=0,padx=(5,150),sticky=W)
 
-        self.content_score_label=Label(self.suggestion_content_frame,text=media.score)
+        self.content_score_label=Label(self.suggestion_content_frame,text=controller.main_service.usermedia_service.get_usermedia_by_user_id_and_media_id(controller.user.id,media.id).score if controller.main_service.usermedia_service.get_usermedia_by_user_id_and_media_id(controller.user.id,media.id) is not None else "-")
         self.content_score_label.bind("<Button-1>", self.on_suggestion_click)
         self.content_score_label.grid(row=1,column=1,sticky=W,padx=(0,5))
 
         
     def on_suggestion_click(self,event):
-        print(self.media)
+        self.controller.show_media_detail_page(self.media)
 
     
     def getFrame(self):
