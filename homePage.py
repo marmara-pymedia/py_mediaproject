@@ -232,8 +232,11 @@ class HomePage(Frame):
                     i.destroy()
             contains=False
             for i in self.media_service.get_all():
-                if(i.title.startswith(sv.get()) and sv.get()!=""):
-                    SearchSuggestion(self.search_suggestion_container,i).getFrame().pack()
+                title=i.title.lower()
+                if(title.startswith(sv.get().lower()) and sv.get()!=""):
+                    print("FOUND!")
+
+                    SearchSuggestion(self.search_suggestion_container,self.controller,i).getFrame().pack()
                     contains=True
             if(contains):
                 self.search_suggestion_container.place(y=60,x=1483)
