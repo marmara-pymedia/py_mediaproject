@@ -166,9 +166,12 @@ class UserProfile(Frame):
         user_change=User(first_name=self.entry_first_name_updated.get(),last_name=self.entry_last_name_updated.get(),user_name=self.entry_username_updated.get(),password=self.entry_password_updated.get(),big_image_path=self.big_img_path,small_image_path=self.small_img_path,id=self.controller.user.id)
         self.user_service=self.controller.main_service.user_service
         self.updated_user=self.user_service.update_user(user_change)
+        self.controller.user=self.updated_user
+        self.controller.show_user_profile()
         messagebox.showinfo("Info", "Successfully saved!")
         #self.apply_changes()
-        self.controller.refresh_frame()
+        
+
     
     def apply_changes(self):
         self.controller.user=self.updated_user
