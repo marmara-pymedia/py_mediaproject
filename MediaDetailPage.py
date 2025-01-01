@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import PhotoImage
 import textwrap
+from entities.Usermedia import Usermedia
 
 
 class mediaDetail(Frame):
@@ -15,6 +16,8 @@ class mediaDetail(Frame):
         self.mediaService = self.controller.main_service.media_service
         self.usermediaService = self.controller.main_service.usermedia_service
         self.watch_state_service = self.controller.main_service.watch_state_service
+        self.usermedia=self.usermediaService.get_usermedia_by_user_id_and_media_id(self.controller.user.id,self.media.id)
+        self.user=self.controller.user
         
 
         # BG FRAME
@@ -261,7 +264,6 @@ class mediaDetail(Frame):
         print(f"Selected view option: {option}")
 
         # Update the "View" button icon based on the selected option
-        self.watch_state = self.media.watch_state
         if option == "not_watched":
             self.view_button.config(image=self.view, bg="#FB4141")
             self.media.watch_state = "not_watched"
@@ -275,6 +277,9 @@ class mediaDetail(Frame):
             self.view_button.config(image=self.view, bg="#5CB338")
             self.media.watch_state = "watched"
             self.watch_state = self.watch_state_service.get_by_id(3)
+        self.usermedia.watch_state = self.watch_state
+        self.usermediaService.update_usermedia(self.usermedia)
+
 
 
 
@@ -284,12 +289,15 @@ class mediaDetail(Frame):
         self.selected_rating = rating
         self.ratingOptionsFrame.place_forget()  # Hide after selection 
         print(f"Selected rating: {rating} Stars")
+        self.usermedia.score = rating
+        self.usermediaService.update_usermedia(self.usermedia)
         # Update the rating button background color based on the selected rating
         self.rating_button.config(bg="#FFC145")
 
         if rating == 1:
             self.rating_button.config(bg="white", image=self.star_1)
             self.rating_button.img_reference = self.star_1
+            
         elif rating == 2:
             self.rating_button.config(bg="white", image=self.star_2)
             self.rating_button.img_reference = self.star_2
@@ -328,6 +336,8 @@ class mediaDetail(Frame):
     def submit_note(self):
         self.note = self.note_text.get("1.0", END).strip()
         print(f"Note submitted: {self.note}")
+        self.usermedia.note = self.note
+        self.usermediaService.update_usermedia(self.usermedia)
         self.noteFrame.place_forget()  # Hide the frame after submission
 
 
