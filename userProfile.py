@@ -31,8 +31,10 @@ class UserProfile(Frame):
         self.user_profile_child2_frame=Frame(self.user_profile_child_frame,bg='#1B1A55')
         self.user_profile_child2_frame.pack(padx=100,pady=55,expand=True)
 
-        self.logo_user_profile_frame=Frame(self.user_profile_child2_frame, bg="#535C91")
+        self.logo_user_profile_frame=Frame(self.user_profile_child2_frame, bg="#535C91",height=200,width=200)
         self.logo_user_profile_frame.grid(row=0,column=0,padx=150,pady=15) 
+        self.logo_user_profile_frame.pack_propagate(False)
+        self.logo_user_profile_frame.grid_propagate(False)
         
         self.logo_user_profile=PhotoImage(file=self.controller.user.small_image_path)
         self.logo_user_profile_label=Label(self.logo_user_profile_frame,image=self.logo_user_profile)
@@ -156,7 +158,7 @@ class UserProfile(Frame):
         self.user_service=self.controller.main_service.user_service
         self.updated_user=self.user_service.update_user(user_change)
         messagebox.showinfo("Info", "Successfully saved!")
-        self.apply_changes()
+        #self.apply_changes()
         self.controller.refresh_frame()
     
     def apply_changes(self):
@@ -170,7 +172,7 @@ class UserProfile(Frame):
         self.entry_password_updated.delete(0,END)
         self.popup.destroy()
 
-    ############################# File Dialogs #############################
+
     def on_small_img_button_click(self):
         self.small_img_path=self.save_file()
 
