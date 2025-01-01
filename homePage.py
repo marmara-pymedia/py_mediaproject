@@ -234,7 +234,6 @@ class HomePage(Frame):
             for i in self.media_service.get_all():
                 title=i.title.lower()
                 if(title.startswith(sv.get().lower()) and sv.get()!=""):
-                    print("FOUND!")
 
                     SearchSuggestion(self.search_suggestion_container,self.controller,i).getFrame().pack()
                     contains=True
@@ -333,7 +332,6 @@ class HomePage(Frame):
         if(len(selected_scores)==0):
             medias_by_score+=self.media_service.get_all()
         else:
-            print(self.media_service,"trestsef")
             medias_by_score+=self.media_service.get_all_media_by_scores(self.controller.user.id,selected_scores)
         
 

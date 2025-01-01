@@ -117,8 +117,13 @@ class MediaService:
                 i.title=media.title
                 i.type=media.type     
         
-        self.delete_media(media)
-        self.add_media(media)
+        for media in medias:
+            if(media.id==media.id):
+                medias.remove(media)
+                break
+        medias.append(media)
+        with open("data/medias.json","w") as file:
+            file.write(json.dumps([json.loads(media.toJSON()) for media in medias]))
     
     def delete_media(self,media:Media):
         medias=self.get_all()
