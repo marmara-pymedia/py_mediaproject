@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import PhotoImage
 import textwrap
 from entities.Usermedia import Usermedia
+from components.MovieUpdate import MovieUpdate
 
 
 class mediaDetail(Frame):
@@ -16,8 +17,11 @@ class mediaDetail(Frame):
         self.mediaService = self.controller.main_service.media_service
         self.usermediaService = self.controller.main_service.usermedia_service
         self.watch_state_service = self.controller.main_service.watch_state_service
+        if self.usermediaService.get_usermedia_by_user_id_and_media_id(self.controller.user.id,self.media.id) is None:
+            self.usermediaService.add_usermedia(Usermedia(user=self.controller.user,watch_state=self.watch_state_service.get_by_id(1),score=0,note="",media=self.media))
         self.usermedia=self.usermediaService.get_usermedia_by_user_id_and_media_id(self.controller.user.id,self.media.id)
         self.user=self.controller.user
+        self.update_form=None
         
 
         # BG FRAME
@@ -81,19 +85,41 @@ class mediaDetail(Frame):
         self.star_3=PhotoImage(file="medias\icons\star-3.png")
         self.star_4=PhotoImage(file="medias\icons\star-4.png")
         self.star_5=PhotoImage(file="medias\icons\star-5.png")
+
+
+        # Note UPDTAED BEFOREHAND
+
+
+
+        # SCORE UPDTAED BEFOREHAND
+
+        if self.usermedia.score == 1:
+            self.rating=self.star_1
+            
+        elif self.usermedia.score == 2:
+            self.rating=self.star_2
+                        
+        elif self.usermedia.score == 3:
+            self.rating=self.star_3
+
+        elif self.usermedia.score == 4:
+            self.rating=self.star_4
+
+        elif self.usermedia.score == 5:
+            self.rating=self.star_5
         
 
         # EDIT - BUTTON
         self.editButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.editButtonFrame.grid(row=0,column=0,padx=(10),pady=(10))
-        self.edit_button=Button(self.editButtonFrame,image=self.edit, command=self.edit_media)
+        self.edit_button=Button(self.editButtonFrame,image=self.edit, command=self.toggle_edit_options)
         self.edit_button.img_reference=self.edit
         self.edit_button.grid(row=0,column=0)
         
         # DELETE - BUTTON
         self.deleteButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.deleteButtonFrame.grid(row=0,column=1, padx=(10),pady=(10))
-        self.delete_button=Button(self.deleteButtonFrame, image=self.delete, command=self.delete_media)
+        self.delete_button=Button(self.deleteButtonFrame, image=self.delete, command=self.toggle_delete_options)
         self.delete_button.img_reference=self.delete
         self.delete_button.grid(row=0,column=1)
         # RATE - BUTTON
@@ -116,6 +142,18 @@ class mediaDetail(Frame):
         self.leavenote_button=Button(self.leavenoteButtonFrame, image=self.leavenote, command=self.toggle_note_frame)
         self.leavenote_button.img_reference=self.leavenote_button
         self.leavenote_button.grid(row=0,column=4)
+
+        # WATCH-STATE UPDATED BEFOREHAND
+
+        if self.usermedia.watch_state.id == 1:
+            self.view_button.config(bg="#FB4141")
+            
+
+        elif self.usermedia.watch_state.id == 2:
+            self.view_button.config(bg="#FFC145")
+            
+        elif self.usermedia.watch_state.id == 3:
+            self.view_button.config(bg="#5CB338")
 
 
         # -------------------------- FOR RATING -----------------------------------------------
@@ -192,6 +230,8 @@ class mediaDetail(Frame):
         self.submit_button.img_reference = self.submitIcon
         self.submit_button.grid(row=0, column=1, padx=(10), pady=(10))
 
+        self.note_text.insert(END, self.usermedia.note)
+
 
 
 
@@ -245,7 +285,7 @@ class mediaDetail(Frame):
         # DELETE TOGGLES
 
     def delete_media(self):
-        self.media.delete_media(self.media)
+        self.usermediaService.delete_media(self.usermedia)
         
 
         # VIEW OPTİON TOGGLES
@@ -278,7 +318,7 @@ class mediaDetail(Frame):
             self.media.watch_state = "watched"
             self.watch_state = self.watch_state_service.get_by_id(3)
         self.usermedia.watch_state = self.watch_state
-        self.usermediaService.update_usermedia(self.usermedia)
+        self.usermediaService.update(self.usermedia)
 
 
 
@@ -290,7 +330,7 @@ class mediaDetail(Frame):
         self.ratingOptionsFrame.place_forget()  # Hide after selection 
         print(f"Selected rating: {rating} Stars")
         self.usermedia.score = rating
-        self.usermediaService.update_usermedia(self.usermedia)
+        self.usermediaService.update(self.usermedia)
         # Update the rating button background color based on the selected rating
         self.rating_button.config(bg="#FFC145")
 
@@ -302,7 +342,6 @@ class mediaDetail(Frame):
             self.rating_button.config(bg="white", image=self.star_2)
             self.rating_button.img_reference = self.star_2
             
-
         elif rating == 3:
             self.rating_button.config(bg="white", image=self.star_3)
             self.rating_button.img_reference = self.star_3
@@ -337,15 +376,17 @@ class mediaDetail(Frame):
         self.note = self.note_text.get("1.0", END).strip()
         print(f"Note submitted: {self.note}")
         self.usermedia.note = self.note
-        self.usermediaService.update_usermedia(self.usermedia)
+        self.usermediaService.update(self.usermedia)
         self.noteFrame.place_forget()  # Hide the frame after submission
 
 
-
-    def edit_media(self):
-        print("Edit Media")
-
-    def delete_media(self):
-        print("Delete Media")
+    def toggle_edit_options(self):
+        if(self.update_form!=None):
+            del self.update_form
+        self.update_form=MovieUpdate(self,self.controller,self.media)
     
-    # will add somehtin 
+    def toggle_delete_options(self):
+        self.mediaService.delete_media(self.media)
+        self.usermediaService.delete_media(self.usermedia)
+        print("Media Deleted")
+        self.controller.show_home_page()
