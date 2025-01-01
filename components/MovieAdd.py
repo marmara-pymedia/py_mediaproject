@@ -16,8 +16,8 @@ from services.CategoryService import CategoryService
 
 class MovieAdd:
     def __init__(self, root,controller) -> None:
-        self.media_service=MediaService()
-        self.category_service=CategoryService()
+        self.media_service=controller.main_service.media_service
+        self.category_service=controller.main_service.category_service
         self.controller=controller
         self.root=root
 
@@ -89,7 +89,7 @@ class MovieAdd:
         self.button_save.pack(expand=True)
 
         def save_media():
-            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type(1,"Film"),category=self.category_service.get_all()[self.combo_movie_type.current()],score=0,bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path)
+            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type(1,"Film"),category=self.category_service.get_all()[self.combo_movie_type.current()],bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path)
             # print(media.__dict__)
             self.media_service.add_media(media)
             messagebox.showinfo("Info", "Successfully saved!")
