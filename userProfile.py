@@ -17,6 +17,8 @@ class UserProfile(Frame):
         self.first_name=self.controller.user.first_name
         self.last_name=self.controller.user.last_name
         self.user_service=self.controller.main_service.user_service
+        self.big_img_path = ""
+        self.small_img_path = ""
         self.all_users=self.user_service.get_all()
 
 
@@ -149,15 +151,29 @@ class UserProfile(Frame):
         self.button_save_changes=Button(self.save_changes_frame,text="Save Changes",font=("Roboto",16),bg="#1B1A55",fg="#D8C4B6",width=15,height=1,cursor="hand2",command=lambda: save_user_changes())
         self.button_save_changes.pack(expand=True)
 
-        #########
-        def save_user_changes():
-            user_change=User(first_name=self.entry_first_name_updated.get(),last_name=self.entry_last_name_updated.get(),user_name=self.entry_username_updated.get(),password=self.entry_password_updated.get(),big_image_path=self.big_img_path,small_image_path=self.small_img_path)
-            self.user_service=self.controller.main_service.user_service
-            self.updated_user=self.user_service.update_user(user_change)
-            messagebox.showinfo("Info", "Successfully saved!")
-            self.controller.refresh_frame()
+        self.button_save_changes=Button(self.save_changes_frame,text="Save Changes",font=("Roboto",16),bg="#1B1A55",fg="#D8C4B6",width=15,height=1,cursor="hand2",command=lambda: self.save_user_changes())
+        self.button_save_changes.pack(expand=True)
+    
+    def save_user_changes(self):
+        user_change=User(first_name=self.entry_first_name_updated.get(),last_name=self.entry_last_name_updated.get(),user_name=self.entry_username_updated.get(),password=self.entry_password_updated.get(),big_image_path=self.big_img_path,small_image_path=self.small_img_path)
+        self.user_service=self.controller.main_service.user_service
+        self.updated_user=self.user_service.update_user(user_change)
+        messagebox.showinfo("Info", "Successfully saved!")
+        self.apply_changes()
+        self.controller.refresh_frame()
+    
+    def apply_changes(self):
+        self.controller.user=self.updated_user
+        self.label_first_name_get.config(text=self.updated_user.first_name)
+        self.label_last_name_get.config(text=self.updated_user.last_name)
+        self.label_username_get.config(text=self.updated_user.user_name)
+        self.entry_first_name_updated.delete(0,END)
+        self.entry_last_name_updated.delete(0,END)
+        self.entry_username_updated.delete(0,END)
+        self.entry_password_updated.delete(0,END)
+        self.popup.destroy()
 
-    ################
+    ############################# File Dialogs #############################
     def on_small_img_button_click(self):
         self.small_img_path=self.save_file()
 
