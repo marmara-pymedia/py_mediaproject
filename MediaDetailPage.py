@@ -13,17 +13,19 @@ class mediaDetail(Frame):
         self.root.title("Media Detail Page")
         
         self.mediaService = self.controller.main_service.media_service
+        self.userService = self.controller.main_service.user_service
         
 
         # BG FRAME
-        self.bgFrame=Frame(self.root, bg="#070F2B")
+        self.bgFrame=Frame(self.root, bg="#070F2B", height=1080, width=1920)
+        self.bgFrame.pack_propagate(0)
         self.bgFrame.pack(fill=BOTH, expand=True)
 
         # MEDIA BACKGROUND
         self.movie=PhotoImage(file=self.media.bg_image_path)
-        self.mediaLabel=Label(self.bgFrame,image=self.movie)
+        self.mediaLabel=Label(self.bgFrame,image=self.movie, borderwidth=0, highlightthickness=0)
         self.mediaLabel.img_reference=self.movie
-        self.mediaLabel.pack(fill=BOTH,expand=True , pady=(95))  
+        self.mediaLabel.pack(fill=BOTH,expand=True , pady=(150))  
         # will delete upper part, ones json is connected DELETE        
 
          # Bottom-left Frame
@@ -80,7 +82,7 @@ class mediaDetail(Frame):
         # EDIT - BUTTON
         self.editButtonFrame=Frame(self.bottomRightFrame, width="80", height="80")
         self.editButtonFrame.grid(row=0,column=0,padx=(10),pady=(10))
-        self.edit_button=Button(self.editButtonFrame,image=self.edit, command=self.edit_media)
+        self.edit_button=Button(self.editButtonFrame,image=self.edit, command=self.toggle_edit_options)
         self.edit_button.img_reference=self.edit
         self.edit_button.grid(row=0,column=0)
         
@@ -239,9 +241,7 @@ class mediaDetail(Frame):
         # DELETE TOGGLES
 
     def delete_media(self):
-        self.mediaService.delete_media(self.media)
-        print(f"Media with ID {self.media.id} deleted.")
-        self.root.destroy()
+        self.media.delete_media(self.media)
         
 
         # VIEW OPTİON TOGGLES
@@ -262,10 +262,13 @@ class mediaDetail(Frame):
         # Update the "View" button icon based on the selected option
         if option == "not_watched":
             self.view_button.config(image=self.view, bg="#FB4141")
+            self.media.watch_state = "not_watched"
         elif option == "watching":
             self.view_button.config(image=self.view, bg="#FFC145")
+            self.media.watch_state = "watching"
         elif option == "watched":
             self.view_button.config(image=self.view, bg="#5CB338")
+            self.media.watch_state = "watched"
     
 
 
@@ -281,18 +284,26 @@ class mediaDetail(Frame):
         if rating == 1:
             self.rating_button.config(bg="white", image=self.star_1)
             self.rating_button.img_reference = self.star_1
+            self.media.scor = 1
+
         elif rating == 2:
             self.rating_button.config(bg="white", image=self.star_2)
             self.rating_button.img_reference = self.star_2
+            self.media. = 2
+
         elif rating == 3:
             self.rating_button.config(bg="white", image=self.star_3)
             self.rating_button.img_reference = self.star_3
+            self.media.rating = 3
+
         elif rating == 4:
             self.rating_button.config(bg="white", image=self.star_4)
             self.rating_button.img_reference = self.star_4
+            self.media.rating = 4
         elif rating == 5:
             self.rating_button.config(bg="white", image=self.star_5)
             self.rating_button.img_reference = self.star_5
+            self.media.rating = 5
 
 
     def toggle_rating_options(self):
