@@ -17,7 +17,7 @@ class MovieUpdate:
         self.media_service=controller.main_service.media_service
         self.category_service=controller.main_service.category_service
         self.usermedia_service=controller.main_service.usermedia_service
-
+        self.media=media
         self.controller=controller
         self.root=root
 
@@ -28,7 +28,7 @@ class MovieUpdate:
         self.popup.configure(bg="#070F2B")
 
         self.popup_frame=Frame(self.popup,bg="#070F2B")
-        self.popup_frame.pack(fill=BOTH,expand=True, x=200, y=200)
+        self.popup_frame.pack(fill=BOTH,expand=True)
 
 
         self.movie_name_frame=Frame(self.popup_frame,bg="#1B1A55",height=50,width=700)
@@ -100,11 +100,11 @@ class MovieUpdate:
         self.button_save.pack(expand=True)
 
         def save_media():
-            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type(1,"Film"),category=self.category_service.get_all()[self.combo_movie_type.current()],bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path,id=media.id)
+            media=Media(title=self.entry_movie_name.get(),description=self.text_movie_description.get("1.0", END).strip(),type=Type(1,"Film"),category=self.category_service.get_all()[self.combo_movie_type.current()],bg_image_path=self.bg_img_path,cover_image_path=self.cover_img_path,id=self.media.id)
             # print(media.__dict__)
             self.media_service.update_media(media)
             messagebox.showinfo("Info", "Successfully updated!")
-            self.controller.refresh_frame()
+            self.controller.show_media_detail_page(media)
 
     
     def on_cover_img_button_click(self):

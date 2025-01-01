@@ -34,7 +34,26 @@ class mediaDetail(Frame):
         self.mediaLabel=Label(self.bgFrame,image=self.movie, borderwidth=0, highlightthickness=0)
         self.mediaLabel.img_reference=self.movie
         self.mediaLabel.pack(fill=BOTH,expand=True , pady=(150))  
-        # will delete upper part, ones json is connected DELETE        
+        # will delete upper part, ones json is connected DELETE    
+
+
+        self.back_btn_frame=Frame(self.mediaLabel, bg="#070F2B",width=100,height=100)
+        self.back_btn_frame.place(x=50, y=50)
+        self.back_btn=Button(self.back_btn_frame, text="Back", font=("Roboto", 20), bg="#070F2B", fg="white", command=self.controller.show_home_page)
+        self.back_btn.pack()
+
+        self.favourite_btn_frame=Frame(self.mediaLabel, bg="#070F2B",width=100,height=100)
+        self.favourite_btn_frame.place(x=1800, y=50)
+        self.heart_image = PhotoImage(file="medias\icons\heart.png")
+        self.heart_filled_image = PhotoImage(file="medias\icons\heart_filled.png")
+        if any(self.media.id == media.id for media in self.user.favourite_medias):
+            self.favourite_btn=Button(self.favourite_btn_frame, image=self.heart_filled_image, font=("Roboto", 20), command=self.on_remove_favourite_btn_click)
+            self.favourite_btn.img_reference=self.heart_filled_image
+        else:
+            self.favourite_btn=Button(self.favourite_btn_frame, image=self.heart_image, font=("Roboto", 20),command=self.on_add_favourite_btn_click)
+            self.favourite_btn.img_reference=self.heart_image
+        self.favourite_btn.pack()
+
 
          # Bottom-left Frame
         self.bottomLeftFrame = Frame(self.mediaLabel,bg="#535C91")
@@ -390,4 +409,16 @@ class mediaDetail(Frame):
         self.usermediaService.delete_media(self.usermedia)
         self.controller.show_home_page()
         print("Media Deleted")
-        self.destroy()
+
+    def on_add_favourite_btn_click(self):
+        self.user.favourite_medias.append(self.media)
+        self.controller.user=self.controller.main_service.user_service.update_user(self.user)
+        self.controller.show_media_detail_page(self.media)
+        print("Media Added to Favourites")
+    def on_remove_favourite_btn_click(self):
+        for media in self.user.favourite_medias:
+            if media.id==self.media.id:
+                self.user.favourite_medias.remove(media)
+        self.controller.user=self.controller.main_service.user_service.update_user(self.user)
+        self.controller.show_media_detail_page(self.media)
+        print("Media Removed from Favourites")
