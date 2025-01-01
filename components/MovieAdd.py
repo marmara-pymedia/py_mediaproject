@@ -19,7 +19,8 @@ class MovieAdd:
         self.controller=controller
         self.root=root
 
-        self.popup = Toplevel(root) #homepage olmalı
+        #popup window for adding movie created
+        self.popup = Toplevel(root)
         self.popup.attributes('-topmost', 'true')
         self.popup.title("Add Movie")
         self.popup.geometry("800x630")
@@ -28,7 +29,7 @@ class MovieAdd:
         self.popup_frame=Frame(self.popup,bg="#070F2B")
         self.popup_frame.pack(fill=BOTH,expand=True)
 
-
+        #movie name frame, label and entry created
         self.movie_name_frame=Frame(self.popup_frame,bg="#1B1A55",height=50,width=700)
         self.movie_name_frame.pack(pady=(60,0))
 
@@ -38,7 +39,7 @@ class MovieAdd:
         self.entry_movie_name=Entry(self.movie_name_frame,font=("Roboto",16),width=45)
         self.entry_movie_name.grid(row=0, column=1, padx=(5, 10), pady=5)
 
-
+        #movie type frame, label and entry created
         self.movie_type_frame=Frame(self.popup_frame,bg="#1B1A55",height=50,width=700)
         self.movie_type_frame.pack(pady=(36,0))
 
@@ -53,7 +54,7 @@ class MovieAdd:
         self.combo_movie_type.grid(row=0, column=1, padx=10, pady=10)
         self.combo_movie_type.set("Choose a Genre")
 
-
+        #movie files frame, label and buttons created
         self.movie_files_frame=Frame(self.popup_frame,bg="#1B1A55",height=50,width=700)
         self.movie_files_frame.pack(pady=(36,0))
 
@@ -69,7 +70,7 @@ class MovieAdd:
         self.button_choose_bg=Button(self.movie_files_frame,text="Choose a File",font=("Roboto",13),width=12,height=1,cursor="hand2",command=lambda: self.on_bg_img_button_click())
         self.button_choose_bg.grid(row=0,column=3,padx=(5,5),pady=5)
 
-
+        #movie description frame, label and text created
         self.movie_description_frame=Frame(self.popup_frame,bg="#1B1A55",height=206,width=700)
         self.movie_description_frame.pack(pady=(36,0))
 
@@ -79,7 +80,7 @@ class MovieAdd:
         self.text_movie_description=Text(self.movie_description_frame,width=68, height=15)
         self.text_movie_description.grid(row=0, column=1, padx=(5, 10), pady=(5,5))
 
-
+        #movie save frame and button created
         self.movie_save_frame=Frame(self.popup_frame,bg="#1B1A55",height=40,width=700)
         self.movie_save_frame.pack(pady=(20,0))
 
