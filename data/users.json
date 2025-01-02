@@ -1,13 +1,1 @@
-[
-    {
-        "id": 1,
-        "first_name": "test",
-        "last_name": "test",
-        "user_name": "test",
-        "password": "test",
-        "favourite_medias_id_list": [
-        ],
-        "big_image_path": "medias/images/pp/herhangi-bir-adam-Big.png",
-        "small_image_path": "medias/images/pp/herhangi-bir-adam-Small.png"
-    }
-]
+[{"id": 1, "first_name": "test", "last_name": "test", "user_name": "test", "password": "test", "favourite_medias_id_list": [], "big_image_path": "medias/images/pp/herhangi-bir-kadin-Big.png", "small_image_path": "medias/images/pp/herhangi-bir-kadin-Small.png"}]
